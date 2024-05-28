@@ -34,32 +34,43 @@ public class UserService {
 
 	public void save(User user) {
 		boolean isUpdatingUser = (user.getId() != null);
-		if(isUpdatingUser) {
+		if (isUpdatingUser) {
 			User existingUser = userRepo.findById(user.getId()).get();
-			if(user.getPassword().isEmpty()) {
+			if (user.getPassword().isEmpty()) {
 				user.setPassword(existingUser.getPassword());
-			}else {
+			} else {
 				encodePassword(user);
 			}
-		
-		}else {
+
+		} else {
 			encodePassword(user);
 		}
-		
-	
 
 		userRepo.save(user);
 
 	}
 
+	public boolean isEmailUnique(Integer id, String email) {
+		User userByEmail = userRepo.getUserByEmail(email);
+		if (userByEmail == null)
+			return true;
+
+		boolean iscreatingNew = (id == null);
+
+		if (iscreatingNew) {
+			if (userByEmail != null)
+				return false;
+		} else {
+			if (userByEmail.getId() != id) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	private void encodePassword(User user) {
 		String encodePassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodePassword);
-	}
-
-	public boolean isEmailUnique(String email) {
-		User userByEmail = userRepo.getUserByEmail(email);
-		return userByEmail == null;
 	}
 
 	public User get(Integer id) throws UserNotFoundException {
@@ -69,6 +80,13 @@ public class UserService {
 			throw new UserNotFoundException("Could not find any user with ID: " + id);
 
 		}
+	}
+	public void delete(Integer id) throws UserNotFoundException {
+		Long countById = userRepo.countById(id);
+		if(countById == null || countById == 0) {
+			throw new UserNotFoundException("Could not find any user with ID: " + id);
+		}
+		userRepo.deleteById(id);
 	}
 
 }
