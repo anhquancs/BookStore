@@ -11,7 +11,10 @@ import com.bookstore.admin.user.repository.UserRepository;
 import com.bookstore.entity.Role;
 import com.bookstore.entity.User;
 
+import jakarta.transaction.Transactional;
+
 @Service
+@Transactional
 public class UserService {
 
 	@Autowired
@@ -32,7 +35,7 @@ public class UserService {
 
 	}
 
-	public void save(User user) {
+	public User save(User user) {
 		boolean isUpdatingUser = (user.getId() != null);
 		if (isUpdatingUser) {
 			User existingUser = userRepo.findById(user.getId()).get();
@@ -46,7 +49,7 @@ public class UserService {
 			encodePassword(user);
 		}
 
-		userRepo.save(user);
+	 return	userRepo.save(user);
 
 	}
 
@@ -87,6 +90,10 @@ public class UserService {
 			throw new UserNotFoundException("Could not find any user with ID: " + id);
 		}
 		userRepo.deleteById(id);
+	}
+	
+	public void updateEnabledStatus(Integer id, boolean enabled) {
+		userRepo.updateEnabledStatus(id, enabled);
 	}
 
 }
