@@ -63,6 +63,8 @@
 			<a th:href="@{/users/export/csv}"	style="color: #AA0000;">Export To CSV</a> 
 				&nbsp; || &nbsp; 
 			<a th:href="@{/users/export/excel}" style="color: #AA0000;">Export To Excel</a>
+			&nbsp; || &nbsp; 
+			<a th:href="@{/users/export/pdf}" style="color: #AA0000;">Export To PDF</a>
 		</div>
 		<div th:if="${message!= null}" class="alert alert-success text-center">
 			[[${message}]]</div>
