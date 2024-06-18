@@ -70,4 +70,8 @@ public class BookStoreUserDetails implements UserDetails {
 		return user.isEnabled();
 	}
 
+	public String getFullname() {
+		return this.user.getFirstName() + "" + this.user.getLastName();
+	}
+
 }

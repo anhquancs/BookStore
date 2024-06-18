@@ -37,7 +37,7 @@ public class WebSecurityConfig {
 	}
 
 	@Bean
-	SecurityFilterChain configureHttp(HttpSecurity http) throws Exception {
+	SecurityFilterChain configureHttpSecurity(HttpSecurity http) throws Exception {
 		http.authenticationProvider(authenticationProvider());
 		
 		http.authorizeHttpRequests(auth -> auth
@@ -47,8 +47,13 @@ public class WebSecurityConfig {
 				.loginPage("/login")
 				.usernameParameter("email")
 				.permitAll()
-			);
-			
+			)
+			.logout(logout -> logout.permitAll())
+
+			.rememberMe(rem -> rem
+				.key("AbcDefghijklmnopqrs_1234567890")
+				.tokenValiditySeconds(7 * 24 * 60 * 60));
+
 			return http.build();
 	}
 
