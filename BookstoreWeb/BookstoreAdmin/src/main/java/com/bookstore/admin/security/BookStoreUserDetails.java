@@ -15,9 +15,7 @@ import com.bookstore.entity.User;
 
 public class BookStoreUserDetails implements UserDetails {
 
-	private User  user;
-	
-	
+	private User user;
 	
 	public BookStoreUserDetails(User user) {	
 		this.user = user;
@@ -73,5 +71,14 @@ public class BookStoreUserDetails implements UserDetails {
 	public String getFullname() {
 		return this.user.getFirstName() + "" + this.user.getLastName();
 	}
+
+	public void setFirstName(String firstName){
+		this.user.setFirstName(firstName);
+	}
+
+	public void setLastName(String lastName){
+		this.user.setLastName(lastName);
+	}
+
 
 }
