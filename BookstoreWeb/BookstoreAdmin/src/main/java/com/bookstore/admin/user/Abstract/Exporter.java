@@ -1,4 +1,4 @@
-package com.bookstore.admin.user.Abstrat;
+package com.bookstore.admin.user.Abstract;
 
 import java.io.IOException;
 import java.text.DateFormat;

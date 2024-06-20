@@ -41,6 +41,7 @@ public class WebSecurityConfig {
 		http.authenticationProvider(authenticationProvider());
 		
 		http.authorizeHttpRequests(auth -> auth
+				.requestMatchers("/users/**").hasAuthority("Admin")
 				.anyRequest().authenticated()
 			)
 			.formLogin(form -> form			
@@ -54,7 +55,7 @@ public class WebSecurityConfig {
 				.key("AbcDefghijklmnopqrs_1234567890")
 				.tokenValiditySeconds(7 * 24 * 60 * 60));
 
-			return http.build();
+		return http.build();
 	}
 
 	@Bean

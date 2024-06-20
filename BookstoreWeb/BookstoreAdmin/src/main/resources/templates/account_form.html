@@ -79,7 +79,7 @@
 							th:src="@{${user.photosImagePath}}" class="img-fluid"  width="140px" />
 					</div>
 				</div>
-				<div class="modal fade text-center" id="modalDialog">
+				<!-- <div class="modal fade text-center" id="modalDialog">
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">
@@ -95,8 +95,7 @@
 									data-dismiss="modal">Close</button>
 							</div>
 						</div>
-					</div>
-
+					</div> -->
 
 				</div>
 				<div class="text-center">
@@ -112,47 +111,18 @@
 	</div>
 
 	<script type="text/javascript">
+		moduleURL = "[[@{/}]]";
 
-	$(document).ready(function(){
-		$("#buttonCancel").on("click", function(){
-				window.location = "[[@{/users}]]";
-			});
-		$("#fileImage").change(function(){
-			fileSize =  this.files[0].size;
-			alert("File size: " + fileSize);
-
-			if(fileSize > 1048576){
-				this.setCustomValidity("You must choose an image less than 1MB!");
-				this.reportValidity();
-	
-				}else{
-					this.setCustomValidity("");
-					
-					showImageThumbnail(this);
-					}
-	  		
-			});
-	});
-
-	function showImageThumbnail(fileInput){
-		var file = fileInput.files[0];
-		var reader = new FileReader();
-		reader.onload = function(e){
-			$("#thumbnail").attr("src", e.target.result);
-		};
-		reader.readAsDataURL(file);
-	}
-	
-	function checkPasswordMatch(confirmPassword) {
-		if (confirmPassword.value != $("#password").val()) {
-			confirmPassword.setCustomValidity("Passwords do not match!");
-		} else {
-			confirmPassword.setCustomValidity("");
+		function checkPasswordMatch(confirmPassword) {
+			if (confirmPassword.value != $("#password").val()) {
+				confirmPassword.setCustomValidity("Passwords do not match!");
+			} else {
+				confirmPassword.setCustomValidity("");
+			}
 		}
-	}
 
-
-</script>
+	</script>
+	<script th:src="@{/js/common_form.js}"></script>
 </body>
 
 </html>
