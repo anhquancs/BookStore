@@ -1,6 +1,7 @@
 package com.bookstore.admin.user.controller;
 
 import java.io.IOException;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +70,7 @@ public class Usercontroller {
 		model.addAttribute("reverseSortDir", reverseSortDir);
 		model.addAttribute("keyword", keyword);
 
-		return "users";
+		return "users/users";
 	}
 
 	@GetMapping("/user/new")
@@ -81,7 +82,7 @@ public class Usercontroller {
 		model.addAttribute("user", user);
 		model.addAttribute("listRoles", listRoles);
 		model.addAttribute("pageTitle", "Create New User");
-		return "user_form";
+		return "users/user_form";
 	}
 
 	@PostMapping("/users/save")
@@ -123,7 +124,7 @@ public class Usercontroller {
 
 			model.addAttribute("pageTitle", "Edit User (ID: " + id + ")");
 			model.addAttribute("listRoles", listRoles);
-			return "user_form";
+			return "users/user_form";
 		} catch (UserNotFoundException e) {
 			redirectAttributes.addFlashAttribute("message", e.getMessage());
 			return "redirect:/users";
@@ -167,46 +168,22 @@ public class Usercontroller {
 
 	@GetMapping("/users/export/excel")
 	public void exportExcel(HttpServletResponse response) throws IOException {
-		
+
 		List<User> listUsers = service.listAll();
-	
+
 		UserExcelExporter exporter = new UserExcelExporter();
-		
+
 		exporter.export(listUsers, response);
 	}
 
 	@GetMapping("/users/export/pdf")
 	public void exportPDF(HttpServletResponse response) throws IOException {
-		
+
 		List<User> listUsers = service.listAll();
-	
+
 		UserPDFExporter exporter = new UserPDFExporter();
-		
+
 		exporter.export(listUsers, response);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
