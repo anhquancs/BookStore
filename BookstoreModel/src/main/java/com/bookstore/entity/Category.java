@@ -39,13 +39,16 @@ public class Category {
     @OneToMany(mappedBy = "parent")
     private Set<Category> children = new HashSet<>();
 
-    public Category(String name){
-        this.name = name;
-        this.alias = name;
-        this.image = "default.png";
-    }
 
-    public Integer getId() {
+
+	public Category(String name) {
+
+		this.name = name;
+		this.alias =name;
+		this.image = "image.png";
+	}
+
+	public Integer getId() {
         return id;
     }
 
