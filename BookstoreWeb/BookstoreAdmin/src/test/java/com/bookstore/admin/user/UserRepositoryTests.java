@@ -32,7 +32,7 @@ public class UserRepositoryTests {
 	@Test
 	public void testCreateUserWithOneRole() {
 		Role roleAdmin = entityManager.find(Role.class, 1);
-		User userQuanLA = new User("anhquancs2019@gmail.com", "nam2020", "Quan", "Le Anh");
+		User userQuanLA = new User("anhquancs2019@gmail.com", "$2a$10$bDqskP9Z/y6BIZnFLgJ8HuwMYaZXD9w2jVk2pYHXgn1k6N4nckleu", "Quan", "Le Anh");
 		userQuanLA.addRole(roleAdmin);
 		
 		
@@ -43,7 +43,7 @@ public class UserRepositoryTests {
 	
 	@Test
 	public void testCreateUserWithTwoRole() {
-		User userQuanLA2 = new User("anhquancs2020@gmail.com", "nam2020", "Quan2", "Le Anh");
+		User userQuanLA2 = new User("anhquancs202@gmail.com", "nam2020", "Quan2", "Le Anh");
 		Role roleEditor = new Role(3);
 		Role roleAssistant = new Role(5);
 
@@ -121,7 +121,7 @@ public class UserRepositoryTests {
 	}
 	@Test
 	public void testEnabledUser() {
-		Integer id = 49;
+		Integer id = 1;
 		repo.updateEnabledStatus(id, true);
 	}
 	@Test
