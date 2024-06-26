@@ -41,11 +41,23 @@ public class Category {
 
 
 
-	public Category(String name) {
+    public Category() {
 
+    }
+
+	public Category(Integer id) {
+        this.id = id;
+    }
+
+    public Category(String name) {
 		this.name = name;
 		this.alias =name;
 		this.image = "image.png";
+	}
+
+    public Category(String name, Category parent) {
+        this(name);
+		this.parent = parent;
 	}
 
 	public Integer getId() {
@@ -102,6 +114,11 @@ public class Category {
 
     public void setChildren(Set<Category> children) {
         this.children = children;
+    }
+
+    public Category get() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'get'");
     }
 
 }
