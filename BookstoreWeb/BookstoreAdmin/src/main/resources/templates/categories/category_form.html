@@ -54,30 +54,12 @@
 							th:required="${category.imagePath == null}"
 							class="mb-2">
 						<div class="mt-2">
-							<img id="thumbnail" alt="Image preview" th:src="@{/category.imagePath}"
+							<img id="thumbnail" alt="Image preview" th:src="@{${category.imagePath}}"
 								class="img-fluid"  width="140px" />
 						</div>
 					</div>
 				</div>
-				<div class="modal fade text-center" id="modalDialog">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h4 class="modal-title" id="modalTitle">Warning</h4>
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-
-							</div>
-							<div class="modal-body">
-								<span id="modalBody"></span>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-danger"
-									data-dismiss="modal">Close</button>
-							</div>
-						</div>
-					</div>
-				</div>
-
+				
 				<div class="form-group row">
 					<label class="col-sm-4 col-form-label">Enabled</label>
 					<div class="col-sm-8">
@@ -92,6 +74,8 @@
 				</div>
 
 			</div>
+
+			<div th:replace="modal_fragments :: modal_dialog"></div>
 
 			<div th:replace="fragments :: footer"></div>
 		</form>
@@ -112,9 +96,17 @@
 			params = {id: catId, name: catName, alias: catAlias, _csrf: csrfValue};
 
 			$.post(url, params, function(response) {
-				alert(response);
+				if (response == "OK"){
+					form.submit();
+				} else if (response == "DuplicateName") {
+					showWarningModal("There is another category having same name " + catName);
+				} else if (response == "DuplicateAlias") {
+					showWarningModal("There is another category having same alias " + catAlias);
+				} else {
+					showErrorModal("Unknown response from server"); 
+				}
 			}).fail(function() { 
-				alert('failed');
+				showErrorModal("Could not connect to the server");
 			});
 
 			return false;
