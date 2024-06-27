@@ -17,7 +17,16 @@ public class CategoryService{
 	private CategoryRepository repo;
 	
 	public List<Category> listAll(){
-		return (List<Category>) repo.findAll();
+		List<Category> rootCategories = repo.findRootCategories();
+		return listHierarchicalCategories(rootCategories);
+	}
+
+	private List<Category> listHierarchicalCategories(List<Category>rootCategories){
+		List<Category> hierarchicalCategories = new ArrayList<>();
+		for(Category rootCategory : rootCategories){
+			hierarchicalCategories.add(Category.copyFull(rootCategory));
+		}
+		return hierarchicalCategories;
 	}
 
 	public Category save(Category category){
@@ -38,14 +47,15 @@ public class CategoryService{
 					String name = "--" + subCategory.getName();
 					categoriesUsedInForm.add(Category.copyIdAndName(subCategory.getId(), name));
 
-					listChildren(categoriesUsedInForm, subCategory, 1);
+					listSubCategoriesUsedInForm(categoriesUsedInForm, subCategory, 1);
 				}
 			}
 		}
 		return categoriesUsedInForm;
 	}
 
-	private void listChildren(List<Category> categoriesUsedInForm, Category parent, int subLevel){
+	private void listSubCategoriesUsedInForm(List<Category> 
+	categoriesUsedInForm, Category parent, int subLevel){
 		int newSubLevel = subLevel + 1;
 		Set<Category> children = parent.getChildren();
 
@@ -58,7 +68,7 @@ public class CategoryService{
 			
 			categoriesUsedInForm.add(Category.copyIdAndName(subCategory.getId(), name));
 
-			listChildren(categoriesUsedInForm, subCategory, newSubLevel);
+			listSubCategoriesUsedInForm(categoriesUsedInForm, subCategory, newSubLevel);
 		}
 	}
 

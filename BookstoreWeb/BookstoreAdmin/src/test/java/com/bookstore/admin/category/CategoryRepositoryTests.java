@@ -95,4 +95,8 @@ public class CategoryRepositoryTests {
 		}
 
 	}
+	@Test
+	public void testListRootCategories(){
+		
+	}
 }
