@@ -11,11 +11,14 @@ import java.util.TreeSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.bookstore.admin.category.CategoryRepository;
 import com.bookstore.entity.Category;
 
+
 @Service
+@Transactional
 public class CategoryService {
 
 	@Autowired
@@ -170,5 +173,9 @@ public class CategoryService {
 		});
 		sortedChildren.addAll(children);
 		return sortedChildren;
+	}
+
+	public void updateCategoryEnabledStatus(Integer id, boolean enabled) {
+		repo.updateCategoryEnabledStatus(id, enabled);
 	}
 }
