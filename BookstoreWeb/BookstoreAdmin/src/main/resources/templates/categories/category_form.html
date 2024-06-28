@@ -39,7 +39,7 @@
 						<select class="form-control" th:field="*{parent}">
 							<option value="0">[No Parent]</option>
 
-							<th:block th:each="cat : ${ListCategories}">
+							<th:block th:each="cat : ${listCategories}">
 								<option th:value="${cat.id}">[[${cat.name}]]</option>
 							</th:block>
 						</select>
