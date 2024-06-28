@@ -35,8 +35,8 @@ public class CategoryRepositoryTests {
 	@Test
 	public void testCreateSubCategory() {
 		// ===== New 1 cái, với parent_id là 1 =============================
-		Category parent = new Category(1);
-		Category subCategory = new Category("Book1", parent);
+		Category parent = new Category(1008);
+		Category subCategory = new Category("Book18", parent);
 		Category savedCategory = repo.save(subCategory);
 		
 		assertThat(savedCategory.getId()).isGreaterThan(0);
@@ -52,7 +52,7 @@ public class CategoryRepositoryTests {
 	
 	@Test
 	public void testGetCategory() {
-		Category category = repo.findById(1).get();
+		Category category = repo.findById(1004).get();
 		System.out.println(category.getName());
 
 		Set<Category> children = category.getChildren();
