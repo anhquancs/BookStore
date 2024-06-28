@@ -145,11 +145,11 @@
 
 	</div>
 
-	<!-- <div th:replace="modal_fragments :: confirm_modal"></div> -->
+	<div th:replace="modal_fragments :: confirm_modal"></div>
 	<div th:replace="fragments :: footer"></div>
 
 
-	<!-- <script th:src="@{/js/common_list.js}"></script>
+	<script th:src="@{/js/common_list.js}"></script>
 	<script type="text/javascript">
 		moduleURL = "[[@{/users}]]";
 
@@ -159,9 +159,9 @@
 				showDeleteConfirmModal($(this), 'user');
 			});
 		});
-	</script> -->
+	</script>
 
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		$(document).ready(function(){
 			$(".link-delete").on("click", function(e){			
 				e.preventDefault();
@@ -178,6 +178,6 @@
 		function clearForm() {
 			window.location = "[[@{/users}]]";
 		}
-	</script>
+	</script> -->
 </body>
 </html>

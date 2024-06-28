@@ -67,12 +67,11 @@
 
 	</div>
 
+	<div th:replace="modal_fragments :: confirm_modal"></div>
+
 	<div th:replace="fragments :: footer"></div>
 	
-	<div th:replace="modal_fragments :: confirm_modal"></div>
 	
-	
-
 	<script th:src="@{/js/common_list.js}"></script>
 	<script type="text/javascript">
 		moduleURL = "[[@{/categories}]]";
