@@ -156,7 +156,6 @@ public class CategoryService {
 	}
 
 	private SortedSet<Category> sortSubCategories(Set<Category> children, String sortDir) {
-		
 		SortedSet<Category> sortedChildren = new TreeSet<>(new Comparator<Category>() {
 			@Override
 			public int compare(Category cat1, Category cat2) {
@@ -166,10 +165,7 @@ public class CategoryService {
 				}else{
 					return cat2.getName().compareTo(cat1.getName());
 				}
-				
-
 			}
-
 		});
 		sortedChildren.addAll(children);
 		return sortedChildren;
@@ -178,4 +174,17 @@ public class CategoryService {
 	public void updateCategoryEnabledStatus(Integer id, boolean enabled) {
 		repo.updateCategoryEnabledStatus(id, enabled);
 	}
+
+	public void delete(Integer id) throws CategoryNotFoundException { 
+		Long countById = repo.countById(id);
+		if (countById == null || countById == 0) {
+			throw new CategoryNotFoundException("Could not find any category with ID " + id);
+		}
+		repo.deleteById(id);
+	}
+
+
+
+
+
 }

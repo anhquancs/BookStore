@@ -6,7 +6,7 @@
 	<div class="container-fluid">
 		<div th:replace="navigation:: menu"></div>
 		<div>
-			<h1>Manage Users | Create New User</h1>
+			<h1>Manage Users</h1>
 			<a th:href="@{/user/new}" style="color: #AA0000;">Create New User</a>
 			&nbsp; || &nbsp; 
 			<a th:href="@{/users/export/csv}"	style="color: #AA0000;">Export To CSV</a> 
@@ -45,12 +45,11 @@
 						<th>Photos</th>
 
 						<th th:replace="fragments :: column_link('email', 'Email')">
-						<th
-							th:replace="fragments :: column_link('firstName', 'First Name')">
+						<th th:replace="fragments :: column_link('firstName', 'First Name')">
 						<th th:replace="fragments :: column_link('lastName', 'Last Name')">
 						<th>Roles</th>
 
-						<th th:replace="fragments :: column_link('lastName', 'Last Name')">
+						<th th:replace="fragments :: column_link('enabled', 'Enabled')">
 						<th></th>
 					</tr>
 				</thead>
@@ -146,8 +145,21 @@
 
 	</div>
 
+	<!-- <div th:replace="modal_fragments :: confirm_modal"></div> -->
 	<div th:replace="fragments :: footer"></div>
 
+
+	<!-- <script th:src="@{/js/common_list.js}"></script>
+	<script type="text/javascript">
+		moduleURL = "[[@{/users}]]";
+
+		$(document).ready(function(){
+			$(".link-delete").on("click", function(e){	
+				e.preventDefault();
+				showDeleteConfirmModal($(this), 'user');
+			});
+		});
+	</script> -->
 
 	<script type="text/javascript">
 		$(document).ready(function(){
