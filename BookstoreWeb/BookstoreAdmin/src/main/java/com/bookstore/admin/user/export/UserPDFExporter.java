@@ -24,7 +24,7 @@ public class UserPDFExporter extends Exporter {
 
 	public void export(List<User> listUsers, HttpServletResponse response) throws IOException {
 		
-		super.setResponseHeader(response, "applicaton/pdf", ".pdf");
+		super.setResponseHeader(response, "applicaton/pdf", ".pdf", "users_");
 		
 		
 		Document document = new Document(PageSize.A4);

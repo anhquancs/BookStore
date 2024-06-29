@@ -1,4 +1,4 @@
-package com.bookstore.admin.user.export;
+package com.bookstore.admin.category;
 
 import java.io.IOException;
 
@@ -13,25 +13,26 @@ import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 
 import com.bookstore.admin.user.Abstract.Exporter;
-import com.bookstore.entity.User;
+import com.bookstore.entity.Category;
 
 import jakarta.servlet.http.HttpServletResponse;
 
-public class UserCSVExporter extends Exporter {
-	public void export(List<User> listUsers, HttpServletResponse response) throws IOException {
+public class CategoryCSVExporter extends Exporter {
+	public void export(List<Category> listCategories, HttpServletResponse response) throws IOException {
 		
-		super.setResponseHeader(response, "text/csv", ".csv", "users_");
+		super.setResponseHeader(response, "text/csv", ".csv", "categories_");
 		
 		ICsvBeanWriter csvWriter = new  CsvBeanWriter(response.getWriter(),
 				CsvPreference.STANDARD_PREFERENCE);
 		
-		String[] csvHeader = {"User ID", "E-mail", "First Name", "Last Name", "Roles", "Enabled"};
-		String[] FieldMapping = {"id", "email", "firstName", "lastName", "roles", "enabled"};
+		String[] csvHeader = {"Category ID", "Category Name"};
+		String[] FieldMapping = {"id","name"};
 		
 		csvWriter.writeHeader(csvHeader);
 		
-		for(User user : listUsers) {
-			csvWriter.write(user, FieldMapping);
+		for(Category category : listCategories) {
+			category.setName(category.getName().replace("--", "  "));
+			csvWriter.write(category, FieldMapping);
 		}
 		
 		csvWriter.close();

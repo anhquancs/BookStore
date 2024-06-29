@@ -8,11 +8,12 @@ import java.util.Date;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class Exporter {
-	public void setResponseHeader(HttpServletResponse response, String contentType, String extension) throws IOException {
+	public void setResponseHeader(HttpServletResponse response, String contentType, 
+			String extension, String prefix) throws IOException {
 
 		DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy_HH-mm-ss");
 		String timestamp = dateFormatter.format(new Date());
-		String fileName = "users_" + timestamp + extension;
+		String fileName = prefix + timestamp + extension;
 
 		response.setContentType(contentType);
 
