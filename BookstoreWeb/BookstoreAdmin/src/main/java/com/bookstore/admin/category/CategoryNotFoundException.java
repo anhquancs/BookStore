@@ -1,4 +1,4 @@
-package com.bookstore.admin.user.service;
+package com.bookstore.admin.category;
 
 public class CategoryNotFoundException extends Exception{
 

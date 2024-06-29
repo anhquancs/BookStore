@@ -10,7 +10,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.bookstore.admin.user.service.CategoryService;
 import com.bookstore.entity.Category;
 
 @ExtendWith(MockitoExtension.class)

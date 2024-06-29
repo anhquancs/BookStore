@@ -1,4 +1,4 @@
-package com.bookstore.admin.user.controller;
+package com.bookstore.admin.category;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,8 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 
-import com.bookstore.admin.user.service.CategoryNotFoundException;
-import com.bookstore.admin.user.service.CategoryService;
 import com.bookstore.admin.user.util.FileUploadUtil;
 import com.bookstore.entity.Category;
 
@@ -28,18 +26,31 @@ public class CategoryController {
 	private CategoryService service;
 
 	@GetMapping("/categories")
-	public String listAll(@Param("sortDir")String sortDir, Model model) {
+	public String listFirstPage(@Param("sortDir")String sortDir, Model model) {
+		return listByPage(1, sortDir, model);
+	}
+
+	@GetMapping("/categories/page/{pageNum}")
+	public String listByPage(@PathVariable(name = "pageNum") int pageNum,
+			@Param("sortDir") String sortDir, Model model){
 		if (sortDir == null || sortDir.isEmpty()) {
 			sortDir = "asc";
-		} 
+		}
 
-		List<Category> listCategories = service.listAll(sortDir);
-
+		CategoryPageInfo pageInfo = new CategoryPageInfo();
+		List<Category> listCategories = service.listByPage(pageInfo, pageNum, sortDir);
+		
 		String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
-
+		
+		model.addAttribute("totalPages", pageInfo.getTotalPages());
+		model.addAttribute("totalItems", pageInfo.getTotalElements());
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("sortField", "name");
+		model.addAttribute("sortField", sortDir);
+		
 		model.addAttribute("listCategories", listCategories);
 		model.addAttribute("reverseSortDir", reverseSortDir);
-
+		
 		return "categories/categories";
 	}
 
