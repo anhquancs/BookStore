@@ -27,70 +27,40 @@
 		<div class="full details">
 			<table class="table table-bordered table-striped table-hover table-responsive-xl">
 				<thead class="thead-dark">
-
+ 
 					<tr>
-						<th th:replace="fragments :: column_link('id', 'User ID')">
+						<th th:replace="fragments :: column_link('/users', 'id', 'User ID', 'none')">
 						<th>Photos</th>
 
-						<th th:replace="fragments :: column_link('email', 'Email')">
-						<th th:replace="fragments :: column_link('firstName', 'First Name')">
-						<th th:replace="fragments :: column_link('lastName', 'Last Name')">
+						<th th:replace="fragments :: column_link('/users', 'email', 'Email', 'none')">
+						<th th:replace="fragments :: column_link('/users', 'firstName', 'First Name', 'none')">
+						<th th:replace="fragments :: column_link('/users', 'lastName', 'Last Name', 'none')">
 						<th>Roles</th>
 
-						<th th:replace="fragments :: column_link('enabled', 'Enabled')">
+						<th th:replace="fragments :: column_link('/users', 'enabled', 'Enabled', 'none')">
 						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="user : ${listUsers}">
 						<td>[[${user.id}]]</td>
-						<td><span th:if="${user.photos == null}"
-							class="fa-solid fa-image-portrait fa-2xl icon-dark"> </span> <img
-							th:if="${user.photos != null}"
-							th:src="@{${user.photosImagePath}}" width="85px" height="90px" />
+						<td>
+							<div th:replace="fragments :: user_photos"></div>
 						</td>
 						<td>[[${user.email}]]</td>
 						<td>[[${user.firstName}]]</td>
 						<td>[[${user.lastName}]]</td>
 						<td>[[${user.roles}]]</td>
-						<td><a th:if="${user.enabled == true}"
-							class="fas fa-check-circle fa-xl icon-green"
-							th:href="@{'/users/'+ ${user.id} + '/enabled/false'}"
-							title="Disable this user"></a> <a
-							th:if="${user.enabled == false}"
-							class="fas fa-circle fa-xl icon-dark"
-							th:href="@{'/users/'+ ${user.id} + '/enabled/true'}"
-							title="Enabled this user"></a></td>
-						<td><a class="fa-solid fa-pen-to-square fa-xl icon-black"
-							th:href="@{'/users/edit/' + ${user.id}}" title="Edit this User">&nbsp;</a>
-							<a class="fa-solid fa-trash fa-xl icon-red link-delete"
-							th:href="@{'/users/delete/' + ${user.id}}" th:userId="${user.id}"
-							title="Delete this User"></a></td>
-
+						<td>
+							<div th:replace="fragments :: user_status"></div>
+						</td>
+						<td>
+							<div th:replace="fragments :: user_actions"></div>
+						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
-	</div>
-	
-	<div class="modal fade text-center" id="confirmModal">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title" id="modalTitle">Delete Confirmation</h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-
-				</div>
-				<div class="modal-body">
-					<span id="confirmText"></span>
-				</div>
-				<div class="modal-footer">
-					<a type="button" class="btn btn-success" href="" id="yesButton">Yes</a>
-					<button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
-				</div>
-			</div>
-		</div>
-
 	</div>
 
 	<div th:replace="fragments :: pagination('/users', 'users')"></div>
