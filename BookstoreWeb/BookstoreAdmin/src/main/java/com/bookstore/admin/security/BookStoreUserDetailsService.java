@@ -1,11 +1,10 @@
-package com.bookstore.admin.user.service;
+package com.bookstore.admin.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.bookstore.admin.security.BookStoreUserDetails;
 import com.bookstore.admin.user.repository.UserRepository;
 import com.bookstore.entity.User;
 

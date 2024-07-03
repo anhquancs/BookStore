@@ -82,6 +82,17 @@
 		</th:block>
 	</div>
 
+	<!-- Brands ==================================== -->
+	<div th:fragment="brand_actions" th:remove="tag">
+		<a class="fas fa-edit fa-2x icon-green" th:href="@{'/brands/edit/' + ${brand.id}}"
+			title="Edit this category"></a>
+		&nbsp;
+		<a class="fas fa-trash fa-2x icon-dark link-delete"
+			th:href="@{'/brands/delete/' + ${brand.id}}" 
+			th:userId="${brand.id}"
+			title="Delete this User"></a>
+	</div>
+
 	<!-- ================================================================================= -->
 	<div th:fragment="pagination(moduleURL, entityName)" th:remove="tag">
 		<div class="text-center m-1" th:if="${totalItems > 0}">

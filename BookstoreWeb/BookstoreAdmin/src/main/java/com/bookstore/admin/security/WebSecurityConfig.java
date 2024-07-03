@@ -11,8 +11,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import com.bookstore.admin.user.service.BookStoreUserDetailsService;
-
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
@@ -42,7 +40,7 @@ public class WebSecurityConfig {
 		
 		http.authorizeHttpRequests(auth -> auth
 				.requestMatchers("/users/**").hasAuthority("Admin")
-				.requestMatchers("/categories/**").hasAnyAuthority("Admin", "Editor")
+				.requestMatchers("/categories/**", "/brands/**").hasAnyAuthority("Admin", "Editor")
 				.anyRequest().authenticated()
 			)
 			.formLogin(form -> form			
