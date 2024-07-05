@@ -33,13 +33,4 @@ public class BrandCSVExporter extends Exporter {
 		csvWriter.close();
  	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

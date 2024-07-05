@@ -16,13 +16,7 @@
 			<a th:href="@{/users/export/pdf}" style="color: #AA0000;">Export To PDF</a>
 		</div>
 
-
-
-		<div th:if="${message!= null}" class="alert alert-success text-center">
-			[[${message}]]
-		</div>
-
-		<div th:replace="fragments :: seach_form('/users/page/1')"></div>
+		<div th:replace="fragments :: seach_form_and_message('/users/page/1')"></div>
 
 		<div class="full details">
 			<table class="table table-bordered table-striped table-hover table-responsive-xl">
@@ -52,10 +46,12 @@
 						<td>[[${user.lastName}]]</td>
 						<td>[[${user.roles}]]</td>
 						<td>
-							<div th:replace="fragments :: user_status"></div>
+							<div th:replace="fragments :: status(${user.enabled}, 'user', '/users/' + ${user.id})"></div>
 						</td>
 						<td>
-							<div th:replace="fragments :: user_actions"></div>
+							<div th:replace="fragments :: edit('user', '/users/edit/' + ${user.id})"></div>
+							&nbsp;
+							<div th:replace="fragments :: delete('user', ${user.id}, '/users/delete/' + ${user.id}, true)"></div>
 						</td>
 					</tr>
 				</tbody>

@@ -2,7 +2,6 @@ package com.bookstore.admin.user.export;
 
 import java.awt.Color;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
 
 import com.bookstore.admin.user.Abstract.Exporter;
@@ -13,7 +12,6 @@ import com.lowagie.text.FontFactory;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
-import com.lowagie.text.pdf.PdfCell;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;

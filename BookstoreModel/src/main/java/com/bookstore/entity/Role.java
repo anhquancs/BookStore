@@ -1,7 +1,5 @@
 package com.bookstore.entity;
 
-import java.util.Objects;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,13 +24,10 @@ public class Role {
 	}
     
 	
-	
 	public Role(Integer id) {
 		super();
 		this.id = id;
 	}
-
-
 
 
 	@Override
@@ -42,7 +37,6 @@ public class Role {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
 
 
 	@Override
@@ -64,12 +58,10 @@ public class Role {
 	}
 
 
-
 	@Override
 	public String toString() {
 		return this.name;
 	}
-
 
 
 	public Role(String name) {

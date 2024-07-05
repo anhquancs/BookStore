@@ -12,11 +12,7 @@
 			<a th:href="@{/brands/export/csv}" class="fas fa-file-csv fa-2x icon-dark mr-2"></a>
 		</div>
 
-		<div th:if="${message!= null}" class="alert alert-success text-center">
-			[[${message}]]
-		</div>
-		
-		<div th:replace="fragments :: seach_form('/brands/page/1')"></div>
+		<div th:replace="fragments :: seach_form_and_message('/brands/page/1')"></div>
 
 		<div class="full-details">
 			<table class="table table-bordered table-striped table-hover table-responsive-xl">
@@ -42,7 +38,9 @@
 							</th:block>
 						</td>
 						<td>
-							<div th:replace="fragments :: brand_actions"></div>
+							<div th:replace="fragments :: edit('brand', '/brands/edit/' + ${brand.id})"></div>
+							&nbsp;
+							<div th:replace="fragments :: delete('brand', ${brand.id}, '/brands/delete/' + ${brand.id}, true)"></div>
 						</td>
 					</tr>
 				</tbody>

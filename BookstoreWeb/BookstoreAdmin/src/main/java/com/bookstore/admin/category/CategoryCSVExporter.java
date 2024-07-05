@@ -2,10 +2,6 @@ package com.bookstore.admin.category;
 
 import java.io.IOException;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import java.util.List;
 
 import org.supercsv.io.CsvBeanWriter;
@@ -37,14 +33,5 @@ public class CategoryCSVExporter extends Exporter {
 		
 		csvWriter.close();
  	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }
