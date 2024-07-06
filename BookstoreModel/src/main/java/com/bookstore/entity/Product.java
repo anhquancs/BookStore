@@ -14,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "products")
@@ -243,5 +244,14 @@ public class Product {
     public void addExtraImage(String imageName){
         this.images.add(new ProductImage(imageName, this));
     }
+
+    @Transient
+	public String getMainImagePath(){
+		if (id == null || mainImage == null) 
+			return "/images/image-gallery (2).png";
+			
+		return "/product-images/" + this.id + "/" + this.mainImage;
+	}
+
 
 }
