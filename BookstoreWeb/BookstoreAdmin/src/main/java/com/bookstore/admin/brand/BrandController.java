@@ -21,6 +21,8 @@ import com.bookstore.admin.user.util.FileUploadUtil;
 import com.bookstore.entity.Brand;
 import com.bookstore.entity.Category;
 
+import jakarta.servlet.http.HttpServletResponse;
+
 @Controller
 public class BrandController {
     @Autowired
@@ -126,6 +128,14 @@ public class BrandController {
             redirectAttributes.addFlashAttribute("message", ex.getMessage());
         }
         return "redirect:/brands";
+    }
+    @GetMapping("brands/export/csv")
+    public void exportToCSV(HttpServletResponse response) throws IOException {
+        // Assuming you have a service or repository to fetch brands
+        List<Brand> listBrands = brandService.listAll(); // Replace with your actual logic
+
+        BrandCSVExporter csvExporter = new BrandCSVExporter();
+        csvExporter.export(listBrands, response);
     }
 
 }
