@@ -1,6 +1,7 @@
 package com.bookstore.entity;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import jakarta.persistence.Column;
@@ -42,8 +43,8 @@ public class User {
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "user_roles", 
-	joinColumns = @JoinColumn(name = "user_id"),
-	inverseJoinColumns = @JoinColumn(name = "role_id"))
+			joinColumns = @JoinColumn(name = "user_id"),
+			inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 
 	
@@ -128,17 +129,30 @@ public class User {
 		this.roles.add(role);
 	}
 
-
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", roles=" + roles + "]";
 	}
+
 	@Transient
 	public String getPhotosImagePath() {
 		if(id == null || photos == null) return "/images/image-gallery (2).png";
 		
 		return "/user-photos/" + this.id + "/" + this.photos;
+	}
+
+
+	public boolean hasRole(String roleName) { 
+		Iterator<Role> iterator = roles.iterator();
+
+		while (iterator.hasNext()) { 
+			Role role = iterator.next();
+			if (role.getName().equals(roleName)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }

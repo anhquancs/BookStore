@@ -73,7 +73,7 @@ public class Usercontroller {
 		return "users/users";
 	}
 
-	@GetMapping("/user/new")
+	@GetMapping("/users/new")
 	public String newUser(Model model) {
 		List<Role> listRoles = service.listRoles();
 
