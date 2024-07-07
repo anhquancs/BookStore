@@ -81,14 +81,14 @@ public class BrandController {
     public String saveBrand(Brand brand, @RequestParam("fileImage") MultipartFile multipartFile,
             RedirectAttributes ra) throws IOException {
         if (!multipartFile.isEmpty()) {
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename()); 
-        brand.setLogo(fileName);
-        
-        Brand savedBrand = brandService.save(brand);
-        String uploadDir = "../brand-logos/" + savedBrand.getId();
+            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename()); 
+            brand.setLogo(fileName);
+            
+            Brand savedBrand = brandService.save(brand);
+            String uploadDir = "../brand-logos/" + savedBrand.getId();
 
-        FileUploadUtil.cleanDir(uploadDir);
-        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+            FileUploadUtil.cleanDir(uploadDir);
+            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 
         } else {
             brandService.save(brand);
