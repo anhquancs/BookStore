@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "BookstoreSiteApplication",
+            "request": "launch",
+            "mainClass": "com.bookstore.BookstoreSiteApplication",
+            "projectName": "BookstoreSite"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-BookstoreAdminApplication<BookstoreAdmin>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
@@ -19,7 +26,8 @@
             "mainClass": "com.bookstore.site.BookstoreSiteApplication",
             "projectName": "BookstoreSite",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=52787 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=BookstoreSite"
         }
     ]
 }
