@@ -24,6 +24,8 @@ import com.bookstore.entity.Brand;
 import com.bookstore.entity.Category;
 import com.bookstore.entity.Product;
 
+import jakarta.servlet.http.HttpServletResponse;
+
 @Controller
 public class ProductController {
 
@@ -191,5 +193,14 @@ public class ProductController {
             return "redirect:/products";
         }
     }
+    @GetMapping("products/export/csv")
+    public void exportToCSV(HttpServletResponse response) throws IOException {
+        // Assuming you have a service or repository to fetch brands
+        List<Product> listProducts = productService.listAll(); // Replace with your actual logic
+
+        ProductCSVExporter csvExporter = new ProductCSVExporter();
+        csvExporter.export(listProducts, response);
+    }
+
 
 }
