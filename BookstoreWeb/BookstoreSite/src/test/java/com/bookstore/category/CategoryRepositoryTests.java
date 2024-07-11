@@ -1,5 +1,7 @@
 package com.bookstore.category;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -24,4 +26,12 @@ public class CategoryRepositoryTests {
         });
 	}
     
+    @Test
+    public void testFindCategoryByAlias() {
+        String alias = "something";
+        Category category = repo.findByAliasEnabled(alias);
+        
+        assertThat(category).isNotNull();
+    }
+
 }
