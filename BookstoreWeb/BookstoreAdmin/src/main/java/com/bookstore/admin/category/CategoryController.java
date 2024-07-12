@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 
 import com.bookstore.admin.user.util.FileUploadUtil;
 import com.bookstore.entity.Category;
+import com.bookstore.exception.CategoryNotFoundException;
 
 import jakarta.servlet.http.HttpServletResponse;
 

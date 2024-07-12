@@ -1,4 +1,4 @@
-package com.bookstore.admin.product;
+package com.bookstore.exception;
 
 public class ProductNotFoundException  extends Exception{
 
