@@ -3,6 +3,7 @@ package com.bookstore.admin.setting.city;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +29,7 @@ public class CityRestController {
 		return String.valueOf(savedCity.getId());
 	}
 	
-	@GetMapping("/cities/delete/{id}")
+	@DeleteMapping("/cities/delete/{id}")
 	public void delete(@PathVariable("id") Integer id) {
 		repo.deleteById(id);;
 	}

@@ -51,10 +51,15 @@ function deleteDistrict() {
 
     url = contextPath + "districts/delete/" + districtId;
 
-    $.get(url, function() {
+    $.ajax({
+        type: 'DELETE',
+        url: url,
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader(csrfHeaderName, csrfValue);
+        }
+    }).done(function() {
         $("#dropDownDistricts option[value='" + districtId + "']").remove();
         changeFormDistrictToNew();
-    }).done(function() {
         showToastMessage("The district has been deleted");
     }).fail(function() {
         showToastMessage("ERROR: Could not connect to server encountered an error");

@@ -29,7 +29,7 @@ $(document).ready(function() {
         if (buttonAddCity.val() == "Add") {
             addCity();
         } else {
-            changeFormDistrictToNew();
+            changeFormDistrictToNewCity();
         }
     });
 
@@ -48,10 +48,15 @@ function deleteCity() {
 
     url = contextPath + "cities/delete/" + cityId;
 
-    $.get(url, function() {
-        $("#dropDownCities option[value='" + optionValue + "']").remove();
-        changeFormDistrictToNew();
+    $.ajax({
+        type: 'DELETE',
+        url: url,
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader(csrfHeaderName, csrfValue);
+        }
     }).done(function() {
+        $("#dropDownCities option[value='" + optionValue + "']").remove();
+        changeFormDistrictToNewCity();
         showToastMessage("The city has been deleted");
     }).fail(function() {
         showToastMessage("ERROR: Could not connect to server encountered an error");
@@ -81,7 +86,7 @@ function updateCity() {
 
         showToastMessage("The city has been updated");
 
-        changeFormDistrictToNew();
+        changeFormDistrictToNewCity();
     }).fail(function() {
         showToastMessage("ERROR: Could not connect to server encountered an error");
     });
@@ -119,7 +124,7 @@ function selectNewlyAddedCity(cityId, cityCode, cityName) {
     fieldCityName.val("").focus();
 }
 
-function changeFormDistrictToNew() {
+function changeFormDistrictToNewCity() {
     buttonAddCity.val("Add");
     labelCityName.text("City Name");
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,7 +37,7 @@ public class DistrictRestController {
 		return String.valueOf(savedDistrict.getId());
 	}
 	
-	@GetMapping("/districts/delete/{id}")
+	@DeleteMapping("/districts/delete/{id}")
 	public void delete(@PathVariable("id") Integer id) {
 		repo.deleteById(id);;
 	}
