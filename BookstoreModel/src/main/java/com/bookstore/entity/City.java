@@ -29,11 +29,22 @@ public class City {
     public City() {
         
     }
+    
+    public City(Integer id) {
+        this.id = id;
+    }
 
     public City(String name, String code) {
         this.name = name;
         this.code = code;
     }
+
+    public City(Integer id, String name, String code) {
+        this.id = id;
+        this.name = name;
+        this.code = code;
+    }
+
 
     public Integer getId() {
         return id;
@@ -57,14 +68,6 @@ public class City {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public Set<District> getDistricts() {
-        return districts;
-    }
-
-    public void setDistricts(Set<District> districts) {
-        this.districts = districts;
     }
 
     @Override
