@@ -30,10 +30,10 @@ public class User {
 	@Column(length = 64, nullable = false)
 	private String password;
 
-	@Column(name = "first_name", length = 45, nullable = false)
+	@Column(name = "first_name", columnDefinition = "nvarchar(45)", nullable = false)
 	private String firstName;
 
-	@Column(name = "last_name", length = 45, nullable = false)
+	@Column(name = "last_name", columnDefinition = "nvarchar(45)", nullable = false)
 	private String lastName;
 
 	@Column(length = 64)

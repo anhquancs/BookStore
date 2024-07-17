@@ -26,16 +26,16 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(unique = true, length = 256, nullable = false)
+    @Column(unique = true, columnDefinition = "nvarchar(256)", nullable = false)
     private String name;
 
     @Column(unique = true, length = 256, nullable = false)
     private String alias;
     
-    @Column(length = 512, nullable = false, name = "short_description")
+    @Column(columnDefinition = "nvarchar(512)", nullable = false, name = "short_description")
     private String shortDescription;
     
-    @Column(length = 4096, nullable = false, name = "full_description")
+    @Column(columnDefinition = "nvarchar(4096)", nullable = false, name = "full_description")
     private String fullDescription;
 
     @Column(name = "created_time")

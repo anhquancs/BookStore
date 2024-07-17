@@ -7,7 +7,7 @@ var labelCityName;
 var fieldCityName;
 var fieldCityCode;
 
-$(document).ready(function() {
+$(document).ready(function () {
     buttonLoad = $("#buttonLoadCities");
     dropDownCity = $("#dropDownCities");
     buttonAddCity = $("#buttonAddCity");
@@ -17,15 +17,15 @@ $(document).ready(function() {
     fieldCityName = $("#fieldCityName");
     fieldCityCode = $("#fieldCityCode");
 
-    buttonLoad.click(function() {
+    buttonLoad.click(function () {
         loadCities();
     });
 
-    dropDownCity.on("change", function() {
+    dropDownCity.on("change", function () {
         changeFormDistrictToSelectedCity();
     });
 
-    buttonAddCity.click(function() {
+    buttonAddCity.click(function () {
         if (buttonAddCity.val() == "Add") {
             addCity();
         } else {
@@ -33,11 +33,11 @@ $(document).ready(function() {
         }
     });
 
-    buttonUpdateCity.click(function() {
+    buttonUpdateCity.click(function () {
         updateCity();
     });
 
-    buttonDeleteCity.click(function() {
+    buttonDeleteCity.click(function () {
         deleteCity();
     });
 });
@@ -51,65 +51,80 @@ function deleteCity() {
     $.ajax({
         type: 'DELETE',
         url: url,
-        beforeSend: function(xhr) {
+        beforeSend: function (xhr) {
             xhr.setRequestHeader(csrfHeaderName, csrfValue);
         }
-    }).done(function() {
+    }).done(function () {
         $("#dropDownCities option[value='" + optionValue + "']").remove();
         changeFormDistrictToNewCity();
         showToastMessage("The city has been deleted");
-    }).fail(function() {
+    }).fail(function () {
         showToastMessage("ERROR: Could not connect to server encountered an error");
     });
 }
 
 function updateCity() {
+    if(!validateFormCity()) return; 
+
     url = contextPath + "cities/save";
     cityName = fieldCityName.val();
     cityCode = fieldCityCode.val();
 
     cityId = dropDownCity.val().split("-")[0];
 
-    jsonData = {id: cityId, name: cityName, code: cityCode};
+    jsonData = { id: cityId, name: cityName, code: cityCode };
 
     $.ajax({
         type: 'POST',
         url: url,
-        beforeSend: function(xhr) {
+        beforeSend: function (xhr) {
             xhr.setRequestHeader(csrfHeaderName, csrfValue);
         },
         data: JSON.stringify(jsonData),
         contentType: 'application/json'
-    }).done(function(cityId) {
+    }).done(function (cityId) {
         $("#dropDownCities option:selected").val(cityId + "-" + cityCode);
         $("#dropDownCities option:selected").text(cityName);
 
         showToastMessage("The city has been updated");
 
         changeFormDistrictToNewCity();
-    }).fail(function() {
+    }).fail(function () {
         showToastMessage("ERROR: Could not connect to server encountered an error");
     });
 }
 
+function validateFormCity() {
+    formCity = document.getElementById("formCity");
+    if (!formCity.checkValidity()) {
+        formCity.reportValidity();
+        return false;
+    }
+
+    return true; 
+}
+
 function addCity() {
+    
+    if(!validateFormCity()) return; 
+
     url = contextPath + "cities/save";
     cityName = fieldCityName.val();
     cityCode = fieldCityCode.val();
-    jsonData = {name: cityName, code: cityCode};
+    jsonData = { name: cityName, code: cityCode };
 
     $.ajax({
         type: 'POST',
         url: url,
-        beforeSend: function(xhr) {
+        beforeSend: function (xhr) {
             xhr.setRequestHeader(csrfHeaderName, csrfValue);
         },
         data: JSON.stringify(jsonData),
         contentType: 'application/json'
-    }).done(function(cityId) {
+    }).done(function (cityId) {
         selectNewlyAddedCity(cityId, cityCode, cityName);
         showToastMessage("The new city has been added");
-    }).fail(function() {
+    }).fail(function () {
         showToastMessage("ERROR: Could not connect to server encountered an error");
     });
 }
@@ -151,17 +166,17 @@ function changeFormDistrictToSelectedCity() {
 
 function loadCities() {
     url = contextPath + "cities/list";
-    $.get(url, function(responseJSON) {
+    $.get(url, function (responseJSON) {
         dropDownCity.empty();
 
-        $.each(responseJSON, function(index, city) {
+        $.each(responseJSON, function (index, city) {
             optionValue = city.id + "-" + city.code;
             $("<option>").val(optionValue).text(city.name).appendTo(dropDownCity);
         });
-    }).done(function() {
+    }).done(function () {
         buttonLoad.val("Refresh City List");
         showToastMessage("All cities have been loaded");
-    }).fail(function() {
+    }).fail(function () {
         showToastMessage("ERROR: Could not connect to server encountered an error");
     });
 }

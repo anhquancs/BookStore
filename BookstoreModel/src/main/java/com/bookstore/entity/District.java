@@ -16,7 +16,7 @@ public class District {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, length = 45)
+    @Column(nullable = false, columnDefinition = "nvarchar(45)")
     private String name;
 
     @ManyToOne

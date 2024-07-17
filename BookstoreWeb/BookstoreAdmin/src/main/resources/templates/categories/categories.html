@@ -6,7 +6,7 @@
 	<div class="container-fluid">
 		<div th:replace="navigation:: menu"></div>
 		<div>
-			<h1>Manage Categories</h1>
+			<h1>Quản lí thể loại</h1>
 
 			<a th:href="@{/categories/new}" class="fas fa-folder-plus fa-2x icon-dark mr-2"></a>
 			<a th:href="@{/categories/export/csv}" class="fas fa-file-csv fa-2x icon-dark mr-2"></a>
@@ -19,8 +19,8 @@
 				<thead class="thead-dark">
 					<tr>
 						<th>ID</th>
-						<th>Category Image</th>
-						<th th:replace="fragments :: column_link('/categories', 'name', 'Category Name', 'none')"></th>
+						<th>Hình ảnh</th>
+						<th th:replace="fragments :: column_link('/categories', 'name', 'Tên thể loại', 'none')"></th>
 						<th class="hideable-column">Alias</th>
 						<th>Enabled</th>
 						<th></th>

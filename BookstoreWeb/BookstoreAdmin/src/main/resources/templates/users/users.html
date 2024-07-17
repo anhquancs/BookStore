@@ -6,8 +6,8 @@
 	<div class="container-fluid">
 		<div th:replace="navigation:: menu"></div>
 		<div>
-			<h1>Manage Users</h1>
-			<a th:href="@{/users/new}" style="color: #AA0000;">Create New User</a>
+			<h1>Quản lí người dùng</h1>
+			<a th:href="@{/users/new}" style="color: #AA0000;">Tạo mới người dùng</a>
 			&nbsp; || &nbsp; 
 			<a th:href="@{/users/export/csv}"	style="color: #AA0000;">Export To CSV</a> 
 				&nbsp; || &nbsp; 
@@ -24,7 +24,7 @@
  
 					<tr>
 						<th th:replace="fragments :: column_link('/users', 'id', 'User ID', 'none')">
-						<th>Photos</th>
+						<th>Photo</th>
 
 						<th th:replace="fragments :: column_link('/users', 'email', 'Email', 'none')">
 						<th th:replace="fragments :: column_link('/users', 'firstName', 'First Name', 'none')">

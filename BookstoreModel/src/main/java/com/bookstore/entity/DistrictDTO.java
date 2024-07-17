@@ -1,4 +1,4 @@
-package com.bookstore.admin.setting.district;
+package com.bookstore.entity;
 
 public class DistrictDTO {
     private Integer id;

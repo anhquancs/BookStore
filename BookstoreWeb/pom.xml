@@ -86,6 +86,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>net.bytebuddy</groupId>
+			<artifactId>byte-buddy</artifactId>
+			<version>1.14.18</version>
+		</dependency>
+
+		<dependency>
 			<groupId>com.bookstore</groupId>
 			<artifactId>BookstoreModel</artifactId>
 			<version>0.0.1-SNAPSHOT</version>

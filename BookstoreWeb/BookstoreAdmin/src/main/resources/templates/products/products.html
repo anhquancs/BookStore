@@ -7,7 +7,7 @@
 	<div class="container-fluid">
 		<div th:replace="navigation:: menu"></div>
 		<div>
-			<h1>Manage Products</h1>
+			<h1>Quản lí sản phẩm</h1>
 
 			<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
 				<a th:href="@{/products/new}" class="fas fa-folder-plus fa-2x icon-dark mr-2"></a>
@@ -21,9 +21,9 @@
 				<input type="hidden" name="sortField" th:value="${sortField}" /> 
 				<input type="hidden" name="sortDir" th:value="${sortDir}" />
 	
-				Category:&nbsp;&nbsp;
+				Thể loại:&nbsp;&nbsp;
 				<select class="form-control" name="categoryId" id="dropdownCategory">
-					<option value="0">All Categories</option>
+					<option value="0">Tất cả thể loại</option>
 
 					<th:block th:each="cat : ${listCategories}">
 						<option th:value="${cat.id}" th:selected="(${categoryId} == ${cat.id})">[[${cat.name}]]</option>
@@ -31,7 +31,7 @@
 				</select>
 				&nbsp;&nbsp;
 
-				Seach:&nbsp;&nbsp;
+				Tìm kiếm:&nbsp;&nbsp;
 				<input type="seach" name="keyword" th:value="${keyword}" class="form-control" required /> 
 				&nbsp;&nbsp;
 				<button type="submit" class="btn btn-primary">
@@ -54,9 +54,9 @@
 					<tr>
 						<th th:replace="fragments :: column_link('/products', 'id', 'ID', 'none')">
 						<th>Main Image</th>
-						<th th:replace="fragments :: column_link('/products', 'name', 'Product Name', 'none')"></th>
-						<th th:replace="fragments :: column_link('/products', 'brand', 'Brand', 'none')"></th>
-						<th th:replace="fragments :: column_link('/products', 'category', 'Category', 'none')"></th>
+						<th th:replace="fragments :: column_link('/products', 'name', 'Tên sản phẩm', 'none')"></th>
+						<th th:replace="fragments :: column_link('/products', 'brand', 'Nhà xuất bản', 'none')"></th>
+						<th th:replace="fragments :: column_link('/products', 'category', 'Thể loại', 'none')"></th>
 						
 						<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
 							<th>Enabled</th>

@@ -67,6 +67,8 @@ function deleteDistrict() {
 }
 
 function updateDistrict() {
+    if (!validateFormDistrict()) return; 
+
     url = contextPath + "districts/save";
     districtId = dropDownDistricts.val();
     districtName = fieldDistrictName.val();
@@ -95,8 +97,14 @@ function updateDistrict() {
 }
 
 function addDistrict() {
+    if (!validateFormDistrict()) return; 
+
     url = contextPath + "districts/save";
     districtName = fieldDistrictName.val();
+
+    selectCity = $("#dropDownCitiesForDistricts option:selected");
+    cityId = selectedCity.val(); 
+    cityName = selectedCity.text(); 
     
     jsonData = {name: districtName, city: {id: cityId, name: cityName}};
 
@@ -114,6 +122,16 @@ function addDistrict() {
     }).fail(function() {
         showToastMessage("ERROR: Could not connect to server encountered an error");
     });
+}
+
+function validateFormDistrict() {
+    formDistrict = document.getElementById("formDistrict"); 
+    if (!formDistrict.checkValidity()) {
+        formDistrict.reportValidity(); 
+        return false; 
+    }
+
+    return true; 
 }
 
 function selectNewlyAddedDistrict(districtId, districtName) {

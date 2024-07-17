@@ -17,7 +17,7 @@ public class Role {
 	@Column(length = 40, nullable = false, unique = true)
 	private String name;
 	
-	@Column(length = 150, nullable = false)
+	@Column(columnDefinition = "nvarchar(150)", nullable = false)
 	private String descripton;
 	
 	public Role() {
