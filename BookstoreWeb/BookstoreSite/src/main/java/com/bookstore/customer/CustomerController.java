@@ -47,7 +47,7 @@ public class CustomerController {
         customerService.registerCustomer(customer);
         sendVerificationEmail(request, customer);
 
-        model.addAttribute("pageTitle", "Registration Succeeded!");
+        model.addAttribute("pageTitle", "Đăng ký thành công!");
 
         return "/register/register_success";
     }

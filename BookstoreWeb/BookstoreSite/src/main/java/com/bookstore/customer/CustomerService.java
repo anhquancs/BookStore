@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,42 +15,58 @@ import com.bookstore.setting.CityRepository;
 import jakarta.transaction.Transactional;
 import net.bytebuddy.utility.RandomString;
 
-
-
 @Service
 @Transactional
 public class CustomerService {
 
-    @Autowired private CityRepository cityRepository;
-    @Autowired private CustomerRepository customerRepository;
-	@Autowired PasswordEncoder passwordEncoder;
+	@Autowired
+	private CityRepository cityRepository;
+	@Autowired
+	private CustomerRepository customerRepository;
+	@Autowired
+	PasswordEncoder passwordEncoder;
 
-    public List<City> listAllCity() {
-        return cityRepository.findAllByOrderByNameAsc();
-    }
+	public List<City> listAllCity() {
+		return cityRepository.findAllByOrderByNameAsc();
+	}
 
-    public boolean isEmailUnique(String email) {
+	public boolean isEmailUnique(String email) {
 		Customer customer = customerRepository.findByEmail(email);
+
 		return customer == null;
 	}
 
 	public void registerCustomer(Customer customer) {
+		try {
+			String pass = customer.getPassword();
+			System.out.println(pass);
 
-		encodePassword(customer);
-		customer.setEnabled(false);
-		customer.setCreatedTime(new Date());
+			encodePassword(customer);
 
-		String randomCode = RandomString.make(64);
-		customer.setVerificationCode(randomCode);
+			checkPassword(customer, pass);
+			
+			customer.setEnabled(false);
+			customer.setCreatedTime(new Date());
 
-		customerRepository.save(customer);
+			String randomCode = RandomString.make(64);
+			customer.setVerificationCode(randomCode);
+
+			customerRepository.save(customer);
+		} catch (Exception e) {
+			// Log lỗi
+			e.printStackTrace();
+		}
 	}
 
-	void encodePassword(Customer customer) {
+	public boolean checkPassword(Customer customer, String rawPassword) {
+		// So sánh mật khẩu nhập vào với mật khẩu đã mã hóa
+		return new BCryptPasswordEncoder().matches(rawPassword, customer.getPassword());
+	}
+
+	private void encodePassword(Customer customer) {
 		String encodedPassword = passwordEncoder.encode(customer.getPassword());
 		customer.setPassword(encodedPassword);
 	}
-
 
 	public boolean verify(String verificationCode) {
 		Customer customer = customerRepository.findByVerificationCode(verificationCode);

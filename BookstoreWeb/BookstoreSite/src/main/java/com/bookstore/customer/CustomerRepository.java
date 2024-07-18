@@ -1,17 +1,17 @@
 package com.bookstore.customer;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.bookstore.entity.Customer;
 
 @Repository
-public interface CustomerRepository extends JpaRepository<Customer, Integer> {
+public interface CustomerRepository extends CrudRepository<Customer, Integer> {
 
     @Query("SELECT c FROM Customer c WHERE c.email = ?1")
-    public Customer findByEmail(String email); 
+	public Customer findByEmail(String email);
 
     @Query("SELECT c FROM Customer c WHERE c.verificationCode = ?1")
 	public Customer findByVerificationCode(String code);

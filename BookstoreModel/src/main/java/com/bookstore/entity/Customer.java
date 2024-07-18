@@ -167,10 +167,15 @@ public class Customer {
         this.city = city;
     }
 
+    
+
     @Override
     public String toString() {
-        return "Customer [id=" + id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName + "]";
-    } 
+        return "Customer [id=" + id + ", email=" + email + ", password=" + password + ", firstName=" + firstName
+                + ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", addressLine=" + addressLine + ", ward="
+                + ward + ", district=" + district + ", verificationCode=" + verificationCode + ", enabled=" + enabled
+                + ", createdTime=" + createdTime + ", city=" + city + "]";
+    }
 
     public String getFullName() {
 		return lastName + " " +  firstName;

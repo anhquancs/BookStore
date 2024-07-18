@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CustomerService",
+            "request": "launch",
+            "mainClass": "com.bookstore.customer.CustomerService",
+            "projectName": "BookstoreSite"
+        },
+        {
+            "type": "java",
             "name": "BookstoreSiteApplication",
             "request": "launch",
             "mainClass": "com.bookstore.BookstoreSiteApplication",
