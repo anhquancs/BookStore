@@ -52,7 +52,7 @@ public class SettingController {
         
         updateSettingValuesFromForm(request, settingBag.list());
         
-        ra.addFlashAttribute("message", "General settings have been saved.");
+        ra.addFlashAttribute("message", "Cài đặt chung đã được lưu.");
 
         return "redirect:/settings";
     }
@@ -94,7 +94,7 @@ public class SettingController {
 		List<Setting> mailServerSettings = service.getMailServerSettings();
 		updateSettingValuesFromForm(request, mailServerSettings);
 		
-		ra.addFlashAttribute("message", "Mail server settings have been saved");
+		ra.addFlashAttribute("message", "Cài đặt máy chủ thư đã được lưu");
 		
 		return "redirect:/settings#mailServer";
 	}
@@ -104,7 +104,7 @@ public class SettingController {
 		List<Setting> mailTemplateSettings = service.getMailTemplateSettings();
 		updateSettingValuesFromForm(request, mailTemplateSettings);
 		
-		ra.addFlashAttribute("message", "Mail template settings have been saved");
+		ra.addFlashAttribute("message", "Cài đặt mẫu thư đã được lưu");
 		
 		return "redirect:/settings#mailTemplates";
 	}	

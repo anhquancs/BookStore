@@ -95,7 +95,7 @@ public class CategoryController {
 			service.save(category);
 		}
 		
-		ra.addFlashAttribute("message", "The category has been saved successfully.");
+		ra.addFlashAttribute("message", "Thể loại đã được lưu thành công..");
 		return "redirect:/categories";
 	}
 
@@ -136,7 +136,7 @@ public class CategoryController {
 			FileUploadUtil.removeDir(categoryDir);
 
 			redirectAttributes.addFlashAttribute("message", 
-				"The category ID " + id + " has been deleted successfully");
+				"ID: " + id + " của thể loại đã được xóa thành công!");
 			} catch (CategoryNotFoundException ex) { 
 				redirectAttributes.addFlashAttribute("message", ex.getMessage());
 		}

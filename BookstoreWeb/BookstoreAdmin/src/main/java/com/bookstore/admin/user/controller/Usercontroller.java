@@ -104,7 +104,7 @@ public class Usercontroller {
 			service.save(user);
 		}
 
-		redirectAttributes.addFlashAttribute("message", "The user has been saved successfully.");
+		redirectAttributes.addFlashAttribute("message", "Người dùng đã được lưu thành công.");
 		return getRedirectURLtoAffectedUser(user);
 	}
 
@@ -137,7 +137,7 @@ public class Usercontroller {
 		try {
 
 			service.delete(id);
-			redirectAttributes.addFlashAttribute("message", "The user id " + id + " has been deleted successfully!");
+			redirectAttributes.addFlashAttribute("message", "Id người dùng " + id + " đã bị xóa thành công!");
 		} catch (UserNotFoundException e) {
 			redirectAttributes.addFlashAttribute("message", e.getMessage());
 
