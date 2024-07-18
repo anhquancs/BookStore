@@ -86,7 +86,7 @@ public class CustomerController {
 	public String editCustomer(@PathVariable("id") Integer id, Model model, RedirectAttributes ra) {
 		try {
 			Customer customer = customerService.get(id);
-			List<City> cities = customerService.listAllCountries();
+			List<City> cities = customerService.listAllCities();
 			
 			model.addAttribute("listCities", cities);			
 			model.addAttribute("customer", customer);

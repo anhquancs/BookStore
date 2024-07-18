@@ -25,19 +25,19 @@ public class CustomerService {
     public static final int CUSTOMERS_PER_PAGE = 10;
 
     @Autowired private CustomerRepository customerRepository;
-    @Autowired private CityRepository cityRepository; 
-    @Autowired private PasswordEncoder passwordEncoder; 
+    @Autowired private CityRepository cityRepository;
+    @Autowired private PasswordEncoder passwordEncoder;
 
     public Page<Customer> listByPage(int pageNum, String sortField, String sortDir, String keyword) {
 		Sort sort = Sort.by(sortField);
 		sort = sortDir.equals("asc") ? sort.ascending() : sort.descending();
-		
+
 		Pageable pageable = PageRequest.of(pageNum - 1, CUSTOMERS_PER_PAGE, sort);
-		
+
 		if (keyword != null) {
 			return customerRepository.findAll(keyword, pageable);
 		}
-		
+
 		return customerRepository.findAll(pageable);
 	}
 
@@ -53,38 +53,39 @@ public class CustomerService {
 		}
 	}
 
-    public List<City> listAllCountries() {
+    public List<City> listAllCities() {
 		return cityRepository.findAllByOrderByNameAsc();
 	}
 
     public boolean isEmailUnique(Integer id, String email) {
 		Customer existCustomer = customerRepository.findByEmail(email);
 
-		if (existCustomer != null && existCustomer.getId() != id) {
-			// found another customer having the same email
+		if (existCustomer != null && !existCustomer.getId().equals(id)) {
+			// Tìm thấy một khách hàng khác có cùng email
 			return false;
 		}
-		
+
 		return true;
 	}
+
 
     public void save(Customer customerInForm) {
 		if (!customerInForm.getPassword().isEmpty()) {
 			String encodedPassword = passwordEncoder.encode(customerInForm.getPassword());
-			customerInForm.setPassword(encodedPassword);			
+			customerInForm.setPassword(encodedPassword);
 		} else {
 			Customer customerInDB = customerRepository.findById(customerInForm.getId()).get();
 			customerInForm.setPassword(customerInDB.getPassword());
-		}		
+		}
 		customerRepository.save(customerInForm);
 	}
-	
+
 	public void delete(Integer id) throws CustomerNotFoundException {
 		Long count = customerRepository.countById(id);
 		if (count == null || count == 0) {
 			throw new CustomerNotFoundException("Could not find any customers with ID " + id);
 		}
-		
+
 		customerRepository.deleteById(id);
 	}
 }

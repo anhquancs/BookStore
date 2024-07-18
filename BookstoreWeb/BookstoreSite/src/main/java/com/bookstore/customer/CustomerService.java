@@ -20,39 +20,40 @@ import net.bytebuddy.utility.RandomString;
 @Transactional
 public class CustomerService {
 
-    @Autowired private CityRepository cityRepository; 
+    @Autowired private CityRepository cityRepository;
     @Autowired private CustomerRepository customerRepository;
 	@Autowired PasswordEncoder passwordEncoder;
 
     public List<City> listAllCity() {
-        return cityRepository.findAllByOrderByNameAsc(); 
+        return cityRepository.findAllByOrderByNameAsc();
     }
 
     public boolean isEmailUnique(String email) {
 		Customer customer = customerRepository.findByEmail(email);
 		return customer == null;
-	}    
+	}
 
-    public void registerCustomer(Customer customer) {
+	public void registerCustomer(Customer customer) {
+
 		encodePassword(customer);
 		customer.setEnabled(false);
 		customer.setCreatedTime(new Date());
-		
+
 		String randomCode = RandomString.make(64);
 		customer.setVerificationCode(randomCode);
-		
+
 		customerRepository.save(customer);
-		
 	}
 
-	private void encodePassword(Customer customer) {
+	void encodePassword(Customer customer) {
 		String encodedPassword = passwordEncoder.encode(customer.getPassword());
 		customer.setPassword(encodedPassword);
 	}
 
+
 	public boolean verify(String verificationCode) {
 		Customer customer = customerRepository.findByVerificationCode(verificationCode);
-		
+
 		if (customer == null || customer.isEnabled()) {
 			return false;
 		} else {
