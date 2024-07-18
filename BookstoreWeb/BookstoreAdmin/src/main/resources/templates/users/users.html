@@ -1,37 +1,46 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: page_head('Users - Book.store Admin', 'none')">
+<head
+	th:replace="fragments :: page_head('Users - Book.store Admin', 'none')">
 </head>
 <body>
 	<div class="container-fluid">
 		<div th:replace="navigation:: menu"></div>
 		<div>
-			<h1>Quản lí người dùng</h1>
-			<a th:href="@{/users/new}" style="color: #AA0000;">Tạo mới người dùng</a>
-			&nbsp; || &nbsp; 
-			<a th:href="@{/users/export/csv}"	style="color: #AA0000;">Export To CSV</a> 
-				&nbsp; || &nbsp; 
-			<a th:href="@{/users/export/excel}" style="color: #AA0000;">Export To Excel</a>
-			&nbsp; || &nbsp; 
-			<a th:href="@{/users/export/pdf}" style="color: #AA0000;">Export To PDF</a>
+			<h1>Quản Lí Người Dùng</h1>
+			<a th:href="@{/users/new}" style="color: white;"><img
+				th:src="@{/images/add.png}" width="40px"> </a> &nbsp; || &nbsp; <a
+				th:href="@{/users/export/csv}" style="color: white;"> <img
+				th:src="@{/images/csv-file-format-extension.png}" width="33px">
+			</a> &nbsp; || &nbsp; <a th:href="@{/users/export/excel}"
+				style="color: white;"><img th:src="@{/images/excel-file.png}"
+				width="33px"> </a> &nbsp; || &nbsp; <a
+				th:href="@{/users/export/pdf}" style="color: white;"><img
+				th:src="@{/images/pdf-file-format-symbol.png}" width="33px"> </a>
 		</div>
 
 		<div th:replace="fragments :: seach_form_and_message('/users/page/1')"></div>
 
 		<div class="full details">
-			<table class="table table-bordered table-striped table-hover table-responsive-xl">
+			<table
+				class="table table-bordered table-striped table-hover table-responsive-xl">
 				<thead class="thead-dark">
- 
+
 					<tr>
-						<th th:replace="fragments :: column_link('/users', 'id', 'User ID', 'none')">
-						<th>Photo</th>
+						<th
+							th:replace="fragments :: column_link('/users', 'id', 'ID', 'none')">
+						<th>Hình Ảnh</th>
 
-						<th th:replace="fragments :: column_link('/users', 'email', 'Email', 'none')">
-						<th th:replace="fragments :: column_link('/users', 'firstName', 'First Name', 'none')">
-						<th th:replace="fragments :: column_link('/users', 'lastName', 'Last Name', 'none')">
-						<th>Roles</th>
+						<th
+							th:replace="fragments :: column_link('/users', 'email', 'Email', 'none')">
+						<th
+							th:replace="fragments :: column_link('/users', 'firstName', 'Họ', 'none')">
+						<th
+							th:replace="fragments :: column_link('/users', 'lastName', 'Tên', 'none')">
+						<th>Vai trò</th>
 
-						<th th:replace="fragments :: column_link('/users', 'enabled', 'Enabled', 'none')">
+						<th
+							th:replace="fragments :: column_link('/users', 'enabled', 'Enabled', 'none')">
 						<th></th>
 					</tr>
 				</thead>
@@ -46,12 +55,15 @@
 						<td>[[${user.lastName}]]</td>
 						<td>[[${user.roles}]]</td>
 						<td>
-							<div th:replace="fragments :: status(${user.enabled}, 'user', '/users/' + ${user.id})"></div>
+							<div
+								th:replace="fragments :: status(${user.enabled}, 'user', '/users/' + ${user.id})"></div>
 						</td>
 						<td>
-							<div th:replace="fragments :: edit('user', '/users/edit/' + ${user.id})"></div>
+							<div
+								th:replace="fragments :: edit('user', '/users/edit/' + ${user.id})"></div>
 							&nbsp;
-							<div th:replace="fragments :: delete('user', ${user.id}, '/users/delete/' + ${user.id}, true)"></div>
+							<div
+								th:replace="fragments :: delete('user', ${user.id}, '/users/delete/' + ${user.id}, true)"></div>
 						</td>
 					</tr>
 				</tbody>

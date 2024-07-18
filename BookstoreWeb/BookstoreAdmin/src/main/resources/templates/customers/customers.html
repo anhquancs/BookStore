@@ -7,7 +7,7 @@
 	<div>
 		<h2>Quản lí khách hàng</h2>	
 		
-		<a th:href="@{/customers/export/csv}" class="fas fa-file-csv fa-2x icon-dark mr-2"></a>
+		<a th:href="@{/customers/export/csv}" style="color: white;">  <img th:src="@{/images/csv-file-format-extension.png}"  width="33px"></a>
 	</div>
 		
 	<div th:replace="fragments :: seach_form_and_message('/customers/page/1')"/>

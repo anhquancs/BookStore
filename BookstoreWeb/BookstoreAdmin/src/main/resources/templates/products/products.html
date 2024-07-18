@@ -7,11 +7,11 @@
 	<div class="container-fluid">
 		<div th:replace="navigation:: menu"></div>
 		<div>
-			<h1>Quản lí sản phẩm</h1>
+			<h1>Quản Lí Sản Phẩm</h1>
 
 			<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-				<a th:href="@{/products/new}" class="fas fa-folder-plus fa-2x icon-dark mr-2"></a>
-				<a th:href="@{/products/export/csv}" class="fas fa-file-csv fa-2x icon-dark mr-2"></a>
+				<a th:href="@{/products/new}"style="color: white;"><img th:src="@{/images/add.png}" width="40px"></a> &nbsp; || &nbsp;
+				<a th:href="@{/products/export/csv}" style="color: white;">  <img th:src="@{/images/csv-file-format-extension.png}"  width="33px"></a>
 			</th:block>
 			
 		</div>
@@ -32,15 +32,13 @@
 				&nbsp;&nbsp;
 
 				Tìm kiếm:&nbsp;&nbsp;
-				<input type="seach" name="keyword" th:value="${keyword}" class="form-control" required /> 
-				&nbsp;&nbsp;
-				<button type="submit" class="btn btn-primary">
-					<i class="fas fa-search"></i>
-				</button>
-				&nbsp;&nbsp; 
-				<button type="button" class="btn btn-secondary" onclick="clearFilter()">
-					<i class="fas fa-eraser"></i>
-				</button>
+			<input type="search" name="keyword" th:value="${keyword}" class="form-control" required /> 
+&nbsp;&nbsp;
+<button type="submit" > <img th:src="@{/images/seach.png}"  width="30px"> </button>
+			&nbsp;&nbsp; 
+			<a type="button" onclick="clearFilter()">
+				<img th:src="@{/images/delete (2).png}"  width="30px">
+			</a>
 			</form>
 	
 			<div th:if="${message!= null}" class="alert alert-success text-center">

@@ -109,10 +109,10 @@
 				}else if(response == "Duplicated"){
 					showWarningModal("Có một nhân viên khác có email " + userEmail);
 					}else{
-						showErrorModal("Unknown response from server");
+						showErrorModal("Phản hồi không xác định từ máy chủ");
 					}
 				}).fail(function(){
-					showErrorModal("Could not connect to the server");
+					showErrorModal("Không thể kết nối đến máy chủ");
 				});
 			return false;
 		}

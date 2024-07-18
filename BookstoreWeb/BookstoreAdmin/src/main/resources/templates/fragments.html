@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+s<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:fragment="page_head(title, remove)" th:remove="${remove}">
@@ -15,7 +15,6 @@
 
 	<script type="text/javascript" th:src="@{/js/common.js}"></script>
 </head>
-
 <body>
 
 	<div th:fragment="footer" class="text-center m-3">
@@ -71,37 +70,12 @@
 		<img th:if="${user.photos != null}" th:src="@{${user.photosImagePath}}" width="85px" height="90px" />
 	</div>
 
-
-	<!-- <div th:fragment="user_actions" th:remove="tag">
-		<a class="fa-solid fa-pen-to-square fa-xl icon-black" th:href="@{'/users/edit/' + ${user.id}}" 
-			title="Edit this User"></a>
-		&nbsp;
-		<a class="fa-solid fa-trash fa-xl icon-red link-delete"
-			th:href="@{'/users/delete/' + ${user.id}}" 
-			th:userId="${user.id}"
-			title="Delete this User"></a>
-	</div>
-
-	<div th:fragment="category_actions" th:remove="tag">
-		<a class="fas fa-edit fa-2x icon-green" th:href="@{'/categories/edit/' + ${cat.id}}"
-			title="Edit this category"></a>
-		&nbsp;
-		<th:block th:if="${cat.hasChildren == false}">
-		<a class="fas fa-trash fa-2x icon-dark link-delete" 
-			th:href="@{'/categories/delete/' + ${cat.id}}"
-			th:entityId="${cat.id}" 
-			title="Delete this category"></a>
-		</th:block>
-	</div> -->
-
-
-	<!-- ================================================================================= -->
 	<div th:fragment="pagination(moduleURL, entityName)" th:remove="tag">
 		<div class="text-center m-1" th:if="${totalItems > 0}">
 			<span>Showing [[${entityName}]] # [[${startCount}]] to [[${endCount}]] of [[${totalItems}]] </span>
 		</div>
 		<div class="text-center m-1" th:unless="${totalItems > 0}">
-			<span>Không [[${entityName}]] Tìm thấy</span>
+			<span>Không Tìm thấy [[${entityName}]]</span>
 		</div>
 
 		<div th:if="${totalPages > 1}">
@@ -142,16 +116,15 @@
 			<input type="hidden" name="sortField" th:value="${sortField}" /> 
 			<input type="hidden" name="sortDir" th:value="${sortDir}" />
 
-			Seach:&nbsp;&nbsp;
-			<input type="seach" name="keyword" th:value="${keyword}" class="form-control" required /> 
-			&nbsp;&nbsp;
-			<button type="submit" class="btn btn-primary">
-				<i class="fas fa-search"></i>
-			</button>
+			 Tìm kiếm:&nbsp;&nbsp;
+<input type="search" name="keyword" th:value="${keyword}" class="form-control" required /> 
+&nbsp;&nbsp;
+<button type="submit" > <img th:src="@{/images/seach.png}"  width="30px"> </button>
 			&nbsp;&nbsp; 
-			<button type="button" class="btn btn-secondary" onclick="clearFilter()">
-				<i class="fas fa-eraser"></i>
-			</button>
+			<a type="button" onclick="clearFilter()">
+				<img th:src="@{/images/delete (2).png}"  width="30px">
+			</a>
+			
 		</form>
 
 		<div th:if="${message!= null}" class="alert alert-success text-center">
