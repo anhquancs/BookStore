@@ -78,37 +78,31 @@ s<!DOCTYPE html>
 			<span>Không Tìm thấy [[${entityName}]]</span>
 		</div>
 
-		<div th:if="${totalPages > 1}">
-			<nav>
-				<ul class="pagination justify-content-center">
-					<li
-						th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
-						<a th:replace="fragments :: page_link(${moduleURL}, 1, '&laquo;')"> </a>
-					</li>
-		
-					<li
-						th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
-						<a th:replace="fragments :: page_link(${moduleURL}, ${currentPage - 1} , '-')"> </a>
-					</li>
-		
-					<li
-						th:class="${currentPage != i ? 'page-item' : 'page-item active'}"
-						th:each="i : ${#numbers.sequence(1, totalPages)}">
-						<a th:replace="fragments :: page_link(${moduleURL}, ${i}, ${i})"> </a>
-					</li>
-					
-					<li
-						th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
-						<a th:replace="fragments :: page_link(${moduleURL}, ${currentPage + 1} , '+')"> </a>
-					</li>
+	<div th:if="${totalPages > 1}" class="custom-pagination">
+    <nav>
+        <ul class="pagination justify-content-center">
+            <li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
+                <a class="page-link" th:replace="fragments :: page_link(${moduleURL}, 1, '&laquo;')"> </a>
+            </li>
 
-					<li
-						th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
-						<a th:replace="fragments :: page_link(${moduleURL}, ${totalPages} , '&raquo;')"></a>
-					</li>
-				</ul>
-			</nav>
-		</div>
+            <li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
+                <a class="page-link" th:replace="fragments :: page_link(${moduleURL}, ${currentPage - 1} , '-')"> </a>
+            </li>
+
+            <li th:class="${currentPage != i ? 'page-item' : 'page-item active'}" th:each="i : ${#numbers.sequence(1, totalPages)}">
+                <a class="page-link" th:replace="fragments :: page_link(${moduleURL}, ${i}, ${i})"> </a>
+            </li>
+
+            <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
+                <a class="page-link" th:replace="fragments :: page_link(${moduleURL}, ${currentPage + 1} , '+')"> </a>
+            </li>
+
+            <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
+                <a class="page-link" th:replace="fragments :: page_link(${moduleURL}, ${totalPages} , '&raquo;')"></a>
+            </li>
+        </ul>
+    </nav>
+</div>
 	</div>
 
 	<div th:fragment="seach_form_and_message(moduleURL)">

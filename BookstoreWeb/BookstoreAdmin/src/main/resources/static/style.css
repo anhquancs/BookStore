@@ -9,3 +9,16 @@
         border: none;
         padding: 0;
     }
+    
+    .custom-pagination .page-item a.page-link {
+    color: black; /* Màu chữ */
+    border: 1px solid black; /* Viền đen */
+    background-color: white; /* Màu nền */
+}
+
+.custom-pagination .page-item.active a.page-link {
+    background-color: black; /* Màu nền cho nút đang active */
+    color: white; /* Màu chữ cho nút đang active */
+    border: 1px solid black; /* Viền đen cho nút đang active */
+}
+ 
