@@ -32,12 +32,12 @@ public class Product {
     @Column(unique = true, length = 256, nullable = false)
     private String alias;
     
-    @Column(columnDefinition = "nvarchar(512)", nullable = false, name = "short_description")
+    @Column(columnDefinition = "nvarchar(max)", nullable = false, name = "short_description")
     private String shortDescription;
-    
-    @Column(columnDefinition = "nvarchar(4096)", nullable = false, name = "full_description")
-    private String fullDescription;
 
+    @Column(columnDefinition = "nvarchar(max)", nullable = false, name = "full_description")
+    private String fullDescription;
+    
     @Column(name = "created_time")
     private Date createdTime;
 
