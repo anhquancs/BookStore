@@ -3,14 +3,8 @@ package com.bookstore.entity;
 import java.util.Date;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.annotation.Resource;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "customers")
@@ -54,6 +48,10 @@ public class Customer {
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "authentication_type", length = 10)
+    private  AuthenticationType authenticationType;
 
     public Customer() {
     }
@@ -180,4 +178,14 @@ public class Customer {
     public String getFullName() {
 		return lastName + " " +  firstName;
 	}
+
+    public AuthenticationType getAuthenticationType() {
+        return authenticationType;
+    }
+
+    public void setAuthenticationType(AuthenticationType authenticationType) {
+        this.authenticationType = authenticationType;
+    }
+
+    
 }

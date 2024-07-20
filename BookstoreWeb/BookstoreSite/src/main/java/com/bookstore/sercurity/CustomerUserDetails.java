@@ -49,7 +49,11 @@ public class CustomerUserDetails implements UserDetails {
         return customer.isEnabled();
     }
 
-    public String getName() {
+    public String getfullName() {
         return customer.getLastName() + " " + customer.getFirstName();
+    }
+
+    public Customer getCustomer() {
+        return this.customer; 
     }
 }

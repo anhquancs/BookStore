@@ -9,5 +9,6 @@ import com.bookstore.entity.City;
 public interface CityRepository extends CrudRepository<City, Integer>{
     
     public List<City> findAllByOrderByNameAsc();
+
     
 }

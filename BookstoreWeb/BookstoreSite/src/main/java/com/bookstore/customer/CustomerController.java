@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.repository.query.Param;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -29,6 +30,8 @@ public class CustomerController {
     private CustomerService customerService;
     @Autowired
     private SettingService settingService;
+
+
 
     @GetMapping("/register")
     public String showRegisterForm(Model model) {

@@ -3,6 +3,7 @@ package com.bookstore.customer;
 import java.util.Date;
 import java.util.List;
 
+import com.bookstore.entity.AuthenticationType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -47,6 +48,7 @@ public class CustomerService {
 			
 			customer.setEnabled(false);
 			customer.setCreatedTime(new Date());
+			customer.setAuthenticationType(AuthenticationType.BOOKSTORE);
 
 			String randomCode = RandomString.make(64);
 			customer.setVerificationCode(randomCode);
@@ -58,6 +60,10 @@ public class CustomerService {
 		}
 	}
 
+	public Customer getCustomerByEmail(String email) {
+		return customerRepository.findByEmail(email);
+	}
+ 
 	public boolean checkPassword(Customer customer, String rawPassword) {
 		// So sánh mật khẩu nhập vào với mật khẩu đã mã hóa
 		return new BCryptPasswordEncoder().matches(rawPassword, customer.getPassword());
@@ -76,6 +82,46 @@ public class CustomerService {
 		} else {
 			customerRepository.enable(customer.getId());
 			return true;
+		}
+	}
+
+	public void updateAuthenticationType(Customer customer, AuthenticationType type) {
+		if (!customer.getAuthenticationType().equals(type)) {
+			customerRepository.updateAuthenticationType(customer.getId(), type);
+		}
+	}
+
+    public void addNewCustomerUponOAuthLogin(String name, String email) {
+        Customer customer = new Customer(); 
+        customer.setEmail(email);
+
+		setName(name, customer);
+
+        customer.setFirstName(name);
+        customer.setEnabled(true);
+        customer.setCreatedTime(new Date());
+        customer.setAuthenticationType(AuthenticationType.GOOGLE);
+        customer.setPassword("");
+        customer.setAddressLine("");
+        customer.setPhoneNumber("");
+        customer.setCity(null);;
+        customer.setDistrict("");
+        customer.setWard("");
+
+		customerRepository.save(customer);
+    }
+
+	private void setName(String name, Customer customer) {
+		String[] nameArray = name.split(" ");
+		if (nameArray.length < 2) {
+			customer.setFirstName(name);
+			customer.setLastName("");
+		} else {
+			String firstName = nameArray[0];
+			customer.setFirstName(firstName);
+
+			String lastName = name.replaceFirst(firstName, "");
+			customer.setLastName(lastName);
 		}
 	}
 }

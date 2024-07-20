@@ -1,5 +1,6 @@
 package com.bookstore.sercurity;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,8 +13,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.bookstore.sercurity.oauth.CustomerOAuth2UserService;
+import com.bookstore.sercurity.oauth.OAuth2LoginSuccessHandler;
+
 @Configuration
 public class WebSecurityConfig {
+
+	@Autowired
+	private CustomerOAuth2UserService auth2UserService;
+	@Autowired
+	private OAuth2LoginSuccessHandler auth2LoginSuccessHandler;
+	@Autowired
+	private DatabaseLoginSuccessHandler databaseLoginSuccessHandler; 
 
 	@Bean
 	PasswordEncoder passwordEncoder() {
@@ -29,10 +40,14 @@ public class WebSecurityConfig {
 				.formLogin(form -> form
 						.loginPage("/login")
 						.usernameParameter("email")
+						.successHandler(databaseLoginSuccessHandler)
 						.passwordParameter("password")
 						.permitAll())
 				.logout(LogoutConfigurer::permitAll)
-
+				.oauth2Login(o2 -> o2
+						.loginPage("/login")
+						.userInfoEndpoint(u -> u.userService(auth2UserService))
+						.successHandler(auth2LoginSuccessHandler))
 				.rememberMe(rem -> rem
 						.key("AbcDefghijklmnopqrs_1234567890")
 						.tokenValiditySeconds(7 * 24 * 60 * 60));

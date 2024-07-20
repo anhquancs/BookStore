@@ -56,7 +56,7 @@
                         <th:block sec:authorize="isAuthenticated()">
                             <li class="nav-item">
                                 <b><a class="nav-link" th:href="@{/customer}"
-                                      sec:authentication="principal.name"></a></b>
+                                      sec:authentication="principal.fullName"></a></b>
                             </li>
 
                             <li class="nav-item">
