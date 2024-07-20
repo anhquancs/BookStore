@@ -22,6 +22,9 @@ public interface CustomerRepository extends CrudRepository<Customer, Integer> {
 	public void enable(Integer id);
 
 	@Query("UPDATE Customer c SET c.authenticationType = ?2 WHERE c.id = ?1")
-	@Modifying
+	@Modifying 
 	public void updateAuthenticationType(Integer customerId, AuthenticationType type);
+
+
+	public Customer findByResetPasswordToken(String token);
 }

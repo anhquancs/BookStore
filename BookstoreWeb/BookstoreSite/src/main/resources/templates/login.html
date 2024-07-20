@@ -10,6 +10,9 @@
 
     <div class="mt-3">
         <a class="btn btn-lg btn-secondary fab fa-google" th:href="@{/oauth2/authorization/google}">&nbsp; &nbsp;Google</a>
+    </div>    
+    <div class="mt-3">
+        <a class="btn btn-lg btn-secondary fab fa-facebook" th:href="@{/oauth2/authorization/facebook}">&nbsp; &nbsp;Facebook</a>
     </div>
 
     <div>&nbsp;</div>
@@ -39,6 +42,9 @@
     </form>
 
     <div>&nbsp;</div>
+    <div>
+        <a th:href="@{forgot_password}">Quên mật khẩu?</a>
+    </div>
     <div>
         Khách hàng mới? <a th:href="@{/register}"><b>Đăng ký</b></a>
     </div>
