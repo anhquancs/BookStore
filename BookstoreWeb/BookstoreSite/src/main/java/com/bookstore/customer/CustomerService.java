@@ -122,7 +122,7 @@ public class CustomerService {
 			String firstName = nameArray[0];
 			customer.setFirstName(firstName);
 
-			String lastName = name.replaceFirst(firstName + " ", "");
+			String lastName = name.replaceFirst(firstName + " ", " ");
 			customer.setLastName(lastName);
 		}
 	}

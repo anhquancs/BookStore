@@ -205,6 +205,4 @@ public class Customer {
     public void setResetPasswordToken(String resetPasswordToken) {
         this.resetPasswordToken = resetPasswordToken;
     }
-
-    
 }
