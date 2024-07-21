@@ -3,20 +3,38 @@
 
 <body>
     <div th:fragment="content" class="col-sm-2">
-        <div>
-            <a th:href="@{'/p/' + ${product.alias}}">
-                <img th:src="@{${product.mainImagePath}}" width="150">
-                <br>
-                <b>[[${product.shortName}]]</b>
-            </a>
+        
+        <div class="card text-center">
+                
+            <div class="card-header">
+                BOOKSTORE
+            </div>
+            <div class="card-body">
+                <a th:href="@{'/p/' + ${product.alias}}">
+                    <img th:src="@{${product.mainImagePath}}" class="card-img-top product-img">
+                    <br>
+                    <h5 class="card-title">[[${product.shortName}]]</h5>
+                </a>
+                <div th:if="${product.discountPercent <= 0}">
+                    <div th:replace="product/product_fragment :: price_fragment(${product.price})"></div>
+                </div>
+                <div th:if="${product.discountPercent > 0}">
+                    <span style="font-size: larger; color: darkred">
+                        <div th:replace="product/product_fragment :: price_fragment(${product.discountPrice})"></div>
+                    </span>
+                    <del>
+                        <span>
+                            <div th:replace="product/product_fragment :: price_fragment(${product.price})"></div>
+                        </span>
+                    </del>
+                </div>
+                <a th:href="@{'/p/' + ${product.alias}}" class="btn btn-primary">Xem sản phẩm</a>
+            </div>
+            <div class="card-footer text-body-secondary">
+                SUMMER 2024
+            </div>
         </div>
-        <div th:if="${product.discountPercent <= 0}">
-            <div th:replace="product/product_fragment :: price_fragment(${product.price})"></div>
-        </div>
-        <div th:if="${product.discountPercent > 0}">
-            <span style="font-size: larger; color: darkred"><div th:replace="product/product_fragment :: price_fragment(${product.discountPrice})"></div></span>
-            <del><span><div th:replace="product/product_fragment :: price_fragment(${product.price})"></div></span></del>
-        </div>
+        
     </div>
 
 

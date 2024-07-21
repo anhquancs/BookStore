@@ -4,15 +4,27 @@
 <head th:replace="fragments :: page_head('Lỗi - Book.store Admin', 'none')">
 </head>
 <body>
-<div class="container-fluid">
-    <div th:replace="navigation :: menu"></div>
 
-    <div class="m-3">
-        <h2>Rất tiếc, đã xảy ra lỗi không mong muốn</h2>
+    <div class="row">
+        <div class="col-2">
+            <div class="container-fluid">
+                <div th:replace="navigation :: menu"></div>
+
+            </div>
+        </div>
+
+        <div class="col-10">
+            <div class="container-fluid">
+                <div class="m-3">
+                    <h2>Rất tiếc, đã xảy ra lỗi không mong muốn</h2>
+                </div>
+            
+                <div th:replace="fragments :: footer"></div>    
+            </div>
+        </div>
     </div>
-
-    <div th:replace="fragments :: footer"></div>
-    
+  
+  
 </div>
 
 </body>

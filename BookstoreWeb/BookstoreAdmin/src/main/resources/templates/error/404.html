@@ -4,16 +4,26 @@
 <head th:replace="fragments :: page_head('Error - Book.store Admin', 'none')">
 </head>
 <body>
-<div class="container-fluid">
-    <div th:replace="navigation :: menu"></div>
+    <div class="row">
+        <div class="col-2">
+            <div class="container-fluid">
+                <div th:replace="navigation :: menu"></div>
+            </div>
+        </div>
 
-    <div class="m-3">
-        <h2>Rất tiếc, không thể tìm thấy trang được yêu cầu</h2>
+        <div class="col-10">
+
+            <div class="container-fluid">
+
+                <div class="m-3">
+                    <h2>404</h2>
+                </div>
+
+                <div th:replace="fragments :: footer"></div>
+            </div>
+        </div>
     </div>
 
-    <div th:replace="fragments :: footer"></div>
-    
-</div>
 
 </body>
 </html>

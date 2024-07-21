@@ -22,3 +22,7 @@
     border: 1px solid black; /* Viền đen cho nút đang active */
 }
  
+
+.text-black {
+    color: black;
+}

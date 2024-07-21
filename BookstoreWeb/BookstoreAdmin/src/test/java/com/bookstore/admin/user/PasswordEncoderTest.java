@@ -9,7 +9,7 @@ public class PasswordEncoderTest {
 	@Test
 	public void testEncoderPassword() {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String rawPassword = "nam2020";
+		String rawPassword = "password";
 		String encodedPassword = passwordEncoder.encode(rawPassword);
 
 		System.out.println(encodedPassword);
@@ -17,6 +17,5 @@ public class PasswordEncoderTest {
 		boolean matches = passwordEncoder.matches(rawPassword, encodedPassword);
 
 		assertThat(matches).isTrue();
-
 	}
 }

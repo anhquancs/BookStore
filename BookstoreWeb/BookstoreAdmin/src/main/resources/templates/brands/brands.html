@@ -3,58 +3,75 @@
 <head th:replace="fragments :: page_head('Brands - Book.store Admin', 'none')">
 </head>
 <body>
-	<div class="container-fluid">
-		<div th:replace="navigation:: menu"></div>
-		<div>
-			<h1>Quản Lí Nhà Xuất Bản</h1>
-
-			<a th:href="@{/brands/new}" style="color: white;"><img th:src="@{/images/add.png}" width="40px"></a> &nbsp; || &nbsp;
-			<a th:href="@{/brands/export/csv}" style="color: white;">  <img th:src="@{/images/csv-file-format-extension.png}"  width="33px"></a>
+	
+	<div class="row">
+		<div class="col-2">
+			<div class="container-fluid">
+				<div th:replace="navigation:: menu"></div>
+			</div>
 		</div>
 
-		<div th:replace="fragments :: seach_form_and_message('/brands/page/1')"></div>
+		<div class="col-10">
+			<div class="container-fluid">
+				<div>
+					<h1>Quản Lí Nhà Xuất Bản</h1>
+		
+					<a th:href="@{/brands/new}" style="color: white;"><img th:src="@{/images/add.png}" width="40px"></a> &nbsp; || &nbsp;
+					<a th:href="@{/brands/export/csv}" style="color: white;">  <img th:src="@{/images/csv-file-format-extension.png}"  width="33px"></a>
+				</div>
 
-		<div class="full-details">
-			<table class="table table-bordered table-striped table-hover table-responsive-xl">
-				<thead class="thead-dark">
-					<tr>
-						<th th:replace="fragments :: column_link('/brands', 'id', 'ID', 'none')">
-						<th>Hình</th>
-						<th th:replace="fragments :: column_link('/brands', 'name', 'Tên NXB', 'none')">
-						<th>Thể Loại</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="brand : ${listBrands}">
-						<td>[[${brand.id}]]</td>
-						<td>
-							<img th:src="@{${brand.logoPath}}" style="width: 100px" class="img-fluid">
-						</td>
-						<td>[[${brand.name}]]</td>
-						<td>
-							<th:block th:each="cat : ${brand.categories}">
-								<span class="badge badge-secondary" th:text="${cat.name}"></span>
-							</th:block>
-						</td>
-						<td>
-							<div th:replace="fragments :: edit('brand', '/brands/edit/' + ${brand.id})"></div>
-							&nbsp;
-							<div th:replace="fragments :: delete('brand', ${brand.id}, '/brands/delete/' + ${brand.id}, true)"></div>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+				<div th:replace="fragments :: seach_form_and_message('/brands/page/1')"></div>
+
+				<div class="full-details">
+					<table class="table table-bordered table-striped table-hover table-responsive-sm">
+						<thead class="thead-dark">
+							<tr>
+								<th th:replace="fragments :: column_link('/brands', 'id', 'ID', 'none')"></th>
+								<th>Hình</th>
+								<th th:replace="fragments :: column_link('/brands', 'name', 'Tên NXB', 'none')"></th>
+								<th>Thể Loại</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="brand : ${listBrands}">
+								<td>[[${brand.id}]]</td>
+								<td>
+									<img th:src="@{${brand.logoPath}}" style="width: 80px;" class="img-fluid">
+								</td>
+								<td>[[${brand.name}]]</td>
+								<td>
+									<th:block th:each="cat : ${brand.categories}">
+										<span class="badge badge-secondary" th:text="${cat.name}"></span>
+									</th:block>
+								</td>
+								<td>
+									<div th:replace="fragments :: edit('brand', '/brands/edit/' + ${brand.id})"></div>
+									&nbsp;
+									<div th:replace="fragments :: delete('brand', ${brand.id}, '/brands/delete/' + ${brand.id}, true)"></div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					
+				</div>
+				<div th:replace="fragments :: pagination('/brands', 'brands')"></div>
+
+				<div th:replace="modal_fragments :: confirm_modal"></div>
+			
+				<div th:replace="fragments :: footer"></div>
+				
+			</div>
 		</div>
-
 	</div>
+		
 	
-	<div th:replace="fragments :: pagination('/brands', 'brands')"></div>
 
-	<div th:replace="modal_fragments :: confirm_modal"></div>
 
-	<div th:replace="fragments :: footer"></div>
 	
+
+	
+
 	
 	<script th:src="@{/js/common_list.js}"></script>
 	<script type="text/javascript">

@@ -1,148 +1,168 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"></html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+</html>
+
 <head th:replace="fragments :: page_head('Products - Book.store Admin', 'none')">
 </head>
+
 <body>
-	<div class="container-fluid">
-		<div th:replace="navigation:: menu"></div>
-		<div>
-			<h1>Quản Lí Sản Phẩm</h1>
-
-			<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-				<a th:href="@{/products/new}"style="color: white;"><img th:src="@{/images/add.png}" width="40px"></a> &nbsp; || &nbsp;
-				<a th:href="@{/products/export/csv}" style="color: white;">  <img th:src="@{/images/csv-file-format-extension.png}"  width="33px"></a>
-			</th:block>
-			
+	<div class="row">
+		<div class="col-2">
+			<div class="container-fluid">
+				<div th:replace="navigation:: menu"></div>
+			</div>
 		</div>
-		
-		<div>
-			<form th:action="@{/products/page/1}" class="form-inline m-3" id="searchForm">
-				<input type="hidden" name="sortField" th:value="${sortField}" /> 
-				<input type="hidden" name="sortDir" th:value="${sortDir}" />
-	
-				Thể loại:&nbsp;&nbsp;
-				<select class="form-control" name="categoryId" id="dropdownCategory">
-					<option value="0">Tất cả thể loại</option>
 
-					<th:block th:each="cat : ${listCategories}">
-						<option th:value="${cat.id}" th:selected="(${categoryId} == ${cat.id})">[[${cat.name}]]</option>
+		<div class="col-10">
+			<div class="container-fluid">
+				<div>
+					<h1>Quản Lí Sản Phẩm</h1>
+
+					<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+						<a th:href="@{/products/new}" style="color: white;"><img th:src="@{/images/add.png}"
+								width="40px"></a> &nbsp; || &nbsp;
+						<a th:href="@{/products/export/csv}" style="color: white;"> <img
+								th:src="@{/images/csv-file-format-extension.png}" width="33px"></a>
 					</th:block>
-				</select>
-				&nbsp;&nbsp;
 
-				Tìm kiếm:&nbsp;&nbsp;
-			<input type="search" name="keyword" th:value="${keyword}" class="form-control" required /> 
-&nbsp;&nbsp;
-<button type="submit" > <img th:src="@{/images/seach.png}"  width="30px"> </button>
-			&nbsp;&nbsp; 
-			<a type="button" onclick="clearFilter()">
-				<img th:src="@{/images/delete (2).png}"  width="30px">
-			</a>
-			</form>
-	
-			<div th:if="${message!= null}" class="alert alert-success text-center">
-				[[${message}]]
+				</div>
+
+
+				<div>
+					<form th:action="@{/products/page/1}" class="form-inline m-3" id="searchForm">
+						<input type="hidden" name="sortField" th:value="${sortField}" />
+						<input type="hidden" name="sortDir" th:value="${sortDir}" />
+
+						Thể loại:&nbsp;&nbsp;
+						<select class="form-control" name="categoryId" id="dropdownCategory">
+							<option value="0">Tất cả thể loại</option>
+
+							<th:block th:each="cat : ${listCategories}">
+								<option th:value="${cat.id}" th:selected="(${categoryId} == ${cat.id})">[[${cat.name}]]
+								</option>
+							</th:block>
+						</select>
+						&nbsp;&nbsp;
+
+						Tìm kiếm:&nbsp;&nbsp;
+						<input type="search" name="keyword" th:value="${keyword}" class="form-control" required />
+						&nbsp;&nbsp;
+						<button type="submit"> <img th:src="@{/images/seach.png}" width="30px"> </button>
+						&nbsp;&nbsp;
+						<a type="button" onclick="clearFilter()">
+							<img th:src="@{/images/delete (2).png}" width="30px">
+						</a>
+					</form>
+
+					<div th:if="${message!= null}" class="alert alert-success text-center">
+						[[${message}]]
+					</div>
+				</div>
+
+				<div class="full-details">
+					<table class="table table-bordered table-striped table-hover table-responsive-sm">
+						<thead class="thead-dark">
+							<tr>
+								<th th:replace="fragments :: column_link('/products', 'id', 'ID', 'none')"></th>
+								<th>Main Image</th>
+								<th th:replace="fragments :: column_link('/products', 'name', 'Tên sản phẩm', 'none')"></th>
+								<th th:replace="fragments :: column_link('/products', 'brand', 'Nhà xuất bản', 'none')"></th>
+								<th th:replace="fragments :: column_link('/products', 'category', 'Thể loại', 'none')"></th>
+								<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+									<th>Enabled</th>
+								</th:block>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="product : ${listProducts}">
+								<td>[[${product.id}]]</td>
+								<td>
+									<img th:src="@{${product.mainImagePath}}" style="width: 80px;" class="img-fluid">
+								</td>
+								<td>
+									<a class="link-detail" th:href="@{'/products/detail/' + ${product.id}}"
+									   th:title="${product.name}">
+										[[${product.shortName}]]
+									</a>
+								</td>
+								<td>[[${product.brand.name}]]</td>
+								<td>[[${product.category.name}]]</td>
+								<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+									<td>
+										<div th:replace="fragments :: status(${product.enabled}, 'product', '/products/' + ${product.id})"></div>
+									</td>
+								</th:block>
+								<td>
+									<a class="fas fa-file-alt fa-2x icon-green link-detail"
+									   th:href="@{'/products/detail/' + ${product.id}}"
+									   title="View details of this product"></a>
+					
+									<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor', 'Salesperson')">
+										&nbsp;
+										<div th:replace="fragments :: edit('product', '/products/edit/' + ${product.id})"></div>
+									</th:block>
+					
+									<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+										&nbsp;
+										<div th:replace="fragments :: delete('product', ${product.id}, '/products/delete/' + ${product.id}, true)"></div>
+									</th:block>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					
+				</div>
+
+				<div th:replace="fragments :: pagination('/products', 'product')"></div>
+
+				<div th:replace="modal_fragments :: confirm_modal"></div>
+
+				<div class="modal fade" id="detailModal">
+					<div class="modal-dialog modal-xl">
+						<div class="modal-content">
+						</div>
+					</div>
+				</div>
+
+				<div th:replace="fragments :: footer"></div>
 			</div>
 		</div>
-
-		<div class="full-details">
-			<table class="table table-bordered table-striped table-hover table-responsive-xl">
-				<thead class="thead-dark">
-					<tr>
-						<th th:replace="fragments :: column_link('/products', 'id', 'ID', 'none')">
-						<th>Main Image</th>
-						<th th:replace="fragments :: column_link('/products', 'name', 'Tên sản phẩm', 'none')"></th>
-						<th th:replace="fragments :: column_link('/products', 'brand', 'Nhà xuất bản', 'none')"></th>
-						<th th:replace="fragments :: column_link('/products', 'category', 'Thể loại', 'none')"></th>
-						
-						<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-							<th>Enabled</th>
-						</th:block>
-						
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="product : ${listProducts}">
-						<td>[[${product.id}]]</td>
-						<td>
-							<img th:src="@{${product.mainImagePath}}" style="width: 120px;" class="img-fluid">
-						</td>
-						<td>
-							<a class="link-detail" 
-								th:href="@{'/products/detail/' + ${product.id}}"
-								th:title="${product.name}">
-								[[${product.shortName}]]</a>
-						</td>
-						<td>[[${product.brand.name}]]</td>
-						<td>[[${product.category.name}]]</td>
-
-						<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-							<td>
-								<div th:replace="fragments :: status(${product.enabled}, 'product', '/products/' + ${product.id})"></div>
-							</td>
-						</th:block>
-
-						<td>
-							<a class="fas fa-file-alt fa-2x icon-green link-detail" 
-								th:href="@{'/products/detail/' + ${product.id}}"
-								title="View details of this product"></a>
-						
-						<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor', 'Salesperson')">
-							&nbsp;
-							<div th:replace="fragments :: edit('product', '/products/edit/' + ${product.id})"></div>
-						</th:block>
-
-						<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-							&nbsp;
-							<div th:replace="fragments :: delete('product', ${product.id}, '/products/delete/' + ${product.id}, true)"></div>
-						</th:block>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-
-	</div>
-	
-	<div th:replace="fragments :: pagination('/products', 'product')"></div>
-
-	<div th:replace="modal_fragments :: confirm_modal"></div>
-
-	<div class="modal fade" id="detailModal">
-		<div class="modal-dialog modal-xl">
-			<div class="modal-content">
-			</div>
-		</div>
 	</div>
 
-	<div th:replace="fragments :: footer"></div>
-	
-	
+
+
+
+
+
+
+
+
+
 	<script th:src="@{/js/common_list.js}"></script>
 	<script type="text/javascript">
 		moduleURL = "[[@{/products}]]";
 
-		$(document).ready(function(){
-			$(".link-delete").on("click", function(e){	
+		$(document).ready(function () {
+			$(".link-delete").on("click", function (e) {
 				e.preventDefault();
 				showDeleteConfirmModal($(this), 'product');
 			});
 		});
 
-		$(".link-detail").on("click", function(e) {
+		$(".link-detail").on("click", function (e) {
 			e.preventDefault();
 			linkDetailURL = $(this).attr("href");
 
 			$("#detailModal").modal("show").find(".modal-content").load(linkDetailURL);
 		});
 
-		$("#dropdownCategory").on("change", function() {
+		$("#dropdownCategory").on("change", function () {
 			$("#searchForm").submit();
 		});
 	</script>
-	
+
 </body>
 
 </html>

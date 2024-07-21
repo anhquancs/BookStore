@@ -32,11 +32,11 @@ public class UserRepositoryTests {
 	@Test
 	public void testCreateUserWithOneRole() {
 		Role roleAdmin = entityManager.find(Role.class, 1);
-		User userQuanLA = new User("anhquancs2019@gmail.com", "$2a$10$bDqskP9Z/y6BIZnFLgJ8HuwMYaZXD9w2jVk2pYHXgn1k6N4nckleu", "Quan", "Le Anh");
-		userQuanLA.addRole(roleAdmin);
+		User user = new User("admin@test.com", "$2a$10$d8/TBkIUzNqcOmuOB8P.PuBB7GgwvbBaGJac0LjgJCsBP4.2C8NFG", "test first", "test last");
+		user.addRole(roleAdmin);
 		
 		
-		User saveUser = repo.save(userQuanLA);
+		User saveUser = repo.save(user);
 		
 		assertThat(saveUser.getId()).isGreaterThan(0);
 	}
@@ -121,7 +121,7 @@ public class UserRepositoryTests {
 	}
 	@Test
 	public void testEnabledUser() {
-		Integer id = 1;
+		Integer id = 2015;
 		repo.updateEnabledStatus(id, true);
 	}
 	@Test

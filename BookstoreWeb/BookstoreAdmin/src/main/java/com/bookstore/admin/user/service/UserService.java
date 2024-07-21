@@ -93,21 +93,26 @@ public class UserService {
 
 	public boolean isEmailUnique(Integer id, String email) {
 		User userByEmail = userRepo.getUserByEmail(email);
-		if (userByEmail == null)
+		
+		if (userByEmail == null) {
 			return true;
-
-		boolean iscreatingNew = (id == null);
-
-		if (iscreatingNew) {
-			if (userByEmail != null)
-				return false;
+		}
+		
+		boolean isCreatingNew = (id == null);
+		
+		if (isCreatingNew) {
+			return false;
 		} else {
-			if (userByEmail.getId() != id) {
+			if (userByEmail.getId().equals(id)) {
+				// Email belongs to the user being edited
+				return true;
+			} else {
+				// Email belongs to another user
 				return false;
 			}
 		}
-		return true;
 	}
+	
 
 	private void encodePassword(User user) {
 		String encodePassword = passwordEncoder.encode(user.getPassword());

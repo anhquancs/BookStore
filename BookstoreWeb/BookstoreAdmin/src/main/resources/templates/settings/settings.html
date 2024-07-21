@@ -2,87 +2,95 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <head>
-	<head th:replace="fragments :: page_head('Settings - Shopme Admin', 'tag')" />
-	<link rel="stylesheet" th:href="@{/richtext/richtext.min.css}" />
-	<script th:src="@{/richtext/jquery.richtext.min.js}"></script>
+
+    <head th:replace="fragments :: page_head('Settings - Shopme Admin', 'tag')" />
+    <link rel="stylesheet" th:href="@{/richtext/richtext.min.css}" />
+    <script th:src="@{/richtext/jquery.richtext.min.js}"></script>
 </head>
 
+
 <body>
-    <div class="container-fluid">
-        <div th:replace="navigation :: menu"></div>
 
-        <div>
-            <h2>Site Settings</h2>
-        </div>
 
-        <div th:if="${message!= null}" class="alert alert-success text-center">
-            [[${message}]]
-        </div>
-
-        <div>
-            <ul class="nav nav-tabs" id="settingTab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#general" role="tab">Tổng quan</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#cities" role="tab">Các thành phố</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#districts" role="tab">Quận</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#mailServer" role="tab">Máy chủ thư</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#mailTemplates" role="tab">Mẫu thư</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#payment" role="tab">Thanh Toán</a>
-                </li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane active p-3" id="general" role="tabpanel">
-                    <div th:replace="settings/general :: content"></div>
-                </div>
-
-                <div class="tab-pane p-3" id="cities" role="tabpanel">
-                    <div th:replace="settings/cities :: content"></div>
-                </div>
-
-                <div class="tab-pane p-3" id="districts" role="tabpanel">
-                    <div th:replace="settings/districts :: content"></div>
-                </div>
-
-                <div class="tab-pane p-3" id="mailServer" role="tabpanel">
-                    <div th:replace="settings/mail_server :: content"></div>
-                </div>
-
-                <div class="tab-pane p-3" id="mailTemplates" role="tabpanel">
-                    <div th:replace="settings/mail_templates/mail_templates :: content"></div>
-                </div>
-
-                <div class="tab-pane p-3" id="payment" role="tabpanel">
-                    <h2>Payment</h2>
-                </div>
+    <div class="row">
+        <div class="col-2">
+            <div class="container-fluid">
+                <div th:replace="navigation :: menu"></div>
             </div>
         </div>
 
-        <div class="toast justify-content-center d-flex" role="alert" aria-live="polite" aria-atomic="true"
-            data-delay="30000">
-            <div role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-body">
-                    <span id="toastMessage"></span>
+        <div class="col-10">
+            <div class="container-fluid p-3">
+                <div th:if="${message!= null}" class="alert alert-success text-center">
+                    [[${message}]]
                 </div>
+                <div>
+                    <ul class="nav nav-tabs" id="settingTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#general" role="tab">Tổng quan</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#cities" role="tab">Các thành phố</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#districts" role="tab">Quận</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#mailServer" role="tab">Máy chủ thư</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#mailTemplates" role="tab">Mẫu thư</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#payment" role="tab">Thanh Toán</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active p-3" id="general" role="tabpanel">
+                            <div th:replace="settings/general :: content"></div>
+                        </div>
+
+                        <div class="tab-pane p-3" id="cities" role="tabpanel">
+                            <div th:replace="settings/cities :: content"></div>
+                        </div>
+
+                        <div class="tab-pane p-3" id="districts" role="tabpanel">
+                            <div th:replace="settings/districts :: content"></div>
+                        </div>
+
+                        <div class="tab-pane p-3" id="mailServer" role="tabpanel">
+                            <div th:replace="settings/mail_server :: content"></div>
+                        </div>
+
+                        <div class="tab-pane p-3" id="mailTemplates" role="tabpanel">
+                            <div th:replace="settings/mail_templates/mail_templates :: content"></div>
+                        </div>
+
+                        <div class="tab-pane p-3" id="payment" role="tabpanel">
+                            <h2>Payment</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="toast justify-content-center d-flex" role="alert" aria-live="polite" aria-atomic="true"
+                    data-delay="300">
+                    <div role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-body">
+                            <span id="toastMessage"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div th:replace="fragments :: footer"></div>
             </div>
         </div>
-
-        <div th:replace="fragments :: footer"></div>
     </div>
+
 
     <script type="text/javascript">
         MAX_FILE_SIZE = 1024000;  //1000KB
@@ -92,14 +100,15 @@
         var csrfHeaderName = "[[${_csrf.headerName}]]";
         var csrfValue = "[[${_csrf.token}]]";
 
-        $(document).ready(function() {
-		$("#customerVerificationContent").richText();
-	});
+        $(document).ready(function () {
+            $("#customerVerificationContent").richText();
+        });
 
     </script>
     <script th:src="@{/js/common_form.js}"></script>
     <script th:src="@{/js/cities_setting.js}"></script>
     <script th:src="@{/js/districts_setting.js}"></script>
+
 </body>
 
 </html>
