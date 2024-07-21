@@ -8,6 +8,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -35,7 +36,7 @@ public class WebSecurityConfig {
 	SecurityFilterChain configureHttpSecurity(HttpSecurity http) throws Exception {
 
 		http.authorizeHttpRequests(auth -> auth
-				.requestMatchers("/account_details", "/update_account_details").authenticated()
+				.requestMatchers("/account_details", "/update_account_details", "/cart").authenticated()
 				.anyRequest().permitAll())
 				.formLogin(form -> form
 						.loginPage("/login")
@@ -50,7 +51,11 @@ public class WebSecurityConfig {
 						.successHandler(auth2LoginSuccessHandler))
 				.rememberMe(rem -> rem
 						.key("AbcDefghijklmnopqrs_1234567890")
-						.tokenValiditySeconds(7 * 24 * 60 * 60));
+						.tokenValiditySeconds(7 * 24 * 60 * 60))
+				.sessionManagement(s -> s
+					.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+				);
+				
 
 		return http.build();
 	}

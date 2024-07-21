@@ -7,7 +7,6 @@
 	<div class="container-fluid">
 		<div th:replace="navigation :: header_menu"></div>
 		<div th:replace="navigation :: search_nav"></div>
-
 		<div th:replace="breadcrumb :: content"></div>
 
 		<div class="row">
@@ -19,19 +18,21 @@
 						</div>
 						<div class="row justify-content-center mt-2">
 							<div class="m-2 border border-secondary p-1">
-								<img class="image-thumbnail" th:src="@{${product.mainImagePath}}" height="50" alt="Thumbnail">
+								<img class="image-thumbnail" th:src="@{${product.mainImagePath}}" height="50"
+									alt="Thumbnail">
 							</div>
 							<th:block th:each="extraImage, status : ${product.images}">
 								<div class="m-2 border border-secondary p-1">
-									<img class="image-thumbnail" th:src="@{${extraImage.imagePath}}" height="50" alt="Thumbnail ${status.count}">
+									<img class="image-thumbnail" th:src="@{${extraImage.imagePath}}" height="50"
+										alt="Thumbnail ${status.count}">
 								</div>
 							</th:block>
 						</div>
 					</div>
 				</div>
 			</div>
-			
-			
+
+
 
 			<div class="col-sm">
 				<div class="card rounded">
@@ -39,27 +40,34 @@
 						<h2 class="card-title">[[${product.name}]]</h2>
 						<p class="card-text">Nhà xuất bản: [[${product.brand.name}]]</p>
 						<div class="price-info card-text">
-							List Price:
+					
 							<span th:if="${product.discountPercent <= 0}">
 								<div th:replace="product/product_fragment :: price_fragment(${product.price})"></div>
 							</span>
 							<del th:if="${product.discountPercent > 0}">
 								<span>
-									<div th:replace="product/product_fragment :: price_fragment(${product.price})"></div>
+									<div th:replace="product/product_fragment :: price_fragment(${product.price})">
+									</div>
 								</span>
 							</del>
 						</div>
 						<div th:if="${product.discountPercent > 0}" class="card-text">
-							Price:
 							<span style="font-size: larger; color: darkred">
 								<div th:replace="product/product_fragment :: price_fragment(${product.discountPrice})"></div>
 							</span>
-							([[${#numbers.formatDecimal(product.discountPercent, 1, THOUSANDSL_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]] % off)
+							<button class="btn btn-danger btn-sm">
+								<i class="fas fa-tag"></i> <!-- Biểu tượng giảm giá -->
+								-[[${#numbers.formatDecimal(product.discountPercent, 1, THOUSANDSL_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]]%
+							</button>
 						</div>
+						
+						
+						
+						
 						<div>&nbsp;</div>
 						<div th:utext="${product.shortDescription}" class="card-text"></div>
-						
-						
+
+
 						<div class="mt-4">
 							<span th:if="${product.inStock}" class="text-success"><b>Còn hàng</b></span>
 							<span th:unless="${product.inStock}" class="text-danger"><b>Hết hàng</b></span>
@@ -67,32 +75,19 @@
 						<th:block th:if="${product.inStock}">
 							<div th:replace="cart/quantity_control :: quantity_control(1, ${product.id})"></div>
 							<div class="mt-3">
-								<input type="button" value="Thêm vào giỏ hàng" id="buttonAddToCart" class="btn btn-primary" />
+								<button id="buttonAddToCart" class="btn btn-primary">
+									<i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng
+								</button>
+								
 							</div>
 						</th:block>
 					</div>
 				</div>
-			</div>
-			
-		</div>
 
-		<div class="row">
-			<div class="col-12 mt-3">
-				<div class="card rounded">
+				<div class="card rounded mt-3">
 					<div class="card-body">
-						<h3 class="card-title">Product Description:</h3>
-						<div class="card-text" th:utext="${product.fullDescription}"></div>
-					</div>
-				</div>
-			</div>
-			
-		</div>
-
-		<div class="row">
-			<div class="col-12 mt-3">
-				<div class="card rounded">
-					<div class="card-body">
-						<h3 class="card-title">Product Details:</h3>
+						<h3 class="card-title">Thông tin chi tiết:</h3>
+						<hr>
 						<th:block th:each="detail : ${product.details}">
 							<div class="card-text">
 								<b>[[${detail.name}]]</b>:
@@ -101,9 +96,25 @@
 						</th:block>
 					</div>
 				</div>
+
+
 			</div>
-			
+
 		</div>
+
+		<div class="row">
+			<div class="col-12 mt-3">
+				<div class="card rounded">
+					<div class="card-body">
+						<h3 class="card-title">Mô tả sản phẩm:</h3>
+						<hr>
+						<div class="card-text" th:utext="${product.fullDescription}"></div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
 
 		<div th:replace="product/images_carousel :: content"></div>
 		<div th:replace="fragments :: modal_dialog"></div>
@@ -112,12 +123,12 @@
 	</div>
 
 	<script type="text/javascript">
-		var contextPath = "[[@{/}]]"
-		var productId = "[[${product.id}]]"
-		var csrfHeaderName = "[[${_csrf.headerName}]]"
-        var csrfValue = "[[${_csrf.token}]]"
+		contextPath = "[[@{/}]]";
+		productId = "[[${product.id}]]";
+		var csrfHeaderName = "[[${_csrf.headerName}]]";
+		var csrfValue = "[[${_csrf.token}]]";
 
-		
+
 		$(document).ready(function () {
 			bigImage = $("#bigImage");
 

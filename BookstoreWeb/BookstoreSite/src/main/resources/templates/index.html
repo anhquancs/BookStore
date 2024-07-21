@@ -1,31 +1,6 @@
 <!DOCTYPE html>
 <html  xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: page_head('Book.store', 'none')"/>
-<style>
-    .scrolling-wrapper {
-        display: flex;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none; /* Firefox */
-    }
-
-    .scrolling-wrapper::-webkit-scrollbar {
-        display: none; /* Chrome, Safari, Opera */
-    }
-
-    .category-item {
-        flex: 0 0 auto;
-        margin-right: 10px; /* Khoảng cách giữa các phần tử */
-        text-align: center; /* Căn giữa nội dung */
-    }
-
-    .category-item img {
-        width: 100px;
-        height: 100px; /* Đảm bảo hình ảnh có cùng kích thước */
-        object-fit: cover; /* Đảm bảo hình ảnh không bị biến dạng */
-    }
-</style>
 
 <body>
 	<div class="container-fluid">
@@ -51,9 +26,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		
-		
+		</div>	
 
 		<div th:replace="navigation :: footer_menu"></div>
 		<div>

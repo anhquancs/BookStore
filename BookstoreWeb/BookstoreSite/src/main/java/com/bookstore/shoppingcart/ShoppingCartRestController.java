@@ -1,6 +1,7 @@
 package com.bookstore.shoppingcart;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,5 +42,30 @@ public class ShoppingCartRestController {
             throw new CustomerNotFoundException("Khách hàng chưa xác thực");
         }
         return customerService.getCustomerByEmail(email);
+    }
+
+    @PostMapping("/cart/update/{productId}/{quantity}")
+    public String updateProductToCart(@PathVariable("productId") Integer productId,
+            @PathVariable("quantity") Integer quantity, HttpServletRequest request) {
+        try {
+            Customer customer = getAuthenticatedCustomer(request);
+            float subtotal = cartService.updateQuantity(productId, quantity, customer); 
+
+            return String.valueOf(subtotal); 
+        } catch (CustomerNotFoundException e) {
+            return "Đăng nhập để thêm cập nhật số lượng sản phẩm";
+        } 
+    }
+
+    @DeleteMapping("/cart/remove/{productId}") 
+    public String removeProduct(@PathVariable("productId") Integer productId, HttpServletRequest request) {
+        try {
+            Customer customer = getAuthenticatedCustomer(request);
+            cartService.removeProduct(productId, customer);
+
+            return "Sản phẩm đã được xóa khỏi giỏ hàng";
+        } catch (Exception e) {
+            return "Khách hàng chưa đăng nhập"; 
+        }
     }
 }

@@ -1,0 +1,29 @@
+.scrolling-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+}
+
+.scrolling-wrapper::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.category-item {
+    flex: 0 0 auto;
+    margin-right: 10px; /* Khoảng cách giữa các phần tử */
+    text-align: center; /* Căn giữa nội dung */
+}
+
+.category-item img {
+    width: 100px;
+    height: 100px; /* Đảm bảo hình ảnh có cùng kích thước */
+    object-fit: cover; /* Đảm bảo hình ảnh không bị biến dạng */
+}
+
+
+*.icon-white {color: white}
+*.icon-black {color: black}
+*.icon-green {color: green}
+*.icon-dark {color: gray}
