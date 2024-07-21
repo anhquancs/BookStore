@@ -105,7 +105,7 @@ public class CustomerService {
 		customer.setPassword("");
 		customer.setAddressLine("");
 		customer.setPhoneNumber("");
-		customer.setCity(null);
+		customer.setCity(cityRepository.findByCode("DN"));
 		;
 		customer.setDistrict("");
 		customer.setWard("");
