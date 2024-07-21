@@ -11,4 +11,8 @@ public interface CityRepository extends CrudRepository<City, Integer>{
     public List<City> findAllByOrderByNameAsc();
 
     
+    @Query("SELECT c FROM City c WHERE c.code = ?1")
+    public City findByCode(String string);
+
+    
 }
