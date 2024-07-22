@@ -3,16 +3,16 @@
 <head th:replace="fragments :: page_head('Page Not Found - Book.store', 'none')">
 </head>
 <body>
-<div class="container-fluid">
-    <div th:replace="navigation :: header_menu"></div>
-
-    <div class="m-3">
-        <h2>Sorry, the requested page could not be found</h2>
-    </div>
-
-    <div th:replace="navigation :: footer_menu"></div>
+    <div class="container-fluid">
+        <div th:replace="navigation :: header_menu"></div>
     
-</div>
+        <div class="d-flex justify-content-center m-3">
+            <img th:src="@{/images/404.png}" alt="Error Image" class="img-fluid">
+        </div>
+    
+        <div th:replace="navigation :: footer_menu"></div>
+    </div>
+    
 
 </body>
 </html>

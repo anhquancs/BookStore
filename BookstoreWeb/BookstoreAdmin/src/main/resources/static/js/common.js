@@ -35,3 +35,6 @@ function customizeTabs() {
         window.location.hash = e.target.hash;
     })    
 }
+
+
+

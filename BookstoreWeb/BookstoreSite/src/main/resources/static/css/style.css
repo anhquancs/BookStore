@@ -27,3 +27,18 @@
 *.icon-black {color: black}
 *.icon-green {color: green}
 *.icon-dark {color: gray}
+
+
+.scrolling-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+.category-item {
+    flex: 0 0 auto;
+    width: 150px; /* Adjust the width as needed */
+    margin-right: 15px;
+}
+
+

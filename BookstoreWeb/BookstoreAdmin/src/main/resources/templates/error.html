@@ -5,24 +5,27 @@
 </head>
 <body>
 
-    <div class="row">
-        <div class="col-2">
-            <div class="container-fluid">
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Sidebar Menu -->
+            <div class="col-md-2 bg-light p-3">
                 <div th:replace="navigation :: menu"></div>
-
             </div>
-        </div>
-
-        <div class="col-10">
-            <div class="container-fluid">
-                <div class="m-3">
-                    <h2>Rất tiếc, đã xảy ra lỗi không mong muốn</h2>
+    
+            <!-- Main Content -->
+            <div class="col-md-10">
+                <div class="container py-4">
+                    <div class="mb-4">
+                        <h2>Rất tiếc, đã xảy ra lỗi không mong muốn</h2>
+                    </div>
+    
+                    <!-- Footer -->
+                    <div th:replace="fragments :: footer"></div>
                 </div>
-            
-                <div th:replace="fragments :: footer"></div>    
             </div>
         </div>
     </div>
+    
   
   
 </div>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: page_head('Shipping Rates - Shopme Admin', 'none')" />
+
+<body>
+
+
+	<div class="row">
+		<div class="col-md-2">
+			<div class="container-fluid">
+				<div th:replace="navigation :: menu"></div>
+			</div>
+		</div>
+		<div class="col-md-10 p-3">
+			<div class="container-fluid">
+				<div class="d-flex justify-content-between align-items-center mb-4">
+					<h2>Quản lý giao hàng</h2>
+					<a th:href="@{/shipping_rates/new}" class="btn btn-primary">
+						<i class="fas fa-folder-plus"></i> Thêm mới
+					</a>
+				</div>
+
+				<div class="table-responsive">
+					<table class="table table-hover table-sm">
+						<thead class="thead-dark">
+							<tr>
+								<th th:replace="fragments :: column_link('/shipping_rates', 'id', 'ID', 'none')" />
+								<th th:replace="fragments :: column_link('/shipping_rates', 'city', 'Thành phố', 'none')" />
+								<th
+									th:replace="fragments :: column_link('/shipping_rates', 'district', 'Quận', 'none')" />
+								<th th:replace="fragments :: column_link('/shipping_rates', 'rate', 'Phí', 'none')" />
+								<th th:replace="fragments :: column_link('/shipping_rates', 'days', 'Ngày', 'none')" />
+								<th
+									th:replace="fragments :: column_link('/shipping_rates', 'codSupported', 'Hỗ trợ COD', 'none')" />
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="rate : ${shippingRates}">
+								<td>[[${rate.id}]]</td>
+								<td>[[${rate.city.name}]]</td>
+								<td>[[${rate.district}]]</td>
+								<td>[[${rate.rate}]]</td>
+								<td>[[${rate.days}]]</td>
+								<td>
+									<div th:replace="shipping_rates/shipping_rates_fragment :: cod_support"></div>
+								</td>
+								<td>
+									<div
+										th:replace="fragments :: edit('shipping rate', '/shipping_rates/edit/' + ${rate.id})" />
+									&nbsp;
+									<div
+										th:replace="fragments :: delete('shipping rate', ${rate.id}, '/shipping_rates/delete/' + ${rate.id}, true)" />
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div th:replace="modal_fragments :: confirm_modal"></div>
+				<div th:replace="fragments :: footer"></div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<script th:src="@{/js/common_list.js}"></script>
+	<script type="text/javascript">
+		moduleURL = "[[@{/shipping_rates}]]";
+
+		$(document).ready(function () {
+			$(".link-delete").on("click", function (e) {
+				e.preventDefault();
+				showDeleteConfirmModal($(this), 'shipping rate');
+			});
+		});
+	</script>
+</body>
+
+</html>

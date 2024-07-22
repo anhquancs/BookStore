@@ -7,29 +7,29 @@
 <body>
 
 	<div class="row">
-
-		<div class="col-2">
+		<div class="col-md-2">
 			<div class="container-fluid">
-				<div th:replace="navigation:: menu"></div>
+				<div th:replace="navigation :: menu"></div>
 			</div>
 		</div>
-
-		<div class="col-10">
+		<div class="col-md-10 p-3">
 			<div class="container-fluid">
-
-				<div>
-					<h1>Quản Lí Thể Loại</h1>
-
-					<a th:href="@{/categories/new}" style="color: white;"><img th:src="@{/images/add.png}"
-							width="40px"></a> &nbsp; || &nbsp;
-					<a th:href="@{/categories/export/csv}" style="color: white;"> <img
-							th:src="@{/images/csv-file-format-extension.png}" width="33px"></a>
+				<div class="d-flex justify-content-between align-items-center mb-4">
+					<h2>Quản Lí Thể Loại</h2>
+					<div>
+						<a th:href="@{/categories/new}" class="btn btn-primary btn-sm">
+							<i class="fas fa-plus"></i> Thêm Mới
+						</a>
+						<a th:href="@{/categories/export/csv}" class="btn btn-info btn-sm ml-2">
+							<i class="fas fa-file-csv"></i> Xuất CSV
+						</a>
+					</div>
 				</div>
-
+	
 				<div th:replace="fragments :: seach_form_and_message('/categories/page/1')"></div>
-
-				<div class="full-details">
-					<table class="table table-bordered table-striped table-hover table-responsive-sm">
+	
+				<div class="table-responsive">
+					<table class="table table-hover table-sm">
 						<thead class="thead-dark">
 							<tr>
 								<th>ID</th>
@@ -37,7 +37,7 @@
 								<th th:replace="fragments :: column_link('/categories', 'name', 'Tên thể loại', 'none')"></th>
 								<th class="hideable-column">Alias</th>
 								<th>Enabled</th>
-								<th>Actions</th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -59,27 +59,24 @@
 							</tr>
 						</tbody>
 					</table>
-					
 				</div>
-
+	
 				<div th:if="${keyword != null}" class="text-center">
-					<span>Search result does not show categories in hiararchical form</span>
+					<span>Search result does not show categories in hierarchical form</span>
 					<div th:replace="fragments :: pagination('/categories', 'categories')"></div>
 				</div>
-
+	
 				<th:block th:unless="${keyword != null}">
 					<div th:replace="fragments :: pagination('/categories', 'top-level categories')"></div>
 				</th:block>
-
+	
 				<div th:replace="modal_fragments :: confirm_modal"></div>
-
+	
 				<div th:replace="fragments :: footer"></div>
-
-
 			</div>
 		</div>
 	</div>
-
+	
 
 
 

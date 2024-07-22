@@ -113,8 +113,15 @@ public class CustomerController {
     public String updateAccountDetails(Model model, Customer customer, RedirectAttributes ra, HttpServletRequest request) {
         customerService.update(customer);
         ra.addFlashAttribute("message", "Thông tin tài khoản đã được cập nhật. ");
-        updateNameForAuthenticatedCustomer(customer, request);  
-        return "redirect:/account_details";
+        updateNameForAuthenticatedCustomer(customer, request); 
+        
+        String redirectOption = request.getParameter("redirect");
+		String redirectURL = "redirect:/account_details";
+		
+		if ("address_book".equals(redirectOption)) {
+			redirectURL = "redirect:/address_book";
+		}
+        return redirectURL;
     }
 
     private void updateNameForAuthenticatedCustomer(Customer customer, HttpServletRequest request) {

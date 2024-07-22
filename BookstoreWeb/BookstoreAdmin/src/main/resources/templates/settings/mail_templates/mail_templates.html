@@ -2,31 +2,35 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 <div th:fragment="content" th:remove="tag">
-<form th:action="@{/settings/save_mail_templates}" method="post">
-	<div>
-		<ul class="nav nav-tabs" id="mailTemplatesTab" role="tablist">
-		  <li class="nav-item">
-		    <a class="nav-link active" data-toggle="tab" href="#customerVerification" role="tab">Customer Verification</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" data-toggle="tab" href="#orderConfirmation" role="tab">Order Confirmation</a>
-		  </li>	  
-		</ul>
-		
-		<div class="tab-content">
-		  <div class="tab-pane active p-3" id="customerVerification" role="tabpanel">
-		  	<div th:replace="settings/mail_templates/customer_verification:: content"></div>
-		  </div>
-		  <div class="tab-pane p-3" id="orderConfirmation" role="tabpanel">
-			<h2>Order Confirmation Email Template</h2>
-		  </div>	  	
-		 </div>
-	</div>
+	<form th:action="@{/settings/save_mail_templates}" method="post">
+		<div class="container mt-4">
+			<!-- Tab navigation -->
+			<ul class="nav nav-tabs mb-4" id="mailTemplatesTab" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active" id="customerVerification-tab" data-toggle="tab" href="#customerVerification" role="tab" aria-controls="customerVerification" aria-selected="true">Customer Verification</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="orderConfirmation-tab" data-toggle="tab" href="#orderConfirmation" role="tab" aria-controls="orderConfirmation" aria-selected="false">Order Confirmation</a>
+				</li>
+			</ul>
 	
-	<div class="text-center">
-		<input type="submit" value="Save" class="btn btn-primary m-3" />
-	</div>	
-</form>	
+			<!-- Tab content -->
+			<div class="tab-content">
+				<div class="tab-pane fade show active p-3" id="customerVerification" role="tabpanel" aria-labelledby="customerVerification-tab">
+					<div th:replace="settings/mail_templates/customer_verification:: content"></div>
+				</div>
+				<div class="tab-pane fade p-3" id="orderConfirmation" role="tabpanel" aria-labelledby="orderConfirmation-tab">
+					<h2>Order Confirmation Email Template</h2>
+					<!-- Add your content for Order Confirmation tab here -->
+				</div>
+			</div>
+		</div>
+	
+		<div class="text-center mt-4">
+			<button type="submit" class="btn btn-primary">Save</button>
+		</div>
+	</form>
+	
 </div>
 </body>
 </html>

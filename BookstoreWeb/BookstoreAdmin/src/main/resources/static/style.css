@@ -26,3 +26,23 @@
 .text-black {
     color: black;
 }
+
+
+.table td, .table th {
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+.table img {
+    max-width: 100%; 
+}
+
+.tab-content {
+    max-height: calc(100vh - 60px); /* Chiều cao tối đa của phần nội dung tab */
+    overflow-y: auto; /* Hiển thị thanh cuộn dọc khi cần thiết */
+}
+
+
+
+
+

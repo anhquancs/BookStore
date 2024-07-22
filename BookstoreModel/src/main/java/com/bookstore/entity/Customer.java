@@ -205,4 +205,24 @@ public class Customer {
     public void setResetPasswordToken(String resetPasswordToken) {
         this.resetPasswordToken = resetPasswordToken;
     }
+
+    @Transient
+    public String getAddress() {
+        String address = lastName;
+
+        if (lastName != null && !lastName.isEmpty()) address += " " + firstName;
+        else address = firstName;
+
+        if (addressLine != null && !addressLine.isEmpty()) address += ", " + addressLine; 
+        
+        if (!ward.isEmpty()) address += ", " + ward; 
+
+        if (district != null && !district.isEmpty()) address += ", " + district + ", "; 
+        
+        address += city.getName(); 
+
+        if (!phoneNumber.isEmpty()) address += ". Số điện thoại: " + phoneNumber; 
+
+        return address;
+    }
 }

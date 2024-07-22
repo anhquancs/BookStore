@@ -38,24 +38,34 @@ s
 
 
 	<div th:fragment="status(enabled, entityName, entityURL)" th:remove="tag">
-		<a th:if="${enabled == true}" class="fas fa-check-circle fa-xl icon-green"
-			th:href="@{${entityURL} + '/enabled/false'}" th:title="'Disable this' + ${entityName}"></a>
+		<a th:if="${enabled == true}" class="btn btn-success btn-sm" th:href="@{${entityURL} + '/enabled/false'}"
+			th:title="'Disable this ' + ${entityName}">
+			<i class="fas fa-check-circle"></i>
+		</a>
 
-		<a th:if="${enabled == false}" class="fas fa-circle fa-xl icon-dark" th:href="@{${entityURL} + '/enabled/true'}"
-			th:title="'Enabled this' + ${entityName}"></a>
+		<a th:if="${enabled == false}" class="btn btn-secondary btn-sm" th:href="@{${entityURL} + '/enabled/true'}"
+			th:title="'Enable this ' + ${entityName}">
+			<i class="fas fa-circle"></i>
+		</a>
 	</div>
 
 
+
 	<div th:fragment="edit(entityName, editURL)" th:remove="tag">
-		<a class="fas fa-edit fa-2x icon-green" th:href="@{${editURL}}" th:title="'Edit this ' + ${entityName}"></a>
+		<a class="btn btn-warning btn-sm" th:href="@{${editURL}}" th:title="'Sửa ' + ${entityName}">
+			<i class="fas fa-edit"></i> Sửa
+		</a>
 	</div>
 
 	<div th:fragment="delete(entityName, entityId, deleteURL, visible)" th:remove="tag">
 		<th:block th:if="${visible}">
-			<a class="fas fa-trash fa-2x icon-red link-delete" th:href="@{${deleteURL}}" th:entityId="${entityId}"
-				th:title="'Delete this ' + ${entityName}"></a>
+			<a class="btn btn-danger btn-sm link-delete" th:href="@{${deleteURL}}" th:entityId="${entityId}"
+				th:title="'Xóa ' + ${entityName}">
+				<i class="fas fa-trash"></i> Xóa
+			</a>
 		</th:block>
 	</div>
+
 
 
 	<!-- Users ==================================== -->

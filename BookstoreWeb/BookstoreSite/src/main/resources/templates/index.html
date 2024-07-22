@@ -10,24 +10,23 @@
 		<div th:replace="navigation :: search_nav"></div>
 
 
-		<div class="card m-3" >
+		<div class="card m-3">
+			<div class="card-header bg-dark text-white">
+				<h3><i class="fas fa-book"></i> Thể loại</h3>
+			</div>
 			<div class="card-body">
-				<div>
-					<h3><i class="fas fa-book"></i> Mua sách theo thể loại</h3>
-					<hr>
-				</div>
-		
-				<div class="scrolling-wrapper">
-					<div class="category-item col-sm-2" th:each="cat : ${listCategories}">
-						<div><img th:src="@{${cat.imagePath}}"></div>
+				<div class="scrolling-wrapper d-flex flex-row flex-nowrap overflow-auto">
+					<div class="category-item col-sm-2 text-center" th:each="cat : ${listCategories}">
 						<div>
-							<a th:href="@{'/c/' + ${cat.alias}}">[[${cat.name}]]</a>
+							<img class="img-fluid rounded" th:src="@{${cat.imagePath}}" alt="Category Image">
+						</div>
+						<div class="mt-2">
+							<a class="text-dark" th:href="@{'/c/' + ${cat.alias}}">[[${cat.name}]]</a>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>	
-
+		</div>
 		<div th:replace="navigation :: footer_menu"></div>
 		<div>
 
