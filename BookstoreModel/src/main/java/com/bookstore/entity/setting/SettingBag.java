@@ -1,4 +1,4 @@
-package com.bookstore.entity;
+package com.bookstore.entity.setting;
 
 import java.util.List;
 

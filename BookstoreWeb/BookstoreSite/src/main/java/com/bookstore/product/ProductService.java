@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bookstore.entity.Product;
+import com.bookstore.entity.product.Product;
 import com.bookstore.exception.ProductNotFoundException;
 
 @Service

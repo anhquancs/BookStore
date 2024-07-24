@@ -69,12 +69,13 @@
 								<i class="fas fa-truck"></i> Giao hàng
 							</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" th:href="@{/orders}">
-								<i class="fas fa-receipt"></i> Đơn hàng
-							</a>
-						</li>
 					</th:block>
+
+					<th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson', 'Shipper')">
+							<li class="nav-item">
+								<a class="nav-link" th:href="@{/orders}">Đơn hàng</a>
+							</li>
+							</th:block>
 					<th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
 						<li class="nav-item">
 							<a class="nav-link" th:href="@{/report}">

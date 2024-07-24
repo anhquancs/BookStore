@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.bookstore.entity.CartItem;
 import com.bookstore.entity.Customer;
-import com.bookstore.entity.Product;
+import com.bookstore.entity.product.Product;
 
 public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
 
@@ -24,4 +24,8 @@ public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
     @Modifying
     @Query("DELETE FROM CartItem c WHERE c.customer.id = ?1 AND c.product.id = ?2")
     public void deleteByCustomerAndProduct(Integer customer, Integer product);
+
+    @Modifying
+	@Query("DELETE CartItem c WHERE c.customer.id = ?1")
+	public void deleteByCustomer(Integer customerId);
 }

@@ -1,5 +1,6 @@
-package com.bookstore.entity;
+package com.bookstore.entity.product;
 
+import com.bookstore.entity.IdBasedEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,11 +13,7 @@ import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "product_images")
-public class ProductImage {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class ProductImage extends IdBasedEntity {
 
     @Column(nullable = false)
     private String name;
@@ -38,14 +35,6 @@ public class ProductImage {
     public ProductImage(String name, Product product) {
         this.name = name;
         this.product = product;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getName() {

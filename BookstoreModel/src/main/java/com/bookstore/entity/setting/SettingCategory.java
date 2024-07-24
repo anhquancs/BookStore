@@ -1,4 +1,4 @@
-package com.bookstore.entity;
+package com.bookstore.entity.setting;
 
 public enum SettingCategory {
     GENERAL, MAIL_SERVER, MAIL_TEMPLATES, CURRENCY, PAYMENT

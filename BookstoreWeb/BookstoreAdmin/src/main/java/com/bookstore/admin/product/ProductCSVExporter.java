@@ -12,7 +12,7 @@ import org.supercsv.prefs.CsvPreference;
 
 import com.bookstore.admin.user.Abstract.Exporter;
 
-import com.bookstore.entity.Product;
+import com.bookstore.entity.product.Product;
 
 import jakarta.servlet.http.HttpServletResponse;
 

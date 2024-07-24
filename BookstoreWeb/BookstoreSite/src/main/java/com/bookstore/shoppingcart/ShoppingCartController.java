@@ -8,10 +8,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.bookstore.Utility;
+import com.bookstore.address.AddressService;
 import com.bookstore.customer.CustomerService;
+import com.bookstore.entity.Address;
 import com.bookstore.entity.CartItem;
 import com.bookstore.entity.Customer;
+import com.bookstore.entity.ShippingRate;
 import com.bookstore.exception.CustomerNotFoundException;
+import com.bookstore.shipping.ShippingRateService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -22,25 +26,42 @@ public class ShoppingCartController {
     private ShoppingCartService cartService;
     @Autowired
     private CustomerService customerService;
+    @Autowired
+    private AddressService addressService;
+    @Autowired
+    private ShippingRateService shipService;
 
     @GetMapping("/cart")
     public String viewCart(Model model, HttpServletRequest request) {
-        Customer customer = getAuthenticatedCustomer(request); 
-        List<CartItem> cartItems = cartService.listByCartItems(customer); 
+        Customer customer = getAuthenticatedCustomer(request);
+        List<CartItem> cartItems = cartService.listByCartItems(customer);
 
-        float estimatedTotal = 0.0F; 
+        float estimatedTotal = 0.0F;
 
         for (CartItem cartItem : cartItems) {
-            estimatedTotal  += cartItem.getSubtotal();    
-        }   
+            estimatedTotal += cartItem.getSubtotal();
+        }
 
-        model.addAttribute("cartItems", cartItems); 
-        model.addAttribute("estimatedTotal", estimatedTotal); 
-        
+        Address defaultAddress = addressService.getDefaultAddress(customer);
+		ShippingRate shippingRate = null;
+		boolean usePrimaryAddressAsDefault = false;
+		
+		if (defaultAddress != null) {
+			shippingRate = shipService.getShippingRateForAddress(defaultAddress);
+		} else {
+			usePrimaryAddressAsDefault = true;
+			shippingRate = shipService.getShippingRateForCustomer(customer);
+		}
+		
+		model.addAttribute("usePrimaryAddressAsDefault", usePrimaryAddressAsDefault);
+		model.addAttribute("shippingSupported", shippingRate != null);
+        model.addAttribute("cartItems", cartItems);
+        model.addAttribute("estimatedTotal", estimatedTotal);
+
         return "cart/shopping_cart";
     }
 
-    private Customer getAuthenticatedCustomer(HttpServletRequest request){
+    private Customer getAuthenticatedCustomer(HttpServletRequest request) {
         String email = Utility.getEmailOfAuthenticatedCustomer(request);
         return customerService.getCustomerByEmail(email);
     }

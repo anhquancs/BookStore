@@ -8,9 +8,11 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
 
 import com.bookstore.admin.paging.PagingAndSortingHelper;
+import com.bookstore.admin.product.ProductRepository;
 import com.bookstore.admin.setting.city.CityRepository;
 import com.bookstore.entity.City;
 import com.bookstore.entity.ShippingRate;
+import com.bookstore.entity.product.Product;
 
 import jakarta.transaction.Transactional;
 
@@ -22,6 +24,7 @@ public class ShippingRateService {
 	
 	@Autowired private ShippingRateRepository shipRepo;
 	@Autowired private CityRepository  cityRepo;
+	@Autowired private ProductRepository productRepo; 
 	
 	public void listByPage(int pageNum, PagingAndSortingHelper helper) {
 		helper.listEntities(pageNum, RATES_PER_PAGE, shipRepo);
@@ -70,8 +73,23 @@ public class ShippingRateService {
 			
 		}
 		shipRepo.deleteById(id);
-	}	
+	}
 
+	public float calculateShippingCost(Integer productId, Integer cityId, String district) 
+	throws ShippingRateNotFoundException {
+ShippingRate shippingRate = shipRepo.findByCityAndDistrict(cityId, district);
 
+if (shippingRate == null) {
+	throw new ShippingRateNotFoundException("No shipping rate found for the given "
+			+ "destination. You have to enter shipping cost manually.");
+}
+
+Product product = productRepo.findById(productId).get();
+
+float dimWeight = (product.getLength() * product.getWidth() * product.getHeight());
+float finalWeight = product.getWeight() > dimWeight ? product.getWeight() : dimWeight;
+		
+return finalWeight * shippingRate.getRate();
+}
 
 }

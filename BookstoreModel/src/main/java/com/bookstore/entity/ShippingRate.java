@@ -11,10 +11,8 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "shipping_rates")
-public class ShippingRate {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class ShippingRate extends IdBasedEntity{
+
     private float rate;
     private int days;
     
@@ -25,16 +23,8 @@ public class ShippingRate {
     @JoinColumn(name = "city_id")
     private City city;
     
-    @Column(nullable = false, length = 45)
+    @Column(nullable = false, columnDefinition = "nvarchar(45)")
     private String district;
-    
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public float getRate() {
         return rate;

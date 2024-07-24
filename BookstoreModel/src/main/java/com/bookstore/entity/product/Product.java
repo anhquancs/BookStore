@@ -1,4 +1,4 @@
-package com.bookstore.entity;
+package com.bookstore.entity.product;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,6 +7,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import com.bookstore.entity.Brand;
+import com.bookstore.entity.Category;
+import com.bookstore.entity.IdBasedEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,10 +24,7 @@ import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "products")
-public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class Product extends IdBasedEntity {
 
     @Column(unique = true, columnDefinition = "nvarchar(256)", nullable = false)
     private String name;
@@ -82,19 +82,7 @@ public class Product {
         
     }
 
-    
-
     public Product(Integer id) {
-        this.id = id;
-    }
-
-
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
         this.id = id;
     }
 

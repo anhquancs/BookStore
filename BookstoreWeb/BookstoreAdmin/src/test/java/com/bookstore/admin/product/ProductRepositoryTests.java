@@ -14,7 +14,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
 
 import com.bookstore.entity.Brand;
-import com.bookstore.entity.Product;
+import com.bookstore.entity.product.Product;
 import com.bookstore.entity.Category;
 
 @DataJpaTest

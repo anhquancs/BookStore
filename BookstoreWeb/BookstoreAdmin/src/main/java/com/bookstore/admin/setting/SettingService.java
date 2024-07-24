@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bookstore.entity.Setting;
-import com.bookstore.entity.SettingCategory;
+import com.bookstore.entity.setting.Setting;
+import com.bookstore.entity.setting.SettingCategory;
 
 @Service
 public class SettingService {
@@ -41,6 +41,10 @@ public class SettingService {
     public List<Setting> getMailTemplateSettings() {
 		return repo.findByCategory(SettingCategory.MAIL_TEMPLATES);
 	}	
+
+    public List<Setting> getCurrencySettings() {
+		return repo.findByCategory(SettingCategory.CURRENCY);
+	}
 
 
 }

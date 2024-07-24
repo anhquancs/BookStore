@@ -51,6 +51,7 @@ public class WebSecurityConfig {
 					.hasAnyAuthority("Admin", "Salesperson", "Editor", "Shipper")
 
 				.requestMatchers("/products/**").hasAnyAuthority("Admin", "Editor")
+				.requestMatchers("/customer/**", "/order/**").hasAnyAuthority("Admin", "Salesperson")
 				.anyRequest().authenticated()
 			)
 			.formLogin(form -> form			
@@ -64,6 +65,7 @@ public class WebSecurityConfig {
 				.key("AbcDefghijklmnopqrs_1234567890")
 				.tokenValiditySeconds(7 * 24 * 60 * 60));
 
+			http.headers(h -> h.frameOptions(f -> f.sameOrigin()));
 		return http.build();
 	}
 

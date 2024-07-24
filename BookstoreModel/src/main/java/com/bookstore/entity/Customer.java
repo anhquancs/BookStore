@@ -8,34 +8,14 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "customers")
-public class Customer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id; 
+public class Customer extends AbstractAdressWithCity {
 
     @Column(nullable = false, unique = true, columnDefinition = "nvarchar(150)")
     private String email; 
 
     @Column(nullable = false, length = 64)
     private String password;
-    
-    @Column(name = "first_name", nullable = false, columnDefinition = "nvarchar(50)")
-    private String firstName;
-    
-    @Column(name = "last_name", nullable = false, columnDefinition = "nvarchar(50)")
-    private String lastName; 
 
-    @Column(name = "phone_number", nullable = false, length = 15)
-    private String phoneNumber;
-    
-    @Column(name = "address_line", columnDefinition = "nvarchar(200)")
-    private String addressLine;
-
-    @Column(nullable = false, columnDefinition = "nvarchar(200)")
-    private String ward; 
-
-    @Column(nullable = false, columnDefinition = "nvarchar(2002)")
-    private String district; 
 
     @Column(name = "verification_code", length = 64)
     private String verificationCode;
@@ -43,11 +23,7 @@ public class Customer {
     private boolean enabled; 
 
     @Column(name = "created_time")
-    private Date createdTime; 
-
-    @ManyToOne
-    @JoinColumn(name = "city_id")
-    private City city;
+    private Date createdTime;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "authentication_type", length = 10)
@@ -72,13 +48,6 @@ public class Customer {
         this.password = password;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getEmail() {
         return email;
@@ -96,53 +65,6 @@ public class Customer {
         this.password = password;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getAddressLine() {
-        return addressLine;
-    }
-
-    public void setAddressLine(String addressLine) {
-        this.addressLine = addressLine;
-    }
-
-    public String getWard() {
-        return ward;
-    }
-
-    public void setWard(String ward) {
-        this.ward = ward;
-    }
-
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
-    }
 
     public String getVerificationCode() {
         return verificationCode;
@@ -168,27 +90,10 @@ public class Customer {
         this.createdTime = createdTime;
     }
 
-    public City getCity() {
-        return city;
-    }
-
-    public void setCity(City city) {
-        this.city = city;
-    }
-
-    
-
-    @Override
-    public String toString() {
-        return "Customer [id=" + id + ", email=" + email + ", password=" + password + ", firstName=" + firstName
-                + ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", addressLine=" + addressLine + ", ward="
-                + ward + ", district=" + district + ", verificationCode=" + verificationCode + ", enabled=" + enabled
-                + ", createdTime=" + createdTime + ", city=" + city + "]";
-    }
-
     public String getFullName() {
 		return lastName + " " +  firstName;
 	}
+
 
     public AuthenticationType getAuthenticationType() {
         return authenticationType;
@@ -206,23 +111,4 @@ public class Customer {
         this.resetPasswordToken = resetPasswordToken;
     }
 
-    @Transient
-    public String getAddress() {
-        String address = lastName;
-
-        if (lastName != null && !lastName.isEmpty()) address += " " + firstName;
-        else address = firstName;
-
-        if (addressLine != null && !addressLine.isEmpty()) address += ", " + addressLine; 
-        
-        if (!ward.isEmpty()) address += ", " + ward; 
-
-        if (district != null && !district.isEmpty()) address += ", " + district + ", "; 
-        
-        address += city.getName(); 
-
-        if (!phoneNumber.isEmpty()) address += ". Số điện thoại: " + phoneNumber; 
-
-        return address;
-    }
 }

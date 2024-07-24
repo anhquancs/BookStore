@@ -2,8 +2,8 @@ package com.bookstore.admin.setting;
 
 import java.util.List;
 
-import com.bookstore.entity.Setting;
-import com.bookstore.entity.SettingBag;
+import com.bookstore.entity.setting.Setting;
+import com.bookstore.entity.setting.SettingBag;
 
 public class GeneralSettingBag extends SettingBag{
 

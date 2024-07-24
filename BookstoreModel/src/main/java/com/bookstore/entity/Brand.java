@@ -16,10 +16,8 @@ import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "brands")
-public class Brand {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) 
-    private Integer id;
+public class Brand extends IdBasedEntity{
+
 
     @Column(nullable = false, columnDefinition = "nvarchar(50)", unique = true)
     private String name;
@@ -50,13 +48,7 @@ public class Brand {
         this.name = name;
     }
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

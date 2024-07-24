@@ -12,10 +12,8 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "cities")
-public class City {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class City extends IdBasedEntity {
+
 
     @Column(nullable = false, columnDefinition = "nvarchar(45)")
     private String name;
@@ -46,13 +44,7 @@ public class City {
     }
 
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

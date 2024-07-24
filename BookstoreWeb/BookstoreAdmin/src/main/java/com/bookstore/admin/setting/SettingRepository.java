@@ -2,8 +2,8 @@ package com.bookstore.admin.setting;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.bookstore.entity.Setting;
-import com.bookstore.entity.SettingCategory;
+import com.bookstore.entity.setting.Setting;
+import com.bookstore.entity.setting.SettingCategory;
 
 import java.util.List;
 

@@ -22,7 +22,7 @@ import com.bookstore.admin.security.BookStoreUserDetails;
 import com.bookstore.admin.user.util.FileUploadUtil;
 import com.bookstore.entity.Brand;
 import com.bookstore.entity.Category;
-import com.bookstore.entity.Product;
+import com.bookstore.entity.product.Product;
 import com.bookstore.exception.ProductNotFoundException;
 
 import jakarta.servlet.http.HttpServletResponse;

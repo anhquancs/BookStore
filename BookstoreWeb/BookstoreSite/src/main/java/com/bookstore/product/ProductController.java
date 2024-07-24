@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.bookstore.category.CategoryService;
 import com.bookstore.entity.Category;
-import com.bookstore.entity.Product;
+import com.bookstore.entity.product.Product;
 import com.bookstore.exception.CategoryNotFoundException;
 import com.bookstore.exception.ProductNotFoundException;
 

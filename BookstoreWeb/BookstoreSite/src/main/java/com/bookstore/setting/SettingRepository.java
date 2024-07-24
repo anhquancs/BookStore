@@ -3,8 +3,8 @@ package com.bookstore.setting;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import com.bookstore.entity.Setting;
-import com.bookstore.entity.SettingCategory;
+import com.bookstore.entity.setting.Setting;
+import com.bookstore.entity.setting.SettingCategory;
 
 import java.util.List;
 

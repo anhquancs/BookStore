@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.bookstore.entity.CartItem;
 import com.bookstore.entity.Customer;
-import com.bookstore.entity.Product;
+import com.bookstore.entity.product.Product;
 import com.bookstore.product.ProductRepository;
 
 import jakarta.transaction.Transactional;
@@ -45,6 +45,7 @@ public class ShoppingCartService {
         return cartItemRepository.findByCustomer(customer); 
     }
 
+
     public float updateQuantity(Integer productId, Integer quantity, Customer customer) {
         cartItemRepository.updateQuantity(quantity, customer.getId(), productId);
         Product product = productRepository.findById(productId).get(); 
@@ -55,4 +56,9 @@ public class ShoppingCartService {
     public void removeProduct(Integer productId, Customer customer) {
         cartItemRepository.deleteByCustomerAndProduct(customer.getId(), productId);
     }
+
+    public void deleteByCustomer(Customer customer) {
+		cartItemRepository.deleteByCustomer(customer.getId());
+	}
+
 }

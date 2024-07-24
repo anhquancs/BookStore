@@ -11,10 +11,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "districts")
-public class District {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class District extends IdBasedEntity {
 
     @Column(nullable = false, columnDefinition = "nvarchar(45)")
     private String name;
@@ -31,15 +28,7 @@ public class District {
         this.name = name;
         this.city = city;
     }
-
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    
 
     public String getName() {
         return name;
