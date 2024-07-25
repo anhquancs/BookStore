@@ -1,4 +1,4 @@
-package com.bookstore.admin.user.Config;
+package com.bookstore.admin;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

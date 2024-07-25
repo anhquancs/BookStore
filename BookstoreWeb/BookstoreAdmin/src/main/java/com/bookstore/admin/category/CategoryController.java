@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 
-import com.bookstore.admin.user.util.FileUploadUtil;
+import com.bookstore.admin.FileUploadUtil;
 import com.bookstore.entity.Category;
 import com.bookstore.exception.CategoryNotFoundException;
 

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="00a04841-dab2-4e86-961b-3e55106145a3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreSite/src/main/java/com/bookstore/order/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.settings/org.eclipse.m2e.core.prefs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreModel/src/main/java/com/bookstore/entity/order/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreModel/src/main/java/com/bookstore/entity/order/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreModel/src/main/java/com/bookstore/entity/order/OrderStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreModel/src/main/java/com/bookstore/entity/order/OrderStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreModel/src/main/java/com/bookstore/entity/order/OrderTrack.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreModel/src/main/java/com/bookstore/entity/order/OrderTrack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/BookStore-backend-2024-06-20.0.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/BookStore-backend-2024-06-21.0.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/BookStore-backend-2024-06-21.1.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/BookStore-backend.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/bin/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/bin/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/bin/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/bin/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/bin/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/bin/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/bin/src/main/java/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/bin/src/main/java/com/bookstore/admin/BookstoreAdminApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/bin/src/main/java/com/bookstore/admin/MainController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/bin/src/main/java/com/bookstore/admin/user/RoleRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/bin/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/bin/src/main/resources/static/images/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/bin/src/main/resources/templates/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/bin/src/test/java/com/bookstore/admin/user/RoleRepositoryTests.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/brand/BrandCSVExporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/brand/BrandCSVExporter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/brand/BrandController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/brand/BrandController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/category/CategoryCSVExporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/category/CategoryCSVExporter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/category/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/category/CategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/order/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/order/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/order/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/order/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/product/ProductCSVExporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/product/ProductCSVExporter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/product/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/product/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/product/ProductSaveHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/product/ProductSaveHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/security/BookStoreUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/security/BookStoreUserDetailsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/setting/SettingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/setting/SettingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/shippingrate/ShippingRateRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/shippingrate/ShippingRateRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/shippingrate/ShippingRateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/shippingrate/ShippingRateService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/user/Abstract/Exporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/Exporter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/user/Config/MVCconfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/MVCconfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/user/controller/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/user/controller/AccountController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/user/controller/UserRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/user/controller/UserRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/user/controller/Usercontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/user/controller/Usercontroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/user/export/UserCSVExporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/user/export/UserCSVExporter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/user/export/UserExcelExporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/user/export/UserExcelExporter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/user/export/UserPDFExporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/user/export/UserPDFExporter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/user/repository/RoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/user/RoleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/user/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/user/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/user/service/UserNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/user/UserNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/user/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/user/util/FileUploadUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/java/com/bookstore/admin/FileUploadUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/resources/static/js/order_form_add_product.js" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/resources/static/js/order_form_add_product.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/resources/static/js/order_form_overview_products.js" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/resources/static/js/order_form_overview_products.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/resources/static/js/product_form_overview.js" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/resources/static/js/product_form_overview.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/resources/templates/orders/add_product_modal.html" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/resources/templates/orders/add_product_modal.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/resources/templates/orders/order_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/resources/templates/orders/order_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/resources/templates/orders/order_form_products.html" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/resources/templates/orders/order_form_products.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/resources/templates/orders/order_form_shipping.html" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/resources/templates/orders/order_form_shipping.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/resources/templates/orders/search_product.html" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/main/resources/templates/orders/search_product.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/test/java/com/bookstore/admin/order/OrderRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/test/java/com/bookstore/admin/order/OrderRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/test/java/com/bookstore/admin/user/RoleRepositoryTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/test/java/com/bookstore/admin/user/RoleRepositoryTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/test/java/com/bookstore/admin/user/UserRepositoryTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin/src/test/java/com/bookstore/admin/user/UserRepositoryTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreSite/src/main/java/com/bookstore/order/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreSite/src/main/java/com/bookstore/order/OrderRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreSite/src/main/java/com/bookstore/order/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreSite/src/main/java/com/bookstore/order/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreSite/src/main/java/com/bookstore/sercurity/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreSite/src/main/java/com/bookstore/sercurity/WebSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreSite/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreSite/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreSite/src/main/resources/templates/fragments.html" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreSite/src/main/resources/templates/fragments.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookstoreWeb/BookstoreSite/src/main/resources/templates/navigation.html" beforeDir="false" afterPath="$PROJECT_DIR$/BookstoreWeb/BookstoreSite/src/main/resources/templates/navigation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-photos/1002/Screenshot 2024-06-20 084907.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-photos/1003/Screenshot 2024-06-20 084907.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-photos/14/nxbtre_full_03542024_025426_1 (1).png" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2jeVSvmUrXD0hR9X6JzWXTJaGeI" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.BookstoreAdminApplication.executor": "Run",
+    "Application.BookstoreSiteApplication.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/finall/BookStore",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.bookstore.admin.user" />
+      <recent name="com.bookstore.admin" />
+      <recent name="com.bookstore.entity.setting" />
+      <recent name="com.bookstore.entity.product" />
+      <recent name="com.bookstore.entity.order.product" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.BookstoreAdminApplication">
+    <configuration name="BookstoreAdminApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.bookstore.admin.BookstoreAdminApplication" />
+      <module name="BookstoreAdmin" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BookstoreWeb/BookstoreAdmin" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.bookstore.admin.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BookstoreSiteApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.bookstore.BookstoreSiteApplication" />
+      <module name="BookstoreSite" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BookstoreWeb/BookstoreSite" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.bookstore.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="BookStore" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="BookStore" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.BookstoreAdminApplication" />
+      <item itemvalue="Application.BookstoreSiteApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.BookstoreAdminApplication" />
+        <item itemvalue="Application.BookstoreSiteApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="00a04841-dab2-4e86-961b-3e55106145a3" name="Changes" comment="" />
+      <created>1721747532656</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1721747532656</updated>
+    </task>
+    <servers />
+  </component>
+</project>

@@ -15,7 +15,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.annotation.Rollback;
 
-import com.bookstore.admin.user.repository.UserRepository;
 import com.bookstore.entity.Role;
 import com.bookstore.entity.User;
 

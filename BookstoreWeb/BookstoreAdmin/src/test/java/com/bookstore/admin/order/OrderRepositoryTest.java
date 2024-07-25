@@ -159,7 +159,7 @@ public class OrderRepositoryTest {
 
 	@Test
 	public void testUpdateOrderTracks() {
-		Integer orderId = 10;
+		Integer orderId = 4;
 		Order order = repo.findById(orderId).get();
 		
 		OrderTrack newTrack = new OrderTrack();

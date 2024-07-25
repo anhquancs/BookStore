@@ -1,4 +1,4 @@
-package com.bookstore.admin.user.util;
+package com.bookstore.admin;
 
 import java.io.IOException;	
 import java.io.InputStream;

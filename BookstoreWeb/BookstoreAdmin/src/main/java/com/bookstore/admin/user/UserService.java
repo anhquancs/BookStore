@@ -1,4 +1,4 @@
-package com.bookstore.admin.user.service;
+package com.bookstore.admin.user;
 
 import java.util.List;
 
@@ -10,8 +10,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.bookstore.admin.user.RoleRepository;
-import com.bookstore.admin.user.UserRepository;
 import com.bookstore.entity.Role;
 import com.bookstore.entity.User;
 

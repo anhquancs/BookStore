@@ -1,4 +1,4 @@
-package com.bookstore.admin.user.service;
+package com.bookstore.admin.user;
 
 public class UserNotFoundException extends Exception {
 

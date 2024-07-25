@@ -9,8 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 
 import com.bookstore.admin.security.BookStoreUserDetails;
-import com.bookstore.admin.user.service.UserService;
-import com.bookstore.admin.user.util.FileUploadUtil;
+import com.bookstore.admin.user.UserService;
+import com.bookstore.admin.FileUploadUtil;
 import com.bookstore.entity.User;
 
 import org.springframework.web.bind.annotation.GetMapping;

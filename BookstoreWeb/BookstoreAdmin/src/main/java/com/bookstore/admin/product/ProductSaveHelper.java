@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.bookstore.admin.user.util.FileUploadUtil;
+import com.bookstore.admin.FileUploadUtil;
 import com.bookstore.entity.product.Product;
 import com.bookstore.entity.product.ProductImage;
 

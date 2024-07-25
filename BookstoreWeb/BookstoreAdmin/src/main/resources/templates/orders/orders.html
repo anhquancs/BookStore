@@ -27,11 +27,16 @@
 						<thead class="thead-dark">
 							<tr>
 								<th th:replace="fragments :: column_link('/orders','id', 'ID', 'none')"></th>
-								<th th:replace="fragments :: column_link('/orders', 'customer', 'Khách hàng', 'none')"></th>
+								<th th:replace="fragments :: column_link('/orders', 'customer', 'Khách hàng', 'none')">
+								</th>
 								<th th:replace="fragments :: column_link('/orders', 'total', 'Tổng tiền', 'none')"></th>
-								<th th:replace="fragments :: column_link('/orders', 'orderTime', 'Thời gian', 'none')"></th>
-								<th th:replace="fragments :: column_link('/orders', 'destination', 'Địa chỉ', 'none')"></th>
-								<th th:replace="fragments :: column_link('/orders', 'paymentMethod', 'Thanh toán', 'none')"></th>
+								<th th:replace="fragments :: column_link('/orders', 'orderTime', 'Thời gian', 'none')">
+								</th>
+								<th th:replace="fragments :: column_link('/orders', 'destination', 'Địa chỉ', 'none')">
+								</th>
+								<th
+									th:replace="fragments :: column_link('/orders', 'paymentMethod', 'Thanh toán', 'none')">
+								</th>
 								<th th:replace="fragments :: column_link('/orders', 'status', 'Status', 'none')"></th>
 								<th></th>
 							</tr>
@@ -40,7 +45,8 @@
 							<tr th:each="order : ${listOrders}">
 								<td>[[${order.id}]]</td>
 								<td>
-									<a class="linkCustomerDetail" th:href="@{'/customers/detail/' + ${order.customer.id}}">
+									<a class="linkCustomerDetail"
+										th:href="@{'/customers/detail/' + ${order.customer.id}}">
 										[[${order.customer.fullName}]]
 									</a>
 								</td>
@@ -54,18 +60,21 @@
 								<td>[[${order.paymentMethod}]]</td>
 								<td>[[${order.status}]]</td>
 								<td>
-									<a th:href="@{'/orders/detail/' + ${order.id}}" class="btn btn-info btn-sm linkOrderDetail">
+									<a th:href="@{'/orders/detail/' + ${order.id}}"
+										class="btn btn-info btn-sm linkOrderDetail">
 										<i class="fas fa-file-alt"></i> Xem
 									</a>
 									&nbsp;
-									<div th:replace="fragments :: edit('order', '/orders/edit/' + ${order.id})" class="d-inline-block"></div>
+									<div th:replace="fragments :: edit('order', '/orders/edit/' + ${order.id})"
+										class="d-inline-block"></div>
 									&nbsp;
-									<div th:replace="fragments :: delete('order', ${order.id}, '/orders/delete/' + ${order.id}, true)" class="d-inline-block"></div>
+									<div th:replace="fragments :: delete('order', ${order.id}, '/orders/delete/' + ${order.id}, true)"
+										class="d-inline-block"></div>
 								</td>
 							</tr>
 						</tbody>
 					</table>
-					
+
 				</div>
 
 				<!-- <div th:replace="fragments :: pagination('orders')"></div> -->
@@ -98,34 +107,34 @@
 	<script type="text/javascript">
 		moduleURL = "[[@{/orders}]]";
 
-$(document).ready(function() {
-	handleLinkViewCustomerDetails();
-	handleLinkViewOrderDetails();
-	handleLinkDeleteOrder();		
-});
+		$(document).ready(function () {
+			handleLinkViewCustomerDetails();
+			handleLinkViewOrderDetails();
+			handleLinkDeleteOrder();
+		});
 
-function handleLinkDeleteOrder() {
-	$(".link-delete").on("click", function(e) {
-		e.preventDefault();
-		showDeleteConfirmModal($(this), 'order');
-	});		
-}
+		function handleLinkDeleteOrder() {
+			$(".link-delete").on("click", function (e) {
+				e.preventDefault();
+				showDeleteConfirmModal($(this), 'order');
+			});
+		}
 
-function handleLinkViewCustomerDetails() {
-	$(".linkCustomerDetail").on("click", function(e) {
-		e.preventDefault();
-		linkDetailURL = $(this).attr("href");
-		$("#customerDetailModal").modal("show").find(".modal-content").load(linkDetailURL);
-	});			
-}
+		function handleLinkViewCustomerDetails() {
+			$(".linkCustomerDetail").on("click", function (e) {
+				e.preventDefault();
+				linkDetailURL = $(this).attr("href");
+				$("#customerDetailModal").modal("show").find(".modal-content").load(linkDetailURL);
+			});
+		}
 
-function handleLinkViewOrderDetails() {
-	$(".linkOrderDetail").on("click", function(e) {
-		e.preventDefault();
-		linkDetailURL = $(this).attr("href");
-		$("#orderDetailModal").modal("show").find(".modal-content").load(linkDetailURL);
-	});		
-}
+		function handleLinkViewOrderDetails() {
+			$(".linkOrderDetail").on("click", function (e) {
+				e.preventDefault();
+				linkDetailURL = $(this).attr("href");
+				$("#orderDetailModal").modal("show").find(".modal-content").load(linkDetailURL);
+			});
+		}
 	</script>
 </body>
 

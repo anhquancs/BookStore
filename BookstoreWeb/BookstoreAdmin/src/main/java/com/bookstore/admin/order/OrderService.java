@@ -18,6 +18,8 @@ import com.bookstore.entity.order.Order;
 @Service
 public class OrderService {
     @Autowired private CityRepository cityRepository; 
+    @Autowired private OrderRepository orderRepo;
+
 
     private static final int ORDERS_PER_PAGE = 10;
     @Autowired
@@ -69,5 +71,13 @@ public class OrderService {
 
     public List<City> listAllCities() {
         return cityRepository.findAllByOrderByNameAsc();
-    }	
+    }
+
+    public void save(Order orderInForm) {
+		Order orderInDB = orderRepo.findById(orderInForm.getId()).get();
+		orderInForm.setOrderTime(orderInDB.getOrderTime());
+		orderInForm.setCustomer(orderInDB.getCustomer());
+		
+		orderRepo.save(orderInForm);
+	}	
 }

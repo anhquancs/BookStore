@@ -59,6 +59,13 @@ public enum OrderStatus {
 		}		
 	}, 
 	
+	RETURN_REQUESTED {
+		@Override
+		public String defaultDescription() {
+			return "Customer sent request to return purchase";
+		}		
+	},
+	
 	PAID {
 		@Override
 		public String defaultDescription() {
@@ -69,10 +76,9 @@ public enum OrderStatus {
 	REFUNDED {
 		@Override
 		public String defaultDescription() {
-			return "Customer has been refund	ed";
+			return "Customer has been refunded";
 		}		
 	};
 	
 	public abstract String defaultDescription();
 }
-

@@ -1,6 +1,7 @@
 package com.bookstore.entity.order;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -51,16 +52,20 @@ public class Order extends AbstractAddress {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-   @ManyToOne
-	@JoinColumn(name = "customer_id")
-	private Customer customer;
-	
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-	private Set<OrderDetail> orderDetails = new HashSet<>();
-	
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<OrderDetail> orderDetails = new HashSet<>();
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("updatedTime ASC")
-	private List<OrderTrack> orderTracks = new ArrayList<>();
+    private List<OrderTrack> orderTracks = new ArrayList<>();
+
+
+   
+    
 
     public String getCity() {
         return city;
@@ -202,30 +207,36 @@ public class Order extends AbstractAddress {
 
     public void copyShippingAddress(Address address) {
         setFirstName(address.getFirstName());
-		setLastName(address.getLastName());
-		setPhoneNumber(address.getPhoneNumber());
-		setAddressLine(address.getAddressLine());
-		setWard(address.getWard());
-		setCity(address.getCity().getName());
-		setDistrict(address.getDistrict());	
+        setLastName(address.getLastName());
+        setPhoneNumber(address.getPhoneNumber());
+        setAddressLine(address.getAddressLine());
+        setWard(address.getWard());
+        setCity(address.getCity().getName());
+        setDistrict(address.getDistrict());
     }
 
     @Transient
-	public String getShippingAddress() {
+    public String getShippingAddress() {
         String address = lastName;
 
-        if (lastName != null && !lastName.isEmpty()) address += " " + firstName;
-        else address = firstName;
+        if (lastName != null && !lastName.isEmpty())
+            address += " " + firstName;
+        else
+            address = firstName;
 
-        if (addressLine != null && !addressLine.isEmpty()) address += ", " + addressLine;
+        if (addressLine != null && !addressLine.isEmpty())
+            address += ", " + addressLine;
 
-        if (!ward.isEmpty()) address += ", " + ward;
+        if (!ward.isEmpty())
+            address += ", " + ward;
 
-        if (district != null && !district.isEmpty()) address += ", " + district + ", ";
+        if (district != null && !district.isEmpty())
+            address += ", " + district + ", ";
 
         address += city;
 
-        if (!phoneNumber.isEmpty()) address += ". Số điện thoại: " + phoneNumber;
+        if (!phoneNumber.isEmpty())
+            address += ". Số điện thoại: " + phoneNumber;
 
         return address;
     }
@@ -235,5 +246,75 @@ public class Order extends AbstractAddress {
 		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 		return dateFormatter.format(this.deliverDate);
 	}	
+	
+	public void setDeliverDateOnForm(String dateString) {
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+ 		
+		try {
+			this.deliverDate = dateFormatter.parse(dateString);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		} 		
+	}
+
+    @Transient
+    public boolean isCOD() {
+        return paymentMethod.equals(PaymentMethod.COD);
+    }
+
+    @Transient
+    public boolean isProcessing() {
+        return hasStatus(OrderStatus.PROCESSING);
+    }
+
+    @Transient
+    public boolean isPicked() {
+        return hasStatus(OrderStatus.PICKED);
+    }
+
+    @Transient
+    public boolean isShipping() {
+        return hasStatus(OrderStatus.SHIPPING);
+    }
+
+    @Transient
+    public boolean isDelivered() {
+        return hasStatus(OrderStatus.DELIVERED);
+    }
+
+    @Transient
+    public boolean isReturnRequested() {
+        return hasStatus(OrderStatus.RETURN_REQUESTED);
+    }
+
+    @Transient
+    public boolean isReturned() {
+        return hasStatus(OrderStatus.RETURNED);
+    }
+
+    public boolean hasStatus(OrderStatus status) {
+        for (OrderTrack aTrack : orderTracks) {
+            if (aTrack.getStatus().equals(status)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    @Transient
+    public String getProductNames() {
+        String productNames = "";
+
+        productNames = "<ul>";
+
+        for (OrderDetail detail : orderDetails) {
+            productNames += "<li>" + detail.getProduct().getShortName() + "</li>";
+        }
+
+        productNames += "</ul>";
+
+        return productNames;
+    }
 
 }

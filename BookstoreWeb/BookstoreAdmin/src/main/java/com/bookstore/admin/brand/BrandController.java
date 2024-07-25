@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bookstore.admin.category.CategoryService;
-import com.bookstore.admin.user.util.FileUploadUtil;
+import com.bookstore.admin.FileUploadUtil;
 import com.bookstore.entity.Brand;
 import com.bookstore.entity.Category;
 
