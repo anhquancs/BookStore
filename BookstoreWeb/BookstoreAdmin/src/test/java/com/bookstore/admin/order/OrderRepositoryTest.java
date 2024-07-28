@@ -1,5 +1,8 @@
 package com.bookstore.admin.order;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -181,5 +184,22 @@ public class OrderRepositoryTest {
 		Order updatedOrder = repo.save(order);
 		
 		assertThat(updatedOrder.getOrderTracks()).hasSizeGreaterThan(1);
+	}
+
+
+	@Test
+	public void testFindByOrderTimeBetween() throws ParseException {
+		SimpleDateFormat internationalDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date startTime = internationalDateFormat.parse("2024-07-25");
+		Date endTime = internationalDateFormat.parse("2024-07-30");
+		List<Order> listOrders = repo.findByOrderTimeBetween(startTime, endTime);
+		
+		assertThat(listOrders.size()).isGreaterThan(0);
+		
+		for (Order order : listOrders) {
+			System.out.printf("%s | %s | %.2f | %.2f | %.2f \n", 
+					order.getId(), order.getOrderTime(), order.getProductCost(), 
+					order.getSubtotal(), order.getTotal());
+		}
 	}
 }

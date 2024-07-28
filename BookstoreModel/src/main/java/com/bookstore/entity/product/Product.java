@@ -82,6 +82,11 @@ public class Product extends IdBasedEntity {
         
     }
 
+    public Product(String name) {
+		this.name = name;
+	}
+
+
     public Product(Integer id) {
         this.id = id;
     }

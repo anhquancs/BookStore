@@ -4,12 +4,10 @@
 <head th:replace="fragments :: page_head('Giỏ hàng', 'none')" />
 
 <body>
+    <div th:replace="navigation :: header_menu"></div>
+    <div th:replace="navigation :: search_nav"></div>
+
     <div class="container-fluid">
-        <div th:replace="navigation :: header_menu"></div>
-
-
-        <div th:replace="navigation :: search_nav"></div>
-
         <div class="container my-3">
             <div class="text-center mb-4">
                 <h2>Giỏ hàng</h2>
@@ -29,17 +27,17 @@
                                 </div>
                             </div>
                             <div class="col-3">
-                                <img th:src="@{${item.product.mainImagePath}}" class="img-fluid rounded">
+                                <img th:src="@{${item.product.mainImagePath}}" class="img-fluid rounded fixed-size-img">
                             </div>
                             <div class="col-8">
                                 <div>
-                                    <a th:title="${product.name}" th:href="@{'/p/' + ${product.alias}}"
-                                        target="_blank"><b>[[${product.shortName}]]</b></a>
+                                    <a th:title="${product.name}" th:href="@{'/p/' + ${product.alias}}" target="_blank"
+                                        class="text-dark"><b>[[${product.shortName}]]</b></a>
                                 </div>
                                 <div th:replace="cart/quantity_control :: quantity_control(${item.quantity}, ${product.id})"
                                     class="my-2"></div>
                                 <div>
-                                    <span>X&nbsp;</span>
+                                    <!-- <span>X&nbsp;</span> -->
                                     <div th:replace="product/product_fragment :: product_price" class="d-inline"></div>
                                 </div>
                                 <div>
@@ -60,9 +58,9 @@
                 <div class="col-sm-4" th:unless="${#lists.isEmpty(cartItems)}" id="sectionTotal">
                     <div class="card rounded shadow-sm">
                         <div class="card-body text-center">
-                            <div>
+                            <!-- <div>
                                 <span class="h3">Tổng tiền:</span>
-                            </div>
+                            </div> -->
                             <div class="mt-2">
                                 <span th:if="${CURRENCY_SYMBOL_POSITION == 'Before price'}"
                                     th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>
@@ -74,11 +72,11 @@
                             <div class="mt-2">
                                 <div th:if="${shippingSupported}">
                                     <form th:action="@{/checkout}">
-                                        <button class="btn btn-danger p-3 mt-2">Mua hàng</button>
+                                        <button class="btn btn-danger p-3 mt-2">Đặt hàng</button>
                                     </form>
                                 </div>
 
-                                
+
 
                                 <div th:unless="${shippingSupported}">
                                     <div><span class=" text-secondary">Địa chỉ không được hỗ trợ giao hàng</span>

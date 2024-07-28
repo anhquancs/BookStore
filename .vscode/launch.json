@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "RandomPasswordGeneratorGUI",
+            "request": "launch",
+            "mainClass": "com.bookstore.admin.order.RandomPasswordGeneratorGUI",
+            "projectName": "BookstoreAdmin"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-BookstoreSiteApplication<BookstoreSite>",
             "request": "launch",
             "cwd": "${workspaceFolder}",

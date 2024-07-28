@@ -4,29 +4,29 @@
 <body>
     <div th:fragment="content" class="col-sm-3 p-3">
         <div class="card text-center border-0 rounded shadow-sm d-flex flex-column h-100">
-            <div class="card-header bg-light border-bottom-0">
+            <div class="card-header bg-dark text-white border-bottom-0">
                 BOOKSTORE
             </div>
+
             <div class="card-body d-flex flex-column">
-                <a th:href="@{'/p/' + ${product.alias}}" class="text-decoration-none">
+                <a th:href="@{'/p/' + ${product.alias}}" class="text-decoration-none text-dark">
                     <div class="d-flex justify-content-center mb-3">
-                        <img th:src="@{${product.mainImagePath}}" class="card-img-top" 
-                             style="max-width: 100%; max-height: 200px; object-fit: contain;" alt="[[${product.shortName}]]">
+                        <img th:src="@{${product.mainImagePath}}" class="card-img-top"
+                            style="max-width: 100%; max-height: 200px; object-fit: contain;"
+                            alt="[[${product.shortName}]]">
                     </div>
                     <h5 class="card-title">[[${product.shortName}]]</h5>
-                </a>
-                <a th:href="@{'/p/' + ${product.alias}}" class="btn btn-primary mt-auto rounded-pill">Xem sản phẩm</a>
+                </a>                
+                <a th:href="@{'/p/' + ${product.alias}}" class="btn btn-dark mt-auto rounded-pill">Xem sản phẩm</a>
             </div>
-            <div th:replace="product/product_fragment :: product_price" class="card-body d-flex justify-content-center align-items-center"></div>
-            <div class="card-footer bg-light text-muted">
+            <div th:replace="product/product_fragment :: product_price"
+                class="card-body d-flex justify-content-center align-items-center"></div>
+            <div class="card-footer bg-dark text-white">
                 SUMMER 2024
             </div>
         </div>
     </div>
-    
-    
 
-    
 
     <div th:fragment="product_price" th:remove="tag">
         <th:block th:if="${product.discountPercent &lt; 0}">
@@ -49,8 +49,12 @@
 
 
     <div th:fragment="price_fragment(productPrice)" th:remove="tag">
-        <span th:if="${CURRENCY_SYMBOL_POSITION == 'Before price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>[[${#numbers.formatDecimal(productPrice, 1, THOUSANDSL_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]]<span th:if="${CURRENCY_SYMBOL_POSITION == 'After price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>
+        <span th:if="${CURRENCY_SYMBOL_POSITION == 'Before price'}"
+            th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>[[${#numbers.formatDecimal(productPrice, 1,
+        THOUSANDSL_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]]<span
+            th:if="${CURRENCY_SYMBOL_POSITION == 'After price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>
     </div>
 
 </body>
+
 </html>

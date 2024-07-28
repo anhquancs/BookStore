@@ -42,3 +42,11 @@
 }
 
 
+    .fixed-size-img {
+        width: 100%; /* Hoặc chiều rộng cố định, ví dụ: 200px */
+        height: 200px; /* Chiều cao cố định */
+        object-fit: contain;
+    }
+
+
+
