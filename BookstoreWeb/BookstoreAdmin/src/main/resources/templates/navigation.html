@@ -55,9 +55,19 @@
 							<div class="dropdown-menu">
 								<a class="dropdown-item" th:href="@{/products/new}" sec:authorize="hasAnyAuthority('Admin', 'Editor')">Tạo mới</a>
 								<a class="dropdown-item" th:href="@{/products}">Xem tất cả</a>
+								<a class="dropdown-item" sec:authorize="hasAnyAuthority('Admin')"  th:href="@{/reviews}" >Đánh giá</a>
 							</div>
 						</li>
 					</th:block>
+
+					<th:block sec:authorize="hasAuthority('Assistant')">
+						<li class="nav-item">
+							<a class="nav-link" th:href="@{/reviews}">
+								<i class="fa-solid fa-ranking-star"></i> Đánh giá
+							</a>
+						</li>
+					</th:block>
+
 					<th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
 						<li class="nav-item">
 							<a class="nav-link" th:href="@{/customers}">
