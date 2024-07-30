@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: page_head('Reviews - Book.store Admin', 'none')">
+</head>
+
+<body>
+
+    <div class="row">
+        <div class="col-md-2">
+            <div class="container-fluid">
+                <div th:replace="navigation :: menu"></div>
+            </div>
+        </div>
+        <div class="col-md-10 p-3">
+            <div class="container-fluid">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2>Quản Lí Đánh Giá</h2>
+                </div>
+
+                <div th:replace="fragments :: seach_form_and_message"></div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover table-sm">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th th:replace="fragments :: column_link('id', 'ID', 'none')"></th>
+                                <th
+                                    th:replace="fragments :: column_link('product', 'Tên sản phẩm', 'none')">
+                                </th>
+                                <th
+                                    th:replace="fragments :: column_link('customer', 'Tên khách hàng', 'none')">
+                                </th>
+                                <th th:replace="fragments :: column_link('rating', 'Xếp hạng', 'none')">
+                                </th>
+                                <th
+                                    th:replace="fragments :: column_link('reviewTime', 'Thời gian đánh giá', 'none')">
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="review : ${listReviews}">
+                                <td>[[${review.id}]]</td>
+                                <td>
+                                    <a th:href="@{'/products/detail/' + ${review.product.id}}"
+                                        class="link-detail-product"></a>
+                                    [[${review.product.shortName}]]
+                                </td>
+                                <td>
+                                    <a th:href="@{'/customers/detail/' + ${review.customer.id}}"
+                                        class="link-detail-customer"></a>
+                                    [[${review.customer.fullName}]]
+                                </td>
+                                <td>[[${review.rating}]] <i class="far fa-star"></i></td>
+                                <td>[[${review.reviewTime}]]</td>
+                                <td>
+                                    <a class="fas fa-file-alt fa-2x icon-green link-detail-review"
+                                        th:href="@{'/reviews/detail/' + ${review.id}}"
+                                        title="View detail of this review"></a>
+                                    &nbsp;
+                                    <div th:replace="fragments :: edit('review', '/reviews/edit/' + ${review.id})">
+                                    </div>
+                                    &nbsp;
+                                    <div
+                                        th:replace="fragments :: delete('review', ${review.id}, '/reviews/delete/' + ${review.id}, true)">
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div th:replace="fragments :: pagination('product')"></div>
+                <div th:replace="modal_fragments :: confirm_modal"></div>
+
+                <div class="modal fade" id="xlargeModal">
+                    <div class="modal-dialog modal-xL">
+                        <div class="modal-content">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="largeModal">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                        </div>
+                    </div>
+                </div>
+
+                <div th:replace="fragments :: footer"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <script th:src="@{/js/common_list.js}"></script>
+    <script type="text/javascript">
+        moduleURL = "[[@{/reviews}]]";
+
+        $(document).ready(function () { 
+            handleDeleteLink(); 
+            handleProductDetailLink(); 
+            handleCustomerDetailLink(); 
+            handleReviewDetailLink(); 
+        });
+
+        function handleDeleteLink() {
+            $(".link-delete").on("click", function(e) {
+                e.preventDefault();
+                showDeleteConfirmModal($(this), 'review');
+            });
+        }
+
+        function handleDetailLinkClick(cssClass, modalId) {
+            $(cssClass).on("click", function(e) {
+                e.preventDefault();
+                linkDetailURL = $(this).attr("href");
+                $(modalId).modal("show").find(".modal-content").load(linkDetailURL);
+            });
+        }
+
+        function handleProductDetailLink() {
+            handleDetailLinkClick(".link-detail-product", "#xlargeModal");
+        }
+
+        function handleCustomerDetailLink() {
+            handleDetailLinkClick(".link-detail-customer", "#largeModal");
+        }
+
+        function handleReviewDetailLink() {
+            handleDetailLinkClick(".link-detail-review", "#largeModal");
+        }
+    </script>
+
+</body>
+
+</html>
