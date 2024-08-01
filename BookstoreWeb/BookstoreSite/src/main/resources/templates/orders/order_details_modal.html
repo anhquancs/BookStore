@@ -41,7 +41,7 @@
 			    </div>
 			  </div>			  		   -->
 			  <div class="form-group row">
-			    <label class="col-sm-2 col-form-label">Subtotal:</label>
+			    <label class="col-sm-2 col-form-label">Tổng phụ:</label>
 			    <div class="col-sm-10">
 			      <div th:replace="fragments :: currency_input(${order.subtotal})">Subtotal</div>
 			    </div>
@@ -61,7 +61,7 @@
 			  </div>			  
 			   -->
 			  <div class="form-group row">
-			    <label class="col-sm-2 col-form-label">Total:</label>
+			    <label class="col-sm-2 col-form-label">Tổng tiền:</label>
 			    <div class="col-sm-10">
 			      <div th:replace="fragments :: currency_input(${order.total})">Total</div>
 			    </div>
@@ -111,7 +111,15 @@
 						<div th:replace="fragments :: format_currency(${detail.unitPrice})" />
 						 = 
 						 <div th:replace="fragments :: format_currency(${detail.subtotal})" />
-					</div>				
+					</div>
+					
+					<div th:if="${!product.reviewedByCustomer && product.customerCanReview}">
+						<a th:href="@{'/write_review/product/' + ${product.id}}" class="btn btn-info">Review</a>
+					</div>
+					
+					<div th:if="${product.reviewedByCustomer}">
+						<a target="_blank" th:href="@{'/reviews/page/1?sortField=reviewTime&sortDir=desc&keyword=' + ${#strings.substring(product.shortName, 0, 20)}}" class="btn btn-warning">Xem lại Review</a>
+					</div>	
 				</div>
 			</div>
 			</th:block>

@@ -10,17 +10,30 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.bookstore.Utility;
 import com.bookstore.category.CategoryService;
+import com.bookstore.customer.CustomerService;
 import com.bookstore.entity.Category;
+import com.bookstore.entity.Customer;
+import com.bookstore.entity.Review;
 import com.bookstore.entity.product.Product;
 import com.bookstore.exception.CategoryNotFoundException;
 import com.bookstore.exception.ProductNotFoundException;
+import com.bookstore.review.ReviewService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class ProductController {
-    
-    @Autowired private ProductService productService;
-    @Autowired private CategoryService categoryService;
+
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private CategoryService categoryService;
+    @Autowired
+    private ReviewService reviewService;
+    @Autowired
+    private CustomerService customerService;
 
     @GetMapping("/c/{category_alias}")
     public String viewCategoryFirstPage(@PathVariable("category_alias") String alias,
@@ -29,7 +42,7 @@ public class ProductController {
     }
 
     @GetMapping("/c/{category_alias}/page/{pageNum}")
-    public String viewCategoryByPage(@PathVariable("category_alias") String alias, 
+    public String viewCategoryByPage(@PathVariable("category_alias") String alias,
             @PathVariable("pageNum") int pageNum,
             Model model) {
 
@@ -58,34 +71,48 @@ public class ProductController {
             model.addAttribute("category", category);
 
             return "product/products_by_category";
-        } catch(CategoryNotFoundException ex) {
+        } catch (CategoryNotFoundException ex) {
             return "error/404";
         }
     }
-    
+
     @GetMapping("/p/{product_alias}")
-    public String viewProductDetail(@PathVariable("product_alias") String alias, Model model) {
+    public String viewProductDetail(@PathVariable("product_alias") String alias, Model model,
+            HttpServletRequest request) {
+
         try {
             Product product = productService.getProduct(alias);
             List<Category> listCategoryParents = categoryService.getCategoryParents(product.getCategory());
+            Page<Review> listReviews = reviewService.list3MostRecentReviewsByProduct(product);
+
+            Customer customer = getAuthenticatedCustomer(request);
+            boolean customerReviewed = reviewService.didCustomerReviewProduct(customer, product.getId());
+
+            if (customerReviewed) {
+                model.addAttribute("customerReviewed", customerReviewed);
+            } else {
+                boolean customerCanReview = reviewService.canCustomerReviewProduct(customer, product.getId());
+                model.addAttribute("customerCanReview", customerCanReview);
+            }
 
             model.addAttribute("listCategoryParents", listCategoryParents);
             model.addAttribute("product", product);
+            model.addAttribute("listReviews", listReviews);
             model.addAttribute("pageTitle", product.getShortName());
 
             return "product/product_detail";
         } catch (ProductNotFoundException e) {
             return "error/404";
-        } 
+        }
     }
-    
+
     @GetMapping("/search")
     public String searchFirstPage(@Param("keyword") String keyword, Model model) {
         return searchByPage(keyword, 1, model);
     }
 
     @GetMapping("/search/page/{pageNum}")
-    public String searchByPage(@Param("keyword") String keyword, 
+    public String searchByPage(@Param("keyword") String keyword,
             @PathVariable("pageNum") int pageNum,
             Model model) {
         Page<Product> pageProducts = productService.search(keyword, pageNum);
@@ -108,6 +135,11 @@ public class ProductController {
         model.addAttribute("listResult", listResult);
 
         return "product/search_result";
+    }
+
+    private Customer getAuthenticatedCustomer(HttpServletRequest request) {
+        String email = Utility.getEmailOfAuthenticatedCustomer(request);
+        return customerService.getCustomerByEmail(email);
     }
 
 }

@@ -25,7 +25,7 @@ public class WebSecurityConfig {
 	@Autowired
 	private OAuth2LoginSuccessHandler auth2LoginSuccessHandler;
 	@Autowired
-	private DatabaseLoginSuccessHandler databaseLoginSuccessHandler; 
+	private DatabaseLoginSuccessHandler databaseLoginSuccessHandler;
 
 	@Bean
 	PasswordEncoder passwordEncoder() {
@@ -36,7 +36,9 @@ public class WebSecurityConfig {
 	SecurityFilterChain configureHttpSecurity(HttpSecurity http) throws Exception {
 
 		http.authorizeHttpRequests(auth -> auth
-				.requestMatchers("/account_details", "/update_account_details", "/cart", "/address_book/**", "/order/**").authenticated()
+				.requestMatchers("/account_details", "/update_account_details", "/cart", "/address_book/**",
+						"/order/**", "/checkout", "/place_order", "/reviews/**", "/write_review/**", "/post_review")
+				.authenticated()
 				.anyRequest().permitAll())
 				.formLogin(form -> form
 						.loginPage("/login")
@@ -53,9 +55,7 @@ public class WebSecurityConfig {
 						.key("AbcDefghijklmnopqrs_1234567890")
 						.tokenValiditySeconds(7 * 24 * 60 * 60))
 				.sessionManagement(s -> s
-					.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-				);
-				
+						.sessionCreationPolicy(SessionCreationPolicy.ALWAYS));
 
 		return http.build();
 	}

@@ -1,33 +1,143 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments :: page_head('Book.store', 'none')" />
+<head>
 
+	<head th:replace="fragments :: page_head(${pageTitle}, 'tag')" />
+	<link th:href="@{/star-rating/css/star-rating.css}" media="all" rel="stylesheet" type="text/css" />
+	<script th:src="@{/star-rating/js/star-rating.js}" type="text/javascript"></script>
+	<link th:href="@{/star-rating/themes/krajee-svg/theme.css}" media="all" rel="stylesheet" type="text/css" />
+	<script th:src="@{/star-rating/themes/krajee-svg/theme.js}"></script>
+</head>
 <body>
 	<div th:replace="navigation :: header_menu"></div>
-	<div th:replace="navigation :: search_nav"></div>
-
-	<div class="container-fluid p-3">
-			<!-- Card for Categories -->
-			<div class="card m-3">
-				<div class="card-header bg-dark text-white">
-					<h3><i class="fas fa-book"></i> Thể loại</h3>
+	<!-- Card with Slideshow -->
+	<div class="">
+		<div id="saleBookCarousel" class="carousel slide" data-ride="carousel">
+			<div class="carousel-inner">
+				<!-- Example of a single slide -->
+				<div class="carousel-item active">
+					<div class="d-block w-100" style="background-color: black; height: 500px; position: relative;">
+						<img th:src="@{/images/1.png}" alt="" class="carousel-image">
+						<div class="carousel-caption d-none d-md-block">
+							<!-- <h5 style="color: white;">Flash Sale Summer</h5>
+							<p style="color: white;">🥵🥵🥵</p> -->
+						</div>
+					</div>
 				</div>
-				<div class="card-body">
-					<div class="scrolling-wrapper d-flex flex-row flex-nowrap overflow-auto">
-						<div class="category-item col-sm-2 text-center" th:each="cat : ${listCategories}">
-							<div>
-								<img class="img-fluid rounded" th:src="@{${cat.imagePath}}" alt="Category Image">
+
+				<div class="carousel-item">
+					<div class="d-flex justify-content-center align-items-center w-100"
+						style="background-color: black; height: 500px;">
+						<div class="text-center">
+							<h5 style="color: white;">Chào mừng đến với Book.Store</h5>
+							<p style="color: white;">Điểm đến lý tưởng cho những cuốn sách hay và nhiều hơn nữa.</p>
+							<p style="color: white;">Chúng tôi cung cấp một loạt các thể loại sách từ tiểu thuyết, khoa
+								học, đến sách thiếu nhi.</p>
+							<p style="color: white;">Khám phá ngay những tựa sách bán chạy nhất của chúng tôi!</p>
+							<i class="fas fa-book-open" style="color: white; font-size: 2rem;"></i>
+						</div>
+					</div>
+				</div>
+
+				<!-- Add more slides as needed -->
+			</div>
+			<a class="carousel-control-prev" href="#saleBookCarousel" role="button" data-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="carousel-control-next" href="#saleBookCarousel" role="button" data-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
+	</div>
+
+	<!-- Card for Categories -->
+	<div class="card m-3">
+		<div class="card-header bg-dark text-white">
+			<h3><i class="fas fa-book"></i> Danh mục</h3>
+		</div>
+		<div class="card-body">
+			<div class="scrolling-wrapper d-flex flex-row flex-nowrap overflow-auto">
+				<div class="category-item col-sm-2 text-center" th:each="cat : ${listCategories}">
+					<div>
+						<img class="img-fluid rounded" th:src="@{${cat.imagePath}}" alt="Category Image">
+					</div>
+					<div class="mt-2">
+						<a class="text-dark" th:href="@{'/c/' + ${cat.alias}}">[[${cat.name}]]</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="card m-3">
+		<div class="card-header bg-dark text-white">
+			<h3><i class="fas fa-star"></i> Giá tốt</h3>
+		</div>
+		<div class="card-body">
+			<div class="container-fluid">
+				<!-- Iterate through each partition of 5 products -->
+				<div th:each="row : ${bestSellersPartitions}" class="row justify-content-center">
+					<!-- Iterate through each product in the current row -->
+					<div class="col-6 col-md-4 col-lg-2-4 mb-4" th:each="product : ${row}">
+						<div class="card text-center border-0 rounded shadow-sm d-flex flex-column h-100">
+							<div class="card-header bg-dark text-white border-bottom-0">
+								BOOKSTORE
 							</div>
-							<div class="mt-2">
-								<a class="text-dark" th:href="@{'/c/' + ${cat.alias}}">[[${cat.name}]]</a>
+	
+							<div class="card-body d-flex flex-column">
+								<a th:href="@{'/p/' + ${product.alias}}" class="text-decoration-none text-dark">
+									<div class="d-flex justify-content-center mb-3">
+										<img th:src="@{${product.mainImagePath}}" class="card-img-top"
+											style="max-width: 100%; max-height: 200px; object-fit: contain;"
+											alt="[[${product.shortName}]]">
+									</div>
+									<h5 class="card-title">[[${product.shortName}]]</h5>
+								</a>
+								<a th:href="@{'/p/' + ${product.alias}}" class="btn btn-dark mt-auto rounded-pill">Xem sản phẩm</a>
+							</div>
+							<div class="d-flex justify-content-center">
+								<table>
+									<tr>
+										<td>
+											<input type="text" class="product-detail-rating-star" dir="ltr"
+												data-size="xs" th:value="${product.averageRating}" />
+										</td>
+										<td><small>[[${product.reviewCount}]]</small></td>
+									</tr>
+								</table>
+							</div>
+							<div th:replace="product/product_fragment :: product_price"
+								class="card-body d-flex justify-content-center align-items-center"></div>
+							<div class="card-footer bg-dark text-white">
+								SUMMER 2024
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		<div th:replace="navigation :: footer_menu"></div>
+		</div>
 	</div>
+	
+
+	<div th:replace="navigation :: footer_menu"></div>
+	</div>
+	<script>
+		$(".product-detail-rating-star").rating({
+			displayOnly: true,
+			hoverOnClera: false,
+			showCaption: false,
+			theme: 'krajee-svg'
+		});
+
+		function formatRatingNumber() {
+			ratingText = $("#ratingNumber").text();
+			formattedRating = $.number(ratingText, 2, decimalSeparator, thousandSeparator);
+			$("#ratingNumber").text(formattedRating);
+		}	
+	</script>
 </body>
 
 </html>

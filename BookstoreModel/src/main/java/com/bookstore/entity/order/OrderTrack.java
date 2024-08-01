@@ -48,7 +48,6 @@ public class OrderTrack extends IdBasedEntity {
 	public void setUpdatedTime(Date updatedTime) {
 		this.updatedTime = updatedTime;
 	}
-	
 
 	public OrderStatus getStatus() {
 		return status;
@@ -68,18 +67,22 @@ public class OrderTrack extends IdBasedEntity {
 
 	@Transient
 	public String getUpdatedTimeOnForm() {
-		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
-		return dateFormatter.format(this.updatedTime);
+		if (this.updatedTime != null) {
+			DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+			return dateFormatter.format(this.updatedTime);
+		}
+		return null;
 	}
-	
+
 	public void setUpdatedTimeOnForm(String dateString) {
-		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
-		
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		try {
 			this.updatedTime = dateFormatter.parse(dateString);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 	}
+
+	
 
 }

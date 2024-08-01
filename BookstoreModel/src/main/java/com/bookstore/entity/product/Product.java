@@ -13,9 +13,6 @@ import com.bookstore.entity.IdBasedEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.ManyToOne;
@@ -79,7 +76,10 @@ public class Product extends IdBasedEntity {
     private List<ProductDetail> details = new ArrayList<>();
 
     private int reviewCount;
-    private float averageRating;
+	private float averageRating;
+
+    @Transient private boolean customerCanReview;
+	@Transient private boolean reviewedByCustomer;
 
     public Product() {
         
@@ -323,5 +323,24 @@ public class Product extends IdBasedEntity {
         this.averageRating = averageRating;
     }
 
-    
+    @Transient
+	public String getURI() {
+		return "/p/" + this.alias + "";
+	}		
+
+    public boolean isCustomerCanReview() {
+		return customerCanReview;
+	}
+
+	public void setCustomerCanReview(boolean customerCanReview) {
+		this.customerCanReview = customerCanReview;
+	}
+
+	public boolean isReviewedByCustomer() {
+		return reviewedByCustomer;
+	}
+
+	public void setReviewedByCustomer(boolean reviewedByCustomer) {
+		this.reviewedByCustomer = reviewedByCustomer;
+	}
 }

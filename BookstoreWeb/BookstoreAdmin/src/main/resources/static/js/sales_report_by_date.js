@@ -24,16 +24,16 @@ function loadSalesReportByDate(period) {
 		customizeChartForSalesReportByDate(period);
 		formatChartData(data, 1, 2);
 		drawChartForSalesReportByDate(period);
-		setSalesAmount(period, '_date', "Total Orders");
+		setSalesAmount(period, '_date', "Tổng đơn hàng");
 	});
 }
 
 function prepareChartDataForSalesReportByDate(responseJSON) {
 	data = new google.visualization.DataTable();
 	data.addColumn('string', 'Date');
-	data.addColumn('number', 'Gross Sales');
-	data.addColumn('number', 'Net Sales');
-	data.addColumn('number', 'Orders');
+	data.addColumn('number', 'Doanh thu gộp');
+	data.addColumn('number', 'Doanh thu thuần');
+	data.addColumn('number', 'Đơn hàng');
 	
 	totalGrossSales = 0.0;
 	totalNetSales = 0.0;
@@ -60,8 +60,8 @@ function customizeChartForSalesReportByDate(period) {
 		},
 		
 		vAxes: {
-			0: {title: 'Sales Amount', format: 'currency'},
-			1: {title: 'Number of Orders'}
+			0: {title: 'Doanh số'},
+			1: {title: 'Đơn hàng'}
 		}
 	};
 }

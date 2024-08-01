@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments :: page_head('My Orders', 'none')" />
+<head th:replace="fragments :: page_head('Đơn hàng', 'none')" />
 </head>
 
 <body>
     <div th:replace="navigation :: header_menu"></div>
-    <div th:replace="navigation :: search_nav"></div>
     <div class="container">
         <div class="my-4">
             <h2>Danh sách đơn hàng</h2>
@@ -86,7 +85,7 @@
         <div th:replace="navigation :: footer_menu"></div>
 
     </div>
-
+    <script th:src="@{/js/common_list.js}"></script>
     <script type="text/javascript">
         var contextPath = "[[@{/}]]";
         var csrfHeaderName = "[[${_csrf.headerName}]]";
