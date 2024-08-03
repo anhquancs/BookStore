@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bookstore.admin.paging.PagingAndSortingHelper;
 import com.bookstore.admin.paging.PagingAndSortingParam;
+import com.bookstore.admin.product.ProductService;
 import com.bookstore.admin.setting.SettingService;
 import com.bookstore.entity.City;
 import com.bookstore.entity.order.Order;
@@ -30,16 +31,20 @@ import jakarta.servlet.http.HttpServletRequest;
 @Controller
 public class OrderController {
 
-    private String defaultRedirectURL = "redirect:/orders/page/1?sortField=orderTime&sortDir=desc";
-	
-	@Autowired private OrderService orderService;
-	@Autowired private SettingService settingService;
+	private String defaultRedirectURL = "redirect:/orders/page/1?sortField=orderTime&sortDir=desc";
 
-    @GetMapping("/orders")
+	@Autowired
+	private OrderService orderService;
+	@Autowired
+	private SettingService settingService;
+	@Autowired
+	private ProductService productService;
+
+	@GetMapping("/orders")
 	public String listFirstPage() {
 		return defaultRedirectURL;
 	}
-	
+
 	@GetMapping("/orders/page/{pageNum}")
 	public String listByPage(
 			@PagingAndSortingParam(listName = "listOrders", moduleURL = "/orders") PagingAndSortingHelper helper,
@@ -48,111 +53,138 @@ public class OrderController {
 
 		orderService.listByPage(pageNum, helper);
 		loadCurrencySetting(request);
-		
+
 		return "orders/orders";
 	}
 
-    private void loadCurrencySetting(HttpServletRequest request) {
+	private void loadCurrencySetting(HttpServletRequest request) {
 		List<Setting> currencySettings = settingService.getCurrencySettings();
-		
+
 		for (Setting setting : currencySettings) {
 			request.setAttribute(setting.getKey(), setting.getValue());
-		}	
+		}
 	}
 
 	@GetMapping("/orders/detail/{id}")
-	public String viewOrderDetails(@PathVariable("id") Integer id, Model model, 
+	public String viewOrderDetails(@PathVariable("id") Integer id, Model model,
 			RedirectAttributes ra, HttpServletRequest request) {
 		try {
 			Order order = orderService.get(id);
-			loadCurrencySetting(request);			
+			loadCurrencySetting(request);
 			model.addAttribute("order", order);
-			
+
 			return "orders/order_details_modal";
 		} catch (OrderNotFoundException ex) {
 			ra.addFlashAttribute("message", ex.getMessage());
 			return defaultRedirectURL;
 		}
-		
-	}
 
+	}
 
 	@GetMapping("/orders/delete/{id}")
 	public String deleteOrder(@PathVariable("id") Integer id, Model model, RedirectAttributes ra) {
 		try {
-			orderService.delete(id);;
+			orderService.delete(id);
+			;
 			ra.addFlashAttribute("message", "The order ID " + id + " has been deleted.");
 		} catch (OrderNotFoundException ex) {
 			ra.addFlashAttribute("message", ex.getMessage());
 		}
-		
+
 		return defaultRedirectURL;
 	}
-
 
 	@GetMapping("/orders/edit/{id}")
 	public String editOrder(@PathVariable("id") Integer id, Model model, RedirectAttributes ra,
 			HttpServletRequest request) {
 		try {
-			Order order = orderService.get(id);;
-			
+			Order order = orderService.get(id);
+			;
+
 			List<City> listCities = orderService.listAllCities();
-			
+
 			model.addAttribute("pageTitle", "Edit Order (ID: " + id + ")");
 			model.addAttribute("order", order);
 			model.addAttribute("listCities", listCities);
-			
+
 			return "orders/order_form";
-			
+
 		} catch (OrderNotFoundException ex) {
 			ra.addFlashAttribute("message", ex.getMessage());
 			return defaultRedirectURL;
 		}
-		
-	}	
+
+	}
 
 	@PostMapping("/order/save")
 	public String saveOrder(Order order, HttpServletRequest request, RedirectAttributes ra) {
 		String cityName = request.getParameter("cityName");
-		order.setCity(cityName);;
-		
+		order.setCity(cityName);
+
 		updateProductDetails(order, request);
 		updateOrderTracks(order, request);
 
-		orderService.save(order);		
-		
+		// Restore quantities if any track status is RETURNED
+		if (order.getOrderTracks().stream().anyMatch(track -> track.getStatus() == OrderStatus.RETURNED)) {
+			restoreProductQuantities(order);
+		}
+
+		orderService.save(order);
+
 		ra.addFlashAttribute("message", "Đơn hàng " + order.getId() + " cập nhật thành công");
-		
+
 		return defaultRedirectURL;
 	}
+
+	public void restoreProductQuantities(Order order) {
+		System.out.println("Restoring quantities for order ID: " + order.getId());
+		for (OrderDetail detail : order.getOrderDetails()) {
+			if (order.getOrderTracks().stream().anyMatch(track -> track.getStatus() == OrderStatus.RETURNED)) {
+				Product product = detail.getProduct();
+				int quantityToRestore = detail.getQuantity();
+	
+				// Log product and quantity
+				System.out.println("Restoring quantity for product ID: " + product.getId() + " by " + quantityToRestore);
+	
+				// Ensure that the product is retrieved from the database to reflect the latest state
+				product = productService.findById(product.getId());
+				product.setQuantity(product.getQuantity() + quantityToRestore);
+				productService.save(product); // Save the updated product quantity
+	
+				// Log successful update
+				System.out.println("Product ID: " + product.getId() + " updated quantity to " + product.getQuantity());
+			}
+		}
+	}
+	
 
 	private void updateOrderTracks(Order order, HttpServletRequest request) {
 		String[] trackIds = request.getParameterValues("trackId");
 		String[] trackStatuses = request.getParameterValues("trackStatus");
 		String[] trackDates = request.getParameterValues("trackDate");
 		String[] trackNotes = request.getParameterValues("trackNotes");
-		
+
 		List<OrderTrack> orderTracks = order.getOrderTracks();
 		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
-		
+
 		for (int i = 0; i < trackIds.length; i++) {
 			OrderTrack trackRecord = new OrderTrack();
-			
+
 			Integer trackId = Integer.parseInt(trackIds[i]);
 			if (trackId > 0) {
 				trackRecord.setId(trackId);
 			}
-			
+
 			trackRecord.setOrder(order);
 			trackRecord.setStatus(OrderStatus.valueOf(trackStatuses[i]));
 			trackRecord.setNotes(trackNotes[i]);
-			
+
 			try {
 				trackRecord.setUpdatedTime(dateFormatter.parse(trackDates[i]));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-			
+
 			orderTracks.add(trackRecord);
 		}
 	}
@@ -164,34 +196,33 @@ public class OrderController {
 		String[] productDetailCosts = request.getParameterValues("productDetailCost");
 		String[] quantities = request.getParameterValues("quantity");
 		String[] productSubtotals = request.getParameterValues("productSubtotal");
-		
+
 		Set<OrderDetail> orderDetails = order.getOrderDetails();
-		
+
 		for (int i = 0; i < detailIds.length; i++) {
 			System.out.println("Detail ID: " + detailIds[i]);
 			System.out.println("\t Prodouct ID: " + productIds[i]);
 			System.out.println("\t Cost: " + productDetailCosts[i]);
 			System.out.println("\t Quantity: " + quantities[i]);
 			System.out.println("\t Subtotal: " + productSubtotals[i]);
-			
+
 			OrderDetail orderDetail = new OrderDetail();
 			Integer detailId = Integer.parseInt(detailIds[i]);
 			if (detailId > 0) {
 				orderDetail.setId(detailId);
 			}
-			
+
 			orderDetail.setOrder(order);
 			orderDetail.setProduct(new Product(Integer.parseInt(productIds[i])));
 			orderDetail.setProductCost(Float.parseFloat(productDetailCosts[i]));
 			orderDetail.setSubtotal(Float.parseFloat(productSubtotals[i]));
 			orderDetail.setQuantity(Integer.parseInt(quantities[i]));
 			orderDetail.setUnitPrice(Float.parseFloat(productPrices[i]));
-			
+
 			orderDetails.add(orderDetail);
-			
+
 		}
-		
+
 	}
 
-	
 }

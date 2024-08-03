@@ -61,4 +61,8 @@ public class ProductService {
         return repo.findBestSellerProducts(pageable);
     }
 
+    public void save(Product product) {
+        repo.save(product);
+    }
+
 }

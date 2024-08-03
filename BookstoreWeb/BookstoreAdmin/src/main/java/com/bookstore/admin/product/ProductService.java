@@ -124,4 +124,8 @@ public class ProductService {
         }
     }
 
+    public Product findById(Integer id) {
+        return repo.findById(id).orElse(null);
+    }
+
 }
