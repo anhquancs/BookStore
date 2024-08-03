@@ -46,6 +46,17 @@ public class Product extends IdBasedEntity {
     @Column(name = "in_stock")
     private boolean inStock;
 
+    @Column(name = "quantity")
+    private int quantity;
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     private float cost;
 
     private float price;

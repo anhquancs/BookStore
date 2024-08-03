@@ -1,10 +1,13 @@
 package com.bookstore.product;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -105,6 +108,7 @@ public class ProductController {
             return "error/404";
         }
     }
+
 
     @GetMapping("/search")
     public String searchFirstPage(@Param("keyword") String keyword, Model model) {

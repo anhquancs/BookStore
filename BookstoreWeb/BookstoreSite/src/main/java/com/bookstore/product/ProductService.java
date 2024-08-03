@@ -37,6 +37,10 @@ public class ProductService {
         return product;
     }
 
+    public Product findById(Integer id) {
+        return repo.findById(id).orElse(null);
+    }
+
     public Product getProduct(Integer id) throws ProductNotFoundException {
 		try {
 			Product product = repo.findById(id).get();

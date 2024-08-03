@@ -6,17 +6,17 @@
     <title>Document</title>
 </head>
 <body>
-    <div th:fragment="quantity_control(quantityValue, productId)">
+    <div th:fragment="quantity_control(quantityValue, productId, maxQuantity)">
         <nav>
             <ul class="pagination">
                 <li class="page-item">
-                    <a class="page-link linkMinus" th:pid="${product.id}" href=""><b>-</b></a>
+                    <a class="page-link linkMinus" th:pid="${product.id}" th:maxQuantity="${maxQuantity}" href=""><b>-</b></a>
                 </li>
                 <li class="page-item">
-                    <input th:value="${quantityValue}" th:id="'quantity' + ${product.id}"  onkeydown="return false;" class="form-control text-center" style="width: 55px;">
+                    <input th:value="${quantityValue}" th:id="'quantity' + ${product.id}" onkeydown="return false;" class="form-control text-center" style="width: 55px;">
                 </li>
                 <li class="page-item">
-                    <a class="page-link linkPlus"  th:pid="${product.id}" href=""><b>+</b></a>
+                    <a class="page-link linkPlus" th:pid="${product.id}" th:maxQuantity="${maxQuantity}" href=""><b>+</b></a>
                 </li>
             </ul>
         </nav>

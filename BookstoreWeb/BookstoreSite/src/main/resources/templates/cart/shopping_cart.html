@@ -33,7 +33,7 @@
                                     <a th:title="${product.name}" th:href="@{'/p/' + ${product.alias}}" target="_blank"
                                         class="text-dark"><b>[[${product.shortName}]]</b></a>
                                 </div>
-                                <div th:replace="cart/quantity_control :: quantity_control(${item.quantity}, ${product.id})"
+                                <div th:replace="cart/quantity_control :: quantity_control(${item.quantity}, ${product.id}, ${product.quantity})"
                                     class="my-2"></div>
                                 <div>
                                     <!-- <span>X&nbsp;</span> -->

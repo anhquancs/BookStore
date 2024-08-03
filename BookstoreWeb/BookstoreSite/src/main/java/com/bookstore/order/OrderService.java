@@ -21,6 +21,7 @@ import com.bookstore.entity.order.OrderStatus;
 import com.bookstore.entity.order.PaymentMethod;
 import com.bookstore.entity.product.Product;
 import com.bookstore.exception.OrderNotFoundException;
+import com.bookstore.product.ProductRepository;
 import com.bookstore.entity.order.OrderTrack;
 
 @Service
@@ -29,6 +30,7 @@ public class OrderService {
 
     @Autowired private OrderRepository repo;
     @Autowired private OrderTrackRepository orderTrackRepo;
+    @Autowired private ProductRepository productRepository; 
     
     public Order createOrder(Customer customer, Address address, List<CartItem> cartItems,
             PaymentMethod paymentMethod, CheckoutInfo checkoutInfo) {
@@ -69,6 +71,20 @@ public class OrderService {
         }
         
         Order savedOrder = repo.save(newOrder);
+
+        for (OrderDetail orderDetail : savedOrder.getOrderDetails()) {
+            Product product = orderDetail.getProduct();
+            product.setQuantity(product.getQuantity() - orderDetail.getQuantity());
+            
+            // Kiểm tra số lượng và cập nhật trạng thái inStock
+            if (product.getQuantity() <= 0) {
+                product.setInStock(false);
+            }
+
+            // Lưu sản phẩm cập nhật
+            productRepository.save(product);
+        }
+
 
         // Thêm OrderTrack mới
         

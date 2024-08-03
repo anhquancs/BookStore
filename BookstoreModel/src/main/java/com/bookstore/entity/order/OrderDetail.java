@@ -24,6 +24,8 @@ public class OrderDetail extends IdBasedEntity {
 	@ManyToOne
 	@JoinColumn(name = "order_id")
 	private Order order;
+
+	
 	
 	public OrderDetail() {
 	}

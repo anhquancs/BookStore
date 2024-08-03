@@ -19,7 +19,7 @@
 			<div th:replace="breadcrumb :: content" class="m-0"></div>
 		</div>
 	</div>
-	
+
 	<div class="container-fluid">
 		<div class="container my-2">
 			<div class="row">
@@ -94,7 +94,9 @@
 								<span th:unless="${product.inStock}" class="text-danger"><b>Hết hàng</b></span>
 							</div>
 							<th:block th:if="${product.inStock}">
-								<div th:replace="cart/quantity_control :: quantity_control(1, ${product.id})"></div>
+								<div
+									th:replace="cart/quantity_control :: quantity_control(1, ${product.id}, ${product.quantity})">
+								</div>
 								<div class="mt-3">
 									<button id="buttonAddToCart" class="btn btn-dark">
 										<i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng
@@ -146,7 +148,7 @@
 		</div>
 
 
-	
+
 
 		<div th:replace="product/images_carousel :: content"></div>
 		<div th:replace="fragments :: modal_dialog"></div>
