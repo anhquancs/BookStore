@@ -6,16 +6,16 @@
 <body>
     <div th:replace="navigation :: header_menu"></div>
 
-    <div class="container-fluid">
+    <div class="container-fluid" style="min-height: calc(100vh - 245px);">
         <div class="container my-3">
             <div class="text-center mb-4">
                 <h2>Giỏ hàng</h2>
             </div>
 
             <div class="row">
-                <div class="col-sm-8">
+                <div class="col-sm-8 mr-4">
                     <th:block th:each="item, status : ${cartItems}">
-                        <div th:id="'row' + ${status.count}" class="row border rounded p-3 mb-3 shadow-sm"
+                        <div th:id="'row' + ${status.count}" class="row border rounded p-3 mb-3 shadow-sm justify-content-between"
                             th:with="product = ${item.product}">
                             <div class="col-1 d-flex flex-column align-items-center justify-content-center">
                                 <div class="divCount mb-2">[[${status.count}]]</div>
@@ -26,9 +26,9 @@
                                 </div>
                             </div>
                             <div class="col-3">
-                                <img th:src="@{${item.product.mainImagePath}}" class="img-fluid rounded fixed-size-img">
+                                <img th:src="@{${item.product.mainImagePath}}" class="img-fluid rounded fixed-size-img" style="max-height: 210px;">
                             </div>
-                            <div class="col-8">
+                            <div style="width: 64%;">
                                 <div>
                                     <a th:title="${product.name}" th:href="@{'/p/' + ${product.alias}}" target="_blank"
                                         class="text-dark"><b>[[${product.shortName}]]</b></a>
@@ -54,8 +54,8 @@
                     </th:block>
                 </div>
 
-                <div class="col-sm-4" th:unless="${#lists.isEmpty(cartItems)}" id="sectionTotal">
-                    <div class="card rounded shadow-sm">
+                <div class="col-sm-3" th:unless="${#lists.isEmpty(cartItems)}" id="sectionTotal">
+                    <div class="rounded shadow-sm p-3" style="box-shadow: rgba(111, 111, 111, 0.35) 0px 5px 15px;">
                         <div class="card-body text-center">
                             <!-- <div>
                                 <span class="h3">Tổng tiền:</span>
@@ -105,11 +105,12 @@
 
 
         <div th:replace="fragments :: modal_dialog"></div>
-        <div th:replace="navigation :: footer_menu"></div>
         <div>
 
         </div>
     </div>
+    <div th:replace="navigation :: footer_menu"></div>
+
     <script>
         contextPath = "[[@{/}]]";
         var csrfHeaderName = "[[${_csrf.headerName}]]";

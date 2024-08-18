@@ -27,8 +27,8 @@ function loadSalesReportByDateForProduct(period) {
 
 function prepareChartDataForSalesReportByProduct(responseJSON) {
 	data = new google.visualization.DataTable();
-	data.addColumn('string', 'Product');
-	data.addColumn('number', 'Quantity');
+	data.addColumn('string', 'Sản Phẩm');
+	data.addColumn('number', 'Thể Loại');
 	data.addColumn('number', 'Gross Sales');
 	data.addColumn('number', 'Net Sales');
 	

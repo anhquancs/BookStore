@@ -58,7 +58,7 @@ public class AccountController {
 		loggedUser.setFirstName(user.getFirstName());
 		loggedUser.setLastName(user.getLastName());
 
-		redirectAttributes.addFlashAttribute("message", "Your account details have been updated.");
+		redirectAttributes.addFlashAttribute("message", "Thông tin tài khoản của bạn đã được cập nhật.");
 		return "redirect:/account";
 	}
 

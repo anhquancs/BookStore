@@ -56,14 +56,14 @@ public class OrderService {
 		try {
 			return repo.findById(id).get();
 		} catch (NoSuchElementException ex) {
-			throw new OrderNotFoundException("Could not find any orders with ID " + id);
+			throw new OrderNotFoundException("Không tìm thấy bất kỳ đơn hàng nào có ID: " + id);
 		}
 	}
 
     public void delete(Integer id) throws OrderNotFoundException {
 		Long count = repo.countById(id);
 		if (count == null || count == 0) {
-			throw new OrderNotFoundException("Could not find any orders with ID " + id); 
+			throw new OrderNotFoundException("Không tìm thấy bất kỳ đơn hàng nào có ID: " + id); 
 		}
 		
 		repo.deleteById(id);

@@ -11,38 +11,54 @@
 			</div>
 		</div>
 		<div class="col-md-10 p-3">
-			<div class="container-fluid">
-				<div>
-					<h2>Báo cáo kinh doanh</h2>
+			<div class="row">
+				<!-- Navbar header -->
+				<div class="col-12">
+					<div class="container-fluid">
+						<div th:replace="nav_header :: nav_header('Báo Cáo Kinh Doanh', '')"></div>
+					</div>
+
 				</div>
-		
-				<div>
-					<ul class="nav nav-tabs" id="reportTab" role="tablist">
-						<li class="nav-item">
-							<a class="nav-link active" data-toggle="tab" href="#date" role="tab">Doanh số theo ngày</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" data-toggle="tab" href="#category" role="tab">Danh số theo danh mục</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" data-toggle="tab" href="#product" role="tab">Danh số theo sản phẩm</a>
-						</li>
-					</ul>
-		
-					<div class="tab-content">
-						<div class="tab-pane active p-3" id="date" role="tabpanel">
-							<div th:replace="reports/sales_report_fragment::content('_date')"></div>
+
+				<div class="col-12">
+					<div class="container-fluid">
+						<div style="min-height: calc(100vh - 200px);">
+							<!-- Table -->
+							<div class="card my-4">
+								<div>
+									<ul class="nav nav-tabs" id="reportTab" role="tablist">
+										<li class="nav-item">
+											<a class="nav-link active" data-toggle="tab" href="#date" role="tab">Doanh
+												số theo ngày</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" data-toggle="tab" href="#category" role="tab">Danh số
+												theo danh mục</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" data-toggle="tab" href="#product" role="tab">Danh số
+												theo sản phẩm</a>
+										</li>
+									</ul>
+
+									<div class="tab-content">
+										<div class="tab-pane active p-3" id="date" role="tabpanel">
+											<div th:replace="reports/sales_report_fragment::content('_date')"></div>
+										</div>
+										<div class="tab-pane p-3" id="category" role="tabpanel">
+											<div th:replace="reports/sales_report_fragment::content('_category')"></div>
+										</div>
+										<div class="tab-pane p-3" id="product" role="tabpanel">
+											<div th:replace="reports/sales_report_fragment::content('_product')"></div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
-						<div class="tab-pane p-3" id="category" role="tabpanel">
-							<div th:replace="reports/sales_report_fragment::content('_category')"></div>
-						</div>
-						<div class="tab-pane p-3" id="product" role="tabpanel">
-							<div th:replace="reports/sales_report_fragment::content('_product')"></div>
-						</div>
+
+						<div th:replace="fragments :: footer"></div>
 					</div>
 				</div>
-		
-				<div th:replace="fragments :: footer"></div>
 			</div>
 		</div>
 	</div>

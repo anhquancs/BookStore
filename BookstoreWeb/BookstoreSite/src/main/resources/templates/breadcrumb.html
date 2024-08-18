@@ -2,26 +2,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <body>
-	<div th:fragment="content" th:remove="tag">
+    <div th:fragment="content" th:remove="tag">
         <div th:if="${listCategoryParents != null && !listCategoryParents.empty}">
             <div class="row">
                 <div class="col">
                     <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb bg-dark text-white p-3 rounded-0">
+                        <ol class="breadcrumb bg-white-milk text-dark p-3 rounded-0">
                             <li class="breadcrumb-item">
-                                <a th:href="@{/}" class="text-decoration-none text-white">
+                                <a th:href="@{/}" class="text-decoration-none text-dark">
                                     <i class="fas fa-home"></i> Trang chủ
                                 </a>
                             </li>
                             <th:block th:each="parent : ${listCategoryParents}">
                                 <li class="breadcrumb-item">
-                                    <a th:href="@{'/c/' + ${parent.alias}}" class="text-decoration-none text-white">
+                                    <a th:href="@{'/c/' + ${parent.alias}}" class="text-decoration-none text-dark">
                                         <i class="fas fa-angle-right"></i> [[${parent.name}]]
                                     </a>
                                 </li>
                             </th:block>
                             <li class="breadcrumb-item active" aria-current="page" th:if="${product != null}">
-                                <span class="text-white"><i class="fas fa-angle-right"></i>
+                                <span class="text-dark"><i class="fas fa-angle-right"></i>
                                     [[${product.shortName}]]</span>
                             </li>
                         </ol>
@@ -30,7 +30,8 @@
             </div>
         </div>
     </div>
-    
-    
+
+
 </body>
+
 </html>

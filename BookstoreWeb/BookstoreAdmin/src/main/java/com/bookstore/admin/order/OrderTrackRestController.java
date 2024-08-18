@@ -27,9 +27,9 @@ public class OrderTrackRestController {
             orderTrackService.updateOrderTrackStatus(id, OrderStatus.valueOf(newStatus));
             return ResponseEntity.ok().build();
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body("Invalid status");
+            return ResponseEntity.badRequest().body("Trạng thái không hợp lệ");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Đã xảy ra lỗi");
         }
     }
 }

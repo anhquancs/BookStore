@@ -1,126 +1,225 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<body>
+<body class="g-sidenav-show bg-gray-100">
 	<div th:fragment="menu">
 		<form th:action="@{/logout}" method="post" th:hidden="true"
 			name="logoutForm">
 			<input type="submit" />
 		</form>
-		<nav class="navbar navbar-expand-lg bg-white navbar-light flex-column">
-			<a class="navbar-brand" th:href="@{/}">
-				<img th:src="@{/images/YY.png}" width="150" alt="Logo"/>
-			</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavbar"
-					aria-controls="topNavbar" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="topNavbar">
-				<ul class="navbar-nav flex-column">
+
+
+
+		<aside
+			class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
+			id="sidenav-main">
+
+			<div class="sidenav-header">
+				<a class="navbar-brand m-0" th:href="@{/}"> <img
+					th:src="@{/images/YY.png}" width="150" alt="Logo" />
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#topNavbar" aria-controls="topNavbar"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+			</div>
+
+			<hr class="horizontal light mt-0 mb-2">
+
+			<div class="dash-navbar-left nb-visible">
+				<ul class="nb-nav navbar-nav custom-dropdown">
 					<th:block sec:authorize="hasAuthority('Admin')">
-						<li class="nav-item dropdown dropright">
-							<a class="nav-link dropdown-toggle" data-toggle="dropdown" th:href="@{/users}">
-								<i class="fas fa-users"></i> Người dùng
-							</a>
-							<div class="dropdown-menu">
-								<a class="dropdown-item" th:href="@{/users/new}">Tạo mới</a>
-								<a class="dropdown-item" th:href="@{/users}">Xem tất cả</a>
-							</div>
-						</li>
+						<li class="nav-item drop"><a class="collapsed"
+							data-toggle="collapse" data-target="#users" aria-expanded="false"
+							aria-controls="users"> <span
+								class="glyphicon glyphicon-stats nb-link-icon"> <i
+									class="fas fa-users"></i>
+							</span> <span class="nb-link-text">Người dùng</span> <span
+								class="fa fa-angle-up nb-btn-sub-collapse"></span>
+						</a>
+
+							<ul class="nb-sub-one collapse" id="users">
+								<li><a th:href="@{/users/new}"> <span
+										class="fa fa-clock-o nb-link-icon"></span> <span
+										class="nb-link-text">Tạo mới</span>
+								</a></li>
+								<li><a th:href="@{/users}"> <span
+										class="fa fa-clock-o nb-link-icon"></span> <span
+										class="nb-link-text">Xem tất cả</span>
+								</a></li>
+							</ul></li>
 					</th:block>
+
 					<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-						<li class="nav-item dropdown dropright">
-							<a class="nav-link dropdown-toggle" data-toggle="dropdown" th:href="@{/categories}">
-								<i class="fas fa-tags"></i> Thể loại
-							</a>
-							<div class="dropdown-menu">
-								<a class="dropdown-item" th:href="@{/categories/new}">Tạo mới</a>
-								<a class="dropdown-item" th:href="@{/categories}">Xem tất cả</a>
-							</div>
-						</li>
-						<li class="nav-item dropdown dropright">
-							<a class="nav-link dropdown-toggle" data-toggle="dropdown" th:href="@{/brands}">
-								<i class="fas fa-building"></i> Nhà xuất bản
-							</a>
-							<div class="dropdown-menu">
-								<a class="dropdown-item" th:href="@{/brands/new}">Tạo mới</a>
-								<a class="dropdown-item" th:href="@{/brands}">Xem tất cả</a>
-							</div>
-						</li>
+						<li class="nav-item drop"><a class="collapsed"
+							data-toggle="collapse" data-target="#categories"
+							aria-expanded="false" aria-controls="categories"> <span
+								class="glyphicon glyphicon-stats nb-link-icon"> <i
+									class="fas fa-tags"></i>
+							</span> <span class="nb-link-text">Thể loại</span> <span
+								class="fa fa-angle-up nb-btn-sub-collapse"></span>
+						</a>
+
+							<ul class="nb-sub-one collapse" id="categories">
+								<li><a th:href="@{/categories/new}"> <span
+										class="fa fa-clock-o nb-link-icon"></span> <span
+										class="nb-link-text">Tạo mới</span>
+								</a></li>
+								<li><a th:href="@{/categories}"> <span
+										class="fa fa-clock-o nb-link-icon"></span> <span
+										class="nb-link-text">Xem tất cả</span>
+								</a></li>
+							</ul></li>
 					</th:block>
-					<th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson', 'Editor', 'Shipper')">
-						<li class="nav-item dropdown dropright">
-							<a class="nav-link dropdown-toggle" data-toggle="dropdown" th:href="@{/products}">
-								<i class="fas fa-box"></i> Sản phẩm
-							</a>
-							<div class="dropdown-menu">
-								<a class="dropdown-item" th:href="@{/products/new}" sec:authorize="hasAnyAuthority('Admin', 'Editor')">Tạo mới</a>
-								<a class="dropdown-item" th:href="@{/products}">Xem tất cả</a>
-								<a class="dropdown-item" sec:authorize="hasAnyAuthority('Admin')"  th:href="@{/reviews}" >Đánh giá</a>
-							</div>
-						</li>
+
+					<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+						<li class="nav-item drop"><a class="collapsed"
+							data-toggle="collapse" data-target="#brands"
+							aria-expanded="false" aria-controls="brands"> <span
+								class="glyphicon glyphicon-stats nb-link-icon"> <i
+									class="fas fa-building"></i>
+							</span> <span class="nb-link-text">Nhà xuất bản</span> <span
+								class="fa fa-angle-up nb-btn-sub-collapse"></span>
+						</a>
+
+							<ul class="nb-sub-one collapse" id="brands">
+								<li><a th:href="@{/brands/new}"> <span
+										class="fa fa-clock-o nb-link-icon"></span> <span
+										class="nb-link-text">Tạo mới</span>
+								</a></li>
+								<li><a th:href="@{/brands}"> <span
+										class="fa fa-clock-o nb-link-icon"></span> <span
+										class="nb-link-text">Xem tất cả</span>
+								</a></li>
+							</ul></li>
+					</th:block>
+
+					<th:block
+						sec:authorize="hasAnyAuthority('Admin', 'Salesperson', 'Editor', 'Shipper')">
+						<li class="nav-item drop"><a class="collapsed"
+							data-toggle="collapse" data-target="#products"
+							aria-expanded="false" aria-controls="products"> <span
+								class="glyphicon glyphicon-stats nb-link-icon"> <i
+									class="fas fa-box"></i>
+							</span> <span class="nb-link-text">Sản phẩm</span> <span
+								class="fa fa-angle-up nb-btn-sub-collapse"></span>
+						</a>
+
+							<ul class="nb-sub-one collapse" id="products">
+								<li><a th:href="@{/products/new}"
+									sec:authorize="hasAnyAuthority('Admin', 'Editor')"> <span
+										class="fa fa-clock-o nb-link-icon"></span> <span
+										class="nb-link-text">Tạo mới</span>
+								</a></li>
+								<li><a th:href="@{/products}"> <span
+										class="fa fa-clock-o nb-link-icon"></span> <span
+										class="nb-link-text">Xem tất cả</span>
+								</a></li>
+								<li><a sec:authorize="hasAnyAuthority('Admin')"
+									th:href="@{/reviews}"> <span
+										class="fa fa-clock-o nb-link-icon"></span> <span
+										class="nb-link-text">Đánh giá</span>
+								</a></li>
+							</ul></li>
 					</th:block>
 
 					<th:block sec:authorize="hasAuthority('Assistant')">
-						<li class="nav-item">
-							<a class="nav-link" th:href="@{/reviews}">
-								<i class="fa-solid fa-ranking-star"></i> Đánh giá
-							</a>
-						</li>
+						<li class="nav-item drop"><a class="nav-link text-white"
+							th:href="@{/reviews}">
+								<div
+									class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+									<i class="fa-solid fa-ranking-star"></i>
+								</div> <span class="nav-link-text ms-1"> Đánh giá</span>
+						</a></li>
 					</th:block>
 
 					<th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
-						<li class="nav-item">
-							<a class="nav-link" th:href="@{/customers}">
-								<i class="fas fa-users"></i> Khách hàng
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" th:href="@{/shipping_rates}">
-								<i class="fas fa-truck"></i> Giao hàng
-							</a>
-						</li>
+						<li><a th:href="@{/customers}"> <span
+								class="glyphicon glyphicon-folder-open nb-link-icon"> <i
+									class="fas fa-users"></i>
+							</span> <span class="nb-link-text">Khách hàng</span>
+						</a></li>
+
+						<li><a th:href="@{/shipping_rates}"> <span
+								class="glyphicon glyphicon-folder-open nb-link-icon"> <i
+									class="fas fa-truck"></i>
+							</span> <span class="nb-link-text">Giao hàng</span>
+						</a></li>
 					</th:block>
 
-					<th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson', 'Shipper')">
-							<li class="nav-item">
-								<a class="nav-link" th:href="@{/orders}">Đơn hàng</a>
-							</li>
-							</th:block>
-					<th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
-						<li class="nav-item">
-							<a class="nav-link" th:href="@{/reports}">
-								<i class="fas fa-chart-line"></i> Báo cáo kinh doanh
-							</a>
-						</li>
+					<th:block
+						sec:authorize="hasAnyAuthority('Admin', 'Salesperson', 'Shipper')">
+						<li><a th:href="@{/orders}"> <span
+								class="glyphicon glyphicon-folder-open nb-link-icon"> <i
+									class="fas fa-file-invoice-dollar"></i>
+							</span> <span class="nb-link-text">Đơn hàng</span>
+						</a></li>
 					</th:block>
-					<li class="nav-item dropdown dropright" sec:authorize="hasAuthority('Admin')">
-						<a class="nav-link" data-toggle="dropdown" th:href="@{/settings}">
-							<i class="fas fa-cogs"></i> Cài đặt
+
+					<th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
+						<li><a th:href="@{/reports}"> <span
+								class="glyphicon glyphicon-folder-open nb-link-icon"> <i
+									class="fas fa-chart-line"></i>
+							</span> <span class="nb-link-text">Báo cáo kinh doanh</span>
+						</a></li>
+					</th:block>
+
+					<th:block sec:authorize="hasAuthority('Admin')">
+						<li class="nav-item drop"><a class="collapsed"
+							data-toggle="collapse" data-target="#setting"
+							aria-expanded="false" aria-controls="setting"> <span
+								class="glyphicon glyphicon-stats nb-link-icon"> <i
+									class="fas fa-cogs"></i>
+							</span> <span class="nb-link-text">Cài đặt</span> <span
+								class="fa fa-angle-up nb-btn-sub-collapse"></span>
 						</a>
-						<!-- <div class="dropdown-menu">
-							<a class="dropdown-item" th:href="@{/settings#general}">Chung</a>
-							<a class="dropdown-item" th:href="@{/settings#cities}">Thành phố</a>
-							<a class="dropdown-item" th:href="@{/settings#districts}">Quận</a>
-							<a class="dropdown-item" th:href="@{/settings#mailServer}">Mail Server</a>
-							<a class="dropdown-item" th:href="@{/settings#mailTemplates}">Mail Templates</a>
-							<a class="dropdown-item" th:href="@{/settings#payment}">Payment</a>
-						</div> -->
-					</li>
-					<li class="nav-item dropdown dropright">
-						<a class="nav-link dropdown-toggle" data-toggle="dropdown" th:href="@{/account}">
-							<i class="fas fa-user-cog"></i> Tài khoản
-						</a>
-						<div class="dropdown-menu dropdown-menu-right">
-							<a class="dropdown-item" id="logoutLink" href="#">Đăng xuất</a>
-						</div>
-					</li>
+
+							<ul class="nb-sub-one collapse" id="setting">
+								<li><a th:href="@{/settings}"> <span
+										class="fa fa-clock-o nb-link-icon"></span> <span
+										class="nb-link-text">Cài đặt chung</span>
+								</a></li>
+								<li><a th:href="@{/settings#general}"
+									sec:authorize="hasAnyAuthority('Admin', 'Editor')"> <span
+										class="fa fa-clock-o nb-link-icon"></span> <span
+										class="nb-link-text">Tạo mới</span>
+								</a></li>
+								<li><a th:href="@{/settings#cities}"> <span
+										class="fa fa-clock-o nb-link-icon"></span> <span
+										class="nb-link-text">Thành phố</span>
+								</a></li>
+								<li><a th:href="@{/settings#districts}"> <span
+										class="fa fa-clock-o nb-link-icon"></span> <span
+										class="nb-link-text">Quận</span>
+								</a></li>
+								<li><a th:href="@{/settings#mailServer}"> <span
+										class="fa fa-clock-o nb-link-icon"></span> <span
+										class="nb-link-text">Mail Server</span>
+								</a></li>
+								<li><a th:href="@{/settings#mailTemplates}"> <span
+										class="fa fa-clock-o nb-link-icon"></span> <span
+										class="nb-link-text">Mail Templates</span>
+								</a></li>
+								<li><a th:href="@{/settings#payment}"> <span
+										class="fa fa-clock-o nb-link-icon"></span> <span
+										class="nb-link-text">Payment</span>
+								</a></li>
+							</ul></li>
+
+					</th:block>
+
+					<th:block>
+						<li><a th:href="@{/account}"> <span
+								class="glyphicon glyphicon-folder-open nb-link-icon"> <i
+									class="fas fa-user-cog"></i>
+							</span> <span class="nb-link-text">Tài khoản</span>
+						</a></li>
+					</th:block>
 				</ul>
 			</div>
-		</nav>
-		
-		
+		</aside>
 	</div>
-	
-	
+
+
 </body>
 </html>

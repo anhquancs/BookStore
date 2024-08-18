@@ -23,7 +23,7 @@ public class OrderTrackService {
 
     public void updateOrderTrackStatus(int orderTrackId, OrderStatus newStatus) {
         OrderTrack orderTrack = orderTrackRepository.findById(orderTrackId)
-                .orElseThrow(() -> new ResourceNotFoundException("OrderTrack not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Không tìm thấy OrderTrack"));
 
         OrderStatus oldStatus = orderTrack.getStatus();
         orderTrack.setStatus(newStatus);

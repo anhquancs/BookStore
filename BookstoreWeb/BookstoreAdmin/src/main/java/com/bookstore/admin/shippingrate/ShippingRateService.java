@@ -62,7 +62,7 @@ public class ShippingRateService {
 	public void updateCODSupport(Integer id, boolean codSupported) throws ShippingRateNotFoundException {
 		Long count = shipRepo.countById(id);
 		if (count == null || count == 0) {
-			throw new ShippingRateNotFoundException("Could not find shipping rate with ID " + id);
+			throw new ShippingRateNotFoundException("Không tìm thấy giá cước vận chuyển với ID " + id);
 		}
 
 		shipRepo.updateCODSupport(id, codSupported);
@@ -71,7 +71,7 @@ public class ShippingRateService {
 	public void delete(Integer id) throws ShippingRateNotFoundException {
 		Long count = shipRepo.countById(id);
 		if (count == null || count == 0) {
-			throw new ShippingRateNotFoundException("Could not find shipping rate with ID " + id);
+			throw new ShippingRateNotFoundException("Không tìm thấy giá cước vận chuyển với ID " + id);
 
 		}
 		shipRepo.deleteById(id);

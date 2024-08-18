@@ -57,9 +57,9 @@ function deleteCity() {
     }).done(function () {
         $("#dropDownCities option[value='" + optionValue + "']").remove();
         changeFormDistrictToNewCity();
-        showToastMessage("The city has been deleted");
+        showToastMessage("Thành phố đã xóa thành công!");
     }).fail(function () {
-        showToastMessage("ERROR: Could not connect to server encountered an error");
+        showToastMessage("LỖI: Không thể kết nối tới máy chủ gặp lỗi");
     });
 }
 
@@ -86,11 +86,11 @@ function updateCity() {
         $("#dropDownCities option:selected").val(cityId + "-" + cityCode);
         $("#dropDownCities option:selected").text(cityName);
 
-        showToastMessage("The city has been updated");
+        showToastMessage("Thành phố đã được cập nhật");
 
         changeFormDistrictToNewCity();
     }).fail(function () {
-        showToastMessage("ERROR: Could not connect to server encountered an error");
+        showToastMessage("LỖI: Không thể kết nối tới máy chủ gặp lỗi");
     });
 }
 
@@ -123,9 +123,9 @@ function addCity() {
         contentType: 'application/json'
     }).done(function (cityId) {
         selectNewlyAddedCity(cityId, cityCode, cityName);
-        showToastMessage("The new city has been added");
+        showToastMessage("Thành phố mới đã được thêm vào");
     }).fail(function () {
-        showToastMessage("ERROR: Could not connect to server encountered an error");
+        showToastMessage("LỖI: Không thể kết nối tới máy chủ gặp lỗi");
     });
 }
 
@@ -175,9 +175,9 @@ function loadCities() {
         });
     }).done(function () {
         buttonLoad.val("Refresh City List");
-        showToastMessage("All cities have been loaded");
+        showToastMessage("Tất cả các thành phố đã được tải");
     }).fail(function () {
-        showToastMessage("ERROR: Could not connect to server encountered an error");
+        showToastMessage("LỖI: Không thể kết nối tới máy chủ gặp lỗi");
     });
 }
 

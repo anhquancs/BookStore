@@ -95,7 +95,7 @@ public class CategoryController {
 			service.save(category);
 		}
 		
-		ra.addFlashAttribute("message", "Thể loại đã được lưu thành công..");
+		ra.addFlashAttribute("message", "Thể Loại đã được lưu thành công!");
 		return "redirect:/categories";
 	}
 
@@ -107,7 +107,7 @@ public class CategoryController {
 
 			model.addAttribute("category", category);
 			model.addAttribute("listCategories", listCategories); 
-			model.addAttribute("pageTitle", "Edit Category (ID: " + id + ")");
+			model.addAttribute("pageTitle", "Chỉnh Sửa Thể Loại (ID: " + id + ")");
 
 			return "categories/category_form"; 
 		} catch (CategoryNotFoundException ex) {

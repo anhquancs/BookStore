@@ -39,17 +39,17 @@ function addNewTrackRecord() {
 
 // Define a mapping of statuses to their descriptions
 const statusDescriptions = {
-    "NEW": "Order was placed by the customer",
-    "CANCELLED": "Order was rejected",
+    "NEW": "Khách hàng đã đặt hàng",
+    "CANCELLED": "Đơn hàng đã bị từ chối",
     "PROCESSING": "Order is being processed",
-    "PACKAGED": "Products were packaged",
-    "PICKED": "Shipper picked the package",
-    "SHIPPING": "Shipper is delivering the package",
-    "DELIVERED": "Customer received products",
-    "RETURNED": "Products were returned",
-    "RETURN_REQUESTED": "Customer sent request to return purchase",
-    "PAID": "Customer has paid this order",
-    "REFUNDED": "Customer has been refunded"
+    "PACKAGED": "Đơn hàng đang được xử lý",
+    "PICKED": "Shiper đã nhận được đơn hàng",
+    "SHIPPING": "Shiper đang giao đơn hàng",
+    "DELIVERED": "Khách hàng đã nhận được sản phẩm",
+    "RETURNED": "Sản phẩm đã được trả lại",
+    "RETURN_REQUESTED": "Khách hàng đã gửi yêu cầu trả lại hàng đã mua",
+    "PAID": "Khách hàng đã thanh toán đơn hàng này",
+    "REFUNDED": "Khách hàng đã được hoàn tiền"
 };
 
 function generateTrackCode() {

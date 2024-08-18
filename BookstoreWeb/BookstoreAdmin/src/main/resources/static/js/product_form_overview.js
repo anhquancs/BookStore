@@ -49,12 +49,12 @@ function checkUnique(form) {
         if (response == "OK") {
             form.submit();
         } else if (response == "Duplicate") { 
-            showWarningModal("There is another product having the name " + productName);
+            showWarningModal("Có một sản phẩm khác có tên là " + productName);
         } else {
-            showErrorModal("Unknown response from server");
+            showErrorModal("Phản hồi không xác định từ máy chủ");
         }
     }).fail(function() {
-        showErrorModal("Could not connect to the server");
+        showErrorModal("Không thể kết nối tới máy chủ");
     });
 
     return false;

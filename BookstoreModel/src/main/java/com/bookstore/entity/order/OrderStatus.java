@@ -5,7 +5,7 @@ public enum OrderStatus {
 	NEW {
 		@Override
 		public String defaultDescription() {
-			return "Order was placed by the customer";
+			return "Đơn hàng đã được khách hàng đặt";
 		}
 		
 	}, 
@@ -13,70 +13,70 @@ public enum OrderStatus {
 	CANCELLED {
 		@Override
 		public String defaultDescription() {
-			return "Order was rejected";
+			return "Đơn hàng đã bị từ chối";
 		}
 	}, 
 	
 	PROCESSING {
 		@Override
 		public String defaultDescription() {
-			return "Order is being processed";
+			return "Đơn hàng đang được xử lý";
 		}
 	},
 	
 	PACKAGED {
 		@Override
 		public String defaultDescription() {
-			return "Products were packaged";
+			return "Sản phẩm đã được đóng gói";
 		}		
 	}, 
 	
 	PICKED {
 		@Override
 		public String defaultDescription() {
-			return "Shipper picked the package";
+			return "Shipper đã nhận gói hàng";
 		}		
 	}, 
 	
 	SHIPPING {
 		@Override
 		public String defaultDescription() {
-			return "Shipper is delivering the package";
+			return "Shipper đang giao hàng";
 		}		
 	},
 	
 	DELIVERED {
 		@Override
 		public String defaultDescription() {
-			return "Customer received products";
+			return "Khách hàng đã nhận được sản phẩm";
 		}		
 	}, 
 	
 	RETURNED {
 		@Override
 		public String defaultDescription() {
-			return "Products were returned";
+			return "Sản phẩm đã được hoàn trả";
 		}		
 	}, 
 	
 	RETURN_REQUESTED {
 		@Override
 		public String defaultDescription() {
-			return "Customer sent request to return purchase";
+			return "Khách hàng đã gửi yêu cầu trả lại hàng đã mua";
 		}		
 	},
 	
 	PAID {
 		@Override
 		public String defaultDescription() {
-			return "Customer has paid this order";
+			return "Khách hàng đã thanh toán đơn hàng này";
 		}		
 	}, 
 	
 	REFUNDED {
 		@Override
 		public String defaultDescription() {
-			return "Customer has been refunded";
+			return "Khách hàng đã được hoàn tiền";
 		}		
 	};
 	

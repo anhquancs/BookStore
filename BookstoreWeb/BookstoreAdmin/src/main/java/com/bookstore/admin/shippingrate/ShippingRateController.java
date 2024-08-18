@@ -47,7 +47,7 @@ public class ShippingRateController {
     public String saveRate(ShippingRate rate, RedirectAttributes ra) {
         try {
             service.save(rate);
-            ra.addFlashAttribute("message", "The shipping rate has been saved successfully.");
+            ra.addFlashAttribute("message", "Phí vận chuyển đã được lưu thành công.");
         } catch (ShippingRateAlreadyExistsException ex) {
             ra.addFlashAttribute("message", ex.getMessage());
         }
@@ -62,7 +62,7 @@ public class ShippingRateController {
             List<City> listCities = service.listAllCities();
             model.addAttribute("listCities", listCities);
             model.addAttribute("rate", rate);
-            model.addAttribute("pageTitle", "Edit Rate (ID: " + id + ")");
+            model.addAttribute("pageTitle", "Chỉnh sửa Rate (ID: " + id + ")");
             return "shipping_rates/shipping_rate_form";
         } catch (ShippingRateNotFoundException ex) {
             ra.addFlashAttribute("message", ex.getMessage());
@@ -76,7 +76,7 @@ public class ShippingRateController {
                                    RedirectAttributes ra) {
         try {
             service.updateCODSupport(id, supported);
-            ra.addFlashAttribute("message", "COD support for shipping rate ID " + id + " has been updated.");
+            ra.addFlashAttribute("message", "Hỗ trợ COD cho phí vận chuyển ID " + id + " đã được cập nhật!");
         } catch (ShippingRateNotFoundException ex) {
             ra.addFlashAttribute("message", ex.getMessage());
         }
@@ -88,7 +88,7 @@ public class ShippingRateController {
                              RedirectAttributes ra) {
         try {
             service.delete(id);
-            ra.addFlashAttribute("message", "The shipping rate ID " + id + " has been deleted.");
+            ra.addFlashAttribute("message", "Phí vận chuyển ID " + id + " đã xóa thành công!");
         } catch (ShippingRateNotFoundException ex) {
             ra.addFlashAttribute("message", ex.getMessage());
         }

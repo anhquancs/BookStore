@@ -34,7 +34,7 @@ function validateDateRange(reportType, callbackFunction) {
 	if (days >= 7 && days <= 30) {
 		callbackFunction("custom");
 	} else {
-		startDateField.setCustomValidity("Dates must be in the range of 7..30 days");
+		startDateField.setCustomValidity("Ngày phải nằm trong khoảng từ 7..30 ngày");
 		startDateField.reportValidity();
 	}
 }
@@ -68,11 +68,11 @@ function formatCurrency(amount) {
 }
 
 function getChartTitle(period) {
-	if (period == "last_7_days") return "Sales in Last 7 Days";
-	if (period == "last_28_days") return "Sales in Last 28 Days";
-	if (period == "last_6_months") return "Sales in Last 6 Months";
-	if (period == "last_year") return "Sales in Last Year";
-	if (period == "custom") return "Custom Date Range";
+	if (period == "last_7_days") return "Doanh số trong 7 ngày";
+	if (period == "last_28_days") return "Doanh số trong 28 ngày";
+	if (period == "last_6_months") return "Doanh số trong 6 tháng";
+	if (period == "last_year") return "Doanh số trong 1 năm";
+	if (period == "custom") return "Ngày tùy chỉnh";
 	
 	return "";
 }

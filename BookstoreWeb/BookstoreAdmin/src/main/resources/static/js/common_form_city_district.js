@@ -26,6 +26,6 @@ function loadDistrictsForCity() {
 			$("<option>").val(district.name).text(district.name).appendTo(dropdownDistricts);
 		});
 	}).fail(function() {
-		showErrorModal("Error loading districts for the selected city.");
+		showErrorModal("Có lỗi khi tải các quận của thành phố đã chọn.");
 	})	
 }

@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="fragments :: page_head('Brands - Book.store Admin', 'none')">
 </head>
+
 <body>
-	
+
 	<div class="row">
 		<div class="col-md-2">
 			<div class="container-fluid">
@@ -11,84 +13,129 @@
 			</div>
 		</div>
 		<div class="col-md-10 p-3">
-			<div class="container-fluid">
-				<div class="d-flex justify-content-between align-items-center mb-4">
-					<h2>Quản Lí Nhà Xuất Bản</h2>
-					<div>
-						<a th:href="@{/brands/new}" class="btn btn-primary btn-sm">
-							<i class="fas fa-plus"></i> Thêm Mới
-						</a>
-						<a th:href="@{/brands/export/csv}" class="btn btn-info btn-sm ml-2">
-							<i class="fas fa-file-csv"></i> Xuất CSV
-						</a>
+
+			<div class="row">
+				<!-- Navbar header -->
+				<div class="col-12">
+					<div class="container-fluid">
+						<div th:replace="nav_header :: nav_header('Quản Lí Nhà Xuất Bản', '')"></div>
+					</div>
+
+				</div>
+
+				<div class="col-12">
+					<div class="container-fluid">
+						<div style="min-height: calc(100vh - 200px);">
+							<!-- Table -->
+							<div class="card my-4">
+								<div class="d-flex justify-content-between align-items-baseline">
+									<!-- Action list -->
+									<div class="d-flex justify-content-between align-items-center mt-3 mx-3">
+										<div>
+											<a th:href="@{/brands/new}" class="btn btn-dark btn-xl">
+												<i class="fas fa-plus"></i> Thêm Mới
+											</a>
+											<a th:href="@{/brands/export/csv}" class="btn btn-dark btn-xl ml-2">
+												<i class="fas fa-file-csv"></i> Xuất CSV
+											</a>
+										</div>
+									</div>
+
+									<!-- Search -->
+									<div class="search-action mx-3">
+										<div th:replace="fragments :: seach_form_and_message('/brands/page/1')"></div>
+									</div>
+								</div>
+
+								<!-- Core table -->
+								<div class="card-body px-0 pb-2">
+									<div class="table-responsive p-0">
+										<table class="table align-items-center mb-0">
+											<thead>
+												<tr>
+													<th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center"
+														th:replace="fragments :: column_link('/brands', 'id', 'ID', 'none')">
+													</th>
+													<th
+														class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center">
+														Hình
+													</th>
+													<th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center"
+														th:replace="fragments :: column_link('/brands', 'name', 'Tên NXB', 'none')">
+													</th>
+													<th
+														class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+														Thể Loại
+													</th>
+													<th
+														class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-center">
+														Hành động
+													</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="brand : ${listBrands}">
+													<td class="text-center">[[${brand.id}]]</td>
+													<td class="text-center">
+														<img th:src="@{${brand.logoPath}}" style="width: 80px;"
+															class="img-fluid">
+													</td>
+													<td class="text-center">[[${brand.name}]]</td>
+													<td>
+														<th:block th:each="cat : ${brand.categories}">
+															<span class="badge badge-secondary"
+																th:text="${cat.name}"></span>
+														</th:block>
+													</td>
+													<td class="text-center">
+														<div
+															th:replace="fragments :: edit('brand', '/brands/edit/' + ${brand.id})" />
+
+														<div
+															th:replace="fragments :: delete('brand', ${brand.id}, '/brands/delete/' + ${brand.id}, true)" />
+
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+
+								<div th:replace="fragments :: pagination('/brands', 'brands')"></div>
+
+								<div th:replace="modal_fragments :: confirm_modal"></div>
+
+							</div>
+						</div>
+
+						<div th:replace="fragments :: footer"></div>
 					</div>
 				</div>
-	
-				<div th:replace="fragments :: seach_form_and_message('/brands/page/1')"></div>
-	
-				<div class="table-responsive">
-					<table class="table table-hover table-sm">
-						<thead class="thead-dark">
-							<tr>
-								<th th:replace="fragments :: column_link('/brands', 'id', 'ID', 'none')"></th>
-								<th>Hình</th>
-								<th th:replace="fragments :: column_link('/brands', 'name', 'Tên NXB', 'none')"></th>
-								<th>Thể Loại</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="brand : ${listBrands}">
-								<td>[[${brand.id}]]</td>
-								<td>
-									<img th:src="@{${brand.logoPath}}" style="width: 80px;" class="img-fluid">
-								</td>
-								<td>[[${brand.name}]]</td>
-								<td>
-									<th:block th:each="cat : ${brand.categories}">
-										<span class="badge badge-secondary" th:text="${cat.name}"></span>
-									</th:block>
-								</td>
-								<td>
-									<div th:replace="fragments :: edit('brand', '/brands/edit/' + ${brand.id})" />
-
-									<div th:replace="fragments :: delete('brand', ${brand.id}, '/brands/delete/' + ${brand.id}, true)" />						
-
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-	
-				<div th:replace="fragments :: pagination('/brands', 'brands')"></div>
-	
-				<div th:replace="modal_fragments :: confirm_modal"></div>
-	
-				<div th:replace="fragments :: footer"></div>
 			</div>
+
 		</div>
 	</div>
-		
-	
 
 
-	
 
-	
 
-	
+
+
+
+
+
 	<script th:src="@{/js/common_list.js}"></script>
 	<script type="text/javascript">
 		moduleURL = "[[@{/brands}]]";
 
-		$(document).ready(function(){
-			$(".link-delete").on("click", function(e){	
+		$(document).ready(function () {
+			$(".link-delete").on("click", function (e) {
 				e.preventDefault();
 				showDeleteConfirmModal($(this), 'brand');
 			});
 		});
 	</script>
-	
+
 </body>
 
 </html>

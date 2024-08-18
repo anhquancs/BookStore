@@ -86,7 +86,7 @@ public class OrderController {
 		try {
 			orderService.delete(id);
 			;
-			ra.addFlashAttribute("message", "The order ID " + id + " has been deleted.");
+			ra.addFlashAttribute("message", "Mã đơn hàng " + id + " xóa thành công!.");
 		} catch (OrderNotFoundException ex) {
 			ra.addFlashAttribute("message", ex.getMessage());
 		}
@@ -103,7 +103,7 @@ public class OrderController {
 
 			List<City> listCities = orderService.listAllCities();
 
-			model.addAttribute("pageTitle", "Edit Order (ID: " + id + ")");
+			model.addAttribute("pageTitle", "Chỉnh sửa đơn hàng (ID: " + id + ")");
 			model.addAttribute("order", order);
 			model.addAttribute("listCities", listCities);
 
@@ -137,14 +137,14 @@ public class OrderController {
 	}
 
 	public void restoreProductQuantities(Order order) {
-		System.out.println("Restoring quantities for order ID: " + order.getId());
+		System.out.println("Khôi phục số lượng cho ID đơn hàng: " + order.getId());
 		for (OrderDetail detail : order.getOrderDetails()) {
 			if (order.getOrderTracks().stream().anyMatch(track -> track.getStatus() == OrderStatus.RETURNED)) {
 				Product product = detail.getProduct();
 				int quantityToRestore = detail.getQuantity();
 	
 				// Log product and quantity
-				System.out.println("Restoring quantity for product ID: " + product.getId() + " by " + quantityToRestore);
+				System.out.println("Khôi phục số lượng cho ID sản phẩm: " + product.getId() + " by " + quantityToRestore);
 	
 				// Ensure that the product is retrieved from the database to reflect the latest state
 				product = productService.findById(product.getId());
@@ -152,7 +152,7 @@ public class OrderController {
 				productService.save(product); // Save the updated product quantity
 	
 				// Log successful update
-				System.out.println("Product ID: " + product.getId() + " updated quantity to " + product.getQuantity());
+				System.out.println("Sản Phẩm ID: " + product.getId() + " số lượng cập nhật đến " + product.getQuantity());
 			}
 		}
 	}

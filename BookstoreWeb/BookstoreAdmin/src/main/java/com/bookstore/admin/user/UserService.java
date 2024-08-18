@@ -121,7 +121,7 @@ public class UserService {
 		try {
 			return userRepo.findById(id).get();
 		} catch (Exception e) {
-			throw new UserNotFoundException("Could not find any user with ID: " + id);
+			throw new UserNotFoundException("Không tìm thấy người dùng nào có ID: " + id);
 
 		}
 	}
@@ -129,7 +129,7 @@ public class UserService {
 	public void delete(Integer id) throws UserNotFoundException {
 		Long countById = userRepo.countById(id);
 		if (countById == null || countById == 0) {
-			throw new UserNotFoundException("Could not find any user with ID: " + id);
+			throw new UserNotFoundException("Không tìm thấy người dùng nào có ID: " + id);
 		}
 		userRepo.deleteById(id);
 	}

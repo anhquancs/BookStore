@@ -93,7 +93,7 @@ public class BrandController {
         } else {
             brandService.save(brand);
         }
-        ra.addFlashAttribute("message", "The brand has been saved successfully.");
+        ra.addFlashAttribute("message", "Nhà Xuất Bản đã được lưu thành công.");
         return "redirect:/brands";
     }
 
@@ -105,7 +105,7 @@ public class BrandController {
 
             model.addAttribute("brand", brand);
             model.addAttribute("listCategories", listCategories);
-            model.addAttribute("pageTitle", "Edit Brand (ID: " + id + ")");
+            model.addAttribute("pageTitle", "Chỉnh Sửa NXB(ID: " + id + ")");
 
             return "brands/brand_form";
         } catch (BrandNotFoundException ex) {
@@ -123,7 +123,7 @@ public class BrandController {
             FileUploadUtil.removeDir(brandDir);
             
             redirectAttributes.addFlashAttribute("message",
-                    "The brand ID " + id + " has been deleted successfully");
+                    "NXB ID " + id + " đã được xóa thành công!");
         } catch (BrandNotFoundException ex) {
             redirectAttributes.addFlashAttribute("message", ex.getMessage());
         }

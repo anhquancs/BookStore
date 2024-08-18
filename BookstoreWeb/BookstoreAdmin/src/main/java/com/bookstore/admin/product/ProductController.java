@@ -111,7 +111,7 @@ public class ProductController {
 
         if (loggedUser.hasRole("Salesperson")) {
             productService.saveProductPrice(product);
-            ra.addFlashAttribute("message", "The product has been saved successfully.");
+            ra.addFlashAttribute("message", "Sản phẩm đã được lưu thành công!");
             return "redirect:/products";
         }
         
@@ -126,7 +126,7 @@ public class ProductController {
 
         ProductSaveHelper.deleteExtraImagesWeredRemovedOnForm(product);
 
-        ra.addFlashAttribute("message", "The product has been saved successfully.");
+        ra.addFlashAttribute("message", "Sản phẩm đã được lưu thành công.");
 
         return "redirect:/products";
     }
@@ -156,7 +156,7 @@ public class ProductController {
             FileUploadUtil.removeDir(productImagesDir);
 
 			redirectAttributes.addFlashAttribute("message", 
-				"The product ID " + id + " has been deleted successfully");
+				"ID Sản Phẩm " + id + " đã được xóa thành công!");
 		} catch (ProductNotFoundException ex) { 
 			redirectAttributes.addFlashAttribute("message", ex.getMessage());
 		}

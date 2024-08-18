@@ -8,6 +8,167 @@
 	<script th:src="@{/star-rating/js/star-rating.js}" type="text/javascript"></script>
 	<link th:href="@{/star-rating/themes/krajee-svg/theme.css}" media="all" rel="stylesheet" type="text/css" />
 	<script th:src="@{/star-rating/themes/krajee-svg/theme.js}"></script>
+
+	<style>
+		/* footer section start */
+		#footer {
+			background: #f7f7f7;
+			padding: 3rem;
+			/* padding-top: 5rem; */
+			padding-top: 7rem;
+			padding-bottom: 80px;
+		}
+
+		#footer2 {
+			background: #f7f7f7;
+			padding: 3rem;
+			margin-top: 0px;
+			padding-top: 7rem;
+			padding-bottom: 80px;
+		}
+
+		.social-links h2 {
+			padding-bottom: 15px;
+			font-size: 20px;
+			font-weight: 600;
+		}
+
+		.social-links img {
+			padding-bottom: 25px;
+		}
+
+		.social-icons {
+
+			display: flex;
+			flex-direction: column;
+			gap: 1rem;
+			color: #777777;
+		}
+
+		.social-icons a {
+			color: #777777;
+		}
+
+		.social-icons a:hover {
+			color: #000;
+		}
+
+		.social-icons a i {
+			box-shadow: rgb(0 0 0 / 8%) 0px 4px 12px;
+			padding: 0.4rem 1rem 0.4rem 1rem;
+			border-radius: 3px;
+			color: #82074a;
+			font-size: 16px;
+			margin-right: 12px;
+		}
+
+		li {
+			list-style: none;
+		}
+
+		.useful-link h2 {
+			padding-bottom: 15px;
+			font-size: 20px;
+			font-weight: 600;
+		}
+
+		.useful-link img {
+			padding-bottom: 15px;
+		}
+
+		.use-links {
+			line-height: 32px;
+		}
+
+		.use-links li i {
+			font-size: 14px;
+			padding-right: 8px;
+			color: #898989;
+		}
+
+		.use-links li a {
+			color: #303030;
+			font-size: 15px;
+			font-weight: 500;
+			color: #777777;
+		}
+
+		.use-links li a:hover {
+			color: #000;
+		}
+
+		.address h2 {
+			padding-bottom: 15px;
+			font-size: 20px;
+			font-weight: 600;
+		}
+
+		.address img {
+			padding-bottom: 15px;
+		}
+
+		.address-links li a {
+			color: #303030;
+			font-size: 15px;
+			font-weight: 500;
+			color: #777777;
+
+		}
+
+		.address-links li i {
+			font-size: 16px;
+			padding-right: 8px;
+			color: #82074a;
+
+		}
+
+		.address-links li i:nth-child(1) {
+			padding-top: 9px;
+		}
+
+		.address-links .address1 {
+			font-weight: 500;
+			font-size: 15px;
+			display: flex;
+		}
+
+		.address-links {
+			line-height: 32px;
+			color: #777777;
+		}
+
+		.copy-right-sec {
+			padding: 1.8rem;
+			/* color: #fff; */
+			text-align: center;
+		}
+
+		.copy-right-sec a {
+			color: #fcd462;
+			font-weight: 500;
+		}
+
+		a {
+			text-decoration: none;
+		}
+
+		.track {
+			/* position: absolute; */
+			white-space: nowrap;
+			will-change: transform;
+			animation: marquee 5s linear infinite;
+		}
+
+		@keyframes marquee {
+			from {
+				transform: translateX(0);
+			}
+
+			to {
+				transform: translateX(-50%);
+			}
+		}
+	</style>
 </head>
 
 <body>
@@ -22,9 +183,9 @@
 
 	<div class="container-fluid">
 		<div class="container my-2">
-			<div class="row">
-				<div class="col-md-6 mb-4">
-					<div class="card shadow-sm">
+			<div class="row justify-content-between">
+				<div class="col-md-5 mb-4" style="width: 48%;">
+					<div class="card shadow-sm h-100">
 						<div class="card-body">
 							<div class="text-center mb-3">
 								<img id="bigImage" th:src="@{${product.mainImagePath}}" class="img-fluid rounded"
@@ -147,14 +308,73 @@
 			</div>
 		</div>
 
-
+		<div class="marquee mt-5">
+			<div class="track">
+				<div class="content">
+					<a class="navbar-brand mx-6" th:href="@{/}">
+						<img th:src="@{${SITE_LOGO}}" width="200" alt="Logo" />
+					</a>
+					<a class="navbar-brand mx-6" th:href="@{/}">
+						<img th:src="@{${SITE_LOGO}}" width="200" alt="Logo" />
+					</a>
+					<a class="navbar-brand mx-6" th:href="@{/}">
+						<img th:src="@{${SITE_LOGO}}" width="200" alt="Logo" />
+					</a>
+					<a class="navbar-brand mx-6" th:href="@{/}">
+						<img th:src="@{${SITE_LOGO}}" width="200" alt="Logo" />
+					</a>
+					<a class="navbar-brand mx-6" th:href="@{/}">
+						<img th:src="@{${SITE_LOGO}}" width="200" alt="Logo" />
+					</a>
+					<a class="navbar-brand mx-6" th:href="@{/}">
+						<img th:src="@{${SITE_LOGO}}" width="200" alt="Logo" />
+					</a>
+					<a class="navbar-brand mx-6" th:href="@{/}">
+						<img th:src="@{${SITE_LOGO}}" width="200" alt="Logo" />
+					</a>
+					<a class="navbar-brand mx-6" th:href="@{/}">
+						<img th:src="@{${SITE_LOGO}}" width="200" alt="Logo" />
+					</a>
+					<a class="navbar-brand mx-6" th:href="@{/}">
+						<img th:src="@{${SITE_LOGO}}" width="200" alt="Logo" />
+					</a>
+					<a class="navbar-brand mx-6" th:href="@{/}">
+						<img th:src="@{${SITE_LOGO}}" width="200" alt="Logo" />
+					</a>
+					<a class="navbar-brand mx-6" th:href="@{/}">
+						<img th:src="@{${SITE_LOGO}}" width="200" alt="Logo" />
+					</a>
+					<a class="navbar-brand mx-6" th:href="@{/}">
+						<img th:src="@{${SITE_LOGO}}" width="200" alt="Logo" />
+					</a>
+					<a class="navbar-brand mx-6" th:href="@{/}">
+						<img th:src="@{${SITE_LOGO}}" width="200" alt="Logo" />
+					</a>
+					<a class="navbar-brand mx-6" th:href="@{/}">
+						<img th:src="@{${SITE_LOGO}}" width="200" alt="Logo" />
+					</a>
+					<a class="navbar-brand mx-6" th:href="@{/}">
+						<img th:src="@{${SITE_LOGO}}" width="200" alt="Logo" />
+					</a>
+					<a class="navbar-brand mx-6" th:href="@{/}">
+						<img th:src="@{${SITE_LOGO}}" width="200" alt="Logo" />
+					</a>
+					<a class="navbar-brand mx-6" th:href="@{/}">
+						<img th:src="@{${SITE_LOGO}}" width="200" alt="Logo" />
+					</a>
+					<a class="navbar-brand mx-6" th:href="@{/}">
+						<img th:src="@{${SITE_LOGO}}" width="200" alt="Logo" />
+					</a>
+				</div>
+			</div>
+		</div>
 
 
 		<div th:replace="product/images_carousel :: content"></div>
 		<div th:replace="fragments :: modal_dialog"></div>
-		<div th:replace="navigation :: footer_menu"></div>
 
 	</div>
+	<div th:replace="navigation :: footer_menu"></div>
 
 	<script type="text/javascript">
 		contextPath = "[[@{/}]]";

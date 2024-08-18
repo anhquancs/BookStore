@@ -27,7 +27,7 @@ function loadSalesReportByDateForCategory(period) {
 
 function prepareChartDataForSalesReportByCategory(responseJSON) {
 	data = new google.visualization.DataTable();
-	data.addColumn('string', 'Category');
+	data.addColumn('string', 'Thể loại');
 	data.addColumn('number', 'Gross Sales');
 	data.addColumn('number', 'Net Sales');
 	

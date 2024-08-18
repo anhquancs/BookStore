@@ -60,9 +60,9 @@ function deleteDistrict() {
     }).done(function() {
         $("#dropDownDistricts option[value='" + districtId + "']").remove();
         changeFormDistrictToNew();
-        showToastMessage("The district has been deleted");
+        showToastMessage("Quận đã xóa thành công!");
     }).fail(function() {
-        showToastMessage("ERROR: Could not connect to server encountered an error");
+        showToastMessage("LỖI: Không thể kết nối tới máy chủ gặp lỗi");
     });
 }
 
@@ -89,10 +89,10 @@ function updateDistrict() {
         contentType: 'application/json'
     }).done(function(districtId) {
         $("#dropDownDistricts option:selected").text(districtName);
-        showToastMessage("The district has been updated");
+        showToastMessage("Quận đã được cập nhật");
         changeFormDistrictToNew();
     }).fail(function() {
-        showToastMessage("ERROR: Could not connect to server encountered an error");
+        showToastMessage("LỖI: Không thể kết nối tới máy chủ gặp lỗi");
     });
 }
 
@@ -118,9 +118,9 @@ function addDistrict() {
         contentType: 'application/json'
     }).done(function(districtId) {
         selectNewlyAddedDistrict(districtId, districtName);
-        showToastMessage("The new district has been added");
+        showToastMessage("Quận mới đã được thêm vào");
     }).fail(function() {
-        showToastMessage("ERROR: Could not connect to server encountered an error");
+        showToastMessage("LỖI: Không thể kết nối tới máy chủ gặp lỗi");
     });
 }
 
@@ -176,9 +176,9 @@ function loadDistrictsCity() {
         });
     }).done(function() {
         changeFormDistrictToNew();
-        showToastMessage("All districts have been loaded for city" + selectedCity.text());
+        showToastMessage("Tất cả các quận đã được tải cho thành phố: " + selectedCity.text());
     }).fail(function() {
-        showToastMessage("ERROR: Could not connect to server or server encountered an error");
+        showToastMessage("LỖI: Không thể kết nối tới máy chủ gặp lỗi");
     });
 }
 
@@ -192,9 +192,9 @@ function loadCitiesDistricts() {
         });
     }).done(function() {
         buttonLoadDistricts.val("Refresh City List");
-        showToastMessage("All cities have been loaded");
+        showToastMessage("Tất cả các thành phố đã được tải");
     }).fail(function() {
-        showToastMessage("ERROR: Could not connect to server encountered an error");
+        showToastMessage("LỖI: Không thể kết nối tới máy chủ gặp lỗi");
     });
 }
 
