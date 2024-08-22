@@ -57,7 +57,7 @@ public class ProductService {
     }
 
     public List<Product> getBestSellerProducts() {
-        Pageable pageable = PageRequest.of(0, 10);
+        Pageable pageable = PageRequest.of(0, 12);
         return repo.findBestSellerProducts(pageable);
     }
 
