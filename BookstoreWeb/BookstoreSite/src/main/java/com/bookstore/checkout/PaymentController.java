@@ -15,10 +15,13 @@ public class PaymentController {
     @Autowired
     private PaymentGateway paymentGateway;
 
+//    @PostMapping("/payments")
+//    public String initiateTransaction(@RequestParam("amount") int orderTotal,
+//                                      @RequestParam("orderInfo") String orderInfo) {
+
     @PostMapping("/payments")
-    public String initiateTransaction(@RequestParam("amount") int orderTotal,
-                                      @RequestParam("orderInfo") String orderInfo) {
-        return "redirect:" + paymentGateway.initateTransaction(orderTotal, orderInfo).getPaymentUrl();
+    public String initiateTransaction() {
+        return "redirect:" + paymentGateway.initateTransaction(500000, "Thanh toan qua VNPAY").getPaymentUrl();
     }
 
     @GetMapping("/vnpay-payment")
