@@ -47,7 +47,15 @@
 									<input type="radio" name="paymentMethod" id="radioCOD"
 										value="COD" /> Thanh toán khi nhận hàng (COD) &nbsp;
 									<button class="btn btn-primary d-none" type="submit"
-										id="buttonSubmit">Đặt hàng với COD</button>
+										id="buttonSubmitCOD">Đặt hàng với COD</button>
+								</p>
+							</form>
+							<form th:action="@{/place_order}" method="post">
+								<p>
+									<input type="radio" name="paymentMethod" id="radioVNPAY"
+										value="VNPAY" /> Thanh toán Online (VNPAY) &nbsp;
+									<button class="btn btn-primary d-none" type="submit"
+										id="buttonSubmitVNPAY">Đặt hàng với VNPAY</button>
 								</p>
 							</form>
 						</div>
@@ -118,17 +126,26 @@
 	</div>
 	<div th:replace="navigation :: footer_menu"></div>
 	<script type="text/javascript">
-		contextPath = "[[@{/}]]";
-		var csrfHeaderName = "[[${_csrf.headerName}]]";
-		var csrfValue = "[[${_csrf.token}]]";
+	contextPath = "[[@{/}]]";
+	var csrfHeaderName = "[[${_csrf.headerName}]]";
+	var csrfValue = "[[${_csrf.token}]]";
 
-		$(document).ready(function () {
-			$("#radioCOD").on("click", function () {
-				$("#buttonSubmit").removeClass("d-none");
-			});
+	$(document).ready(function () {
+		$("#radioCOD").on("click", function () {
+			$("#buttonSubmitCOD").removeClass("d-none").prop("disabled", false);
+			$("#buttonSubmitVNPAY").addClass("d-none").prop("disabled", true);
+			$("#radioVNPAY").prop("checked", false);
+			$("#radioCOD").prop("checked", true);   
 		});
 
-	</script>
+		$("#radioVNPAY").on("click", function () {
+			$("#buttonSubmitVNPAY").removeClass("d-none").prop("disabled", false);
+			$("#buttonSubmitCOD").addClass("d-none").prop("disabled", true);
+			$("#radioCOD").prop("checked", false);  
+			$("#radioVNPAY").prop("checked", true); 
+		});
+	});
+</script>
 </body>
 
 </html>
