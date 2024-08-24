@@ -344,8 +344,9 @@ a {
 
 /* Process bar */
 .progress-container {
-    background-color: #f5c6c6;
+    background-color: rgb(255, 255, 255);
     border-radius: 20px;
+    border:1px solid black;
     margin: 10px;
     overflow: hidden;
     position: relative;
@@ -354,7 +355,7 @@ a {
 
 .progress-bar {
     height: 30px;
-    background-color: #d9534f;
+  background-color: #000000;
     /* Red bar color */
     border-radius: 20px 0 0 20px;
     display: flex;
@@ -365,7 +366,7 @@ a {
 }
 
 .progress-bar.warning {
-    background-color: #e74c3c;
+  background-color: #000000;
     height: 0.95rem;
     /* Slightly brighter red for "Sắp hết" */
 }
