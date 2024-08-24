@@ -32,7 +32,7 @@ public class MainController {
 		model.addAttribute("listCategories", listCategories);
 
 		List<Product> bestSellers = productService.getBestSellerProducts();
-		List<List<Product>> bestSellersPartitions = partitionList(bestSellers, 5);
+		List<List<Product>> bestSellersPartitions = partitionList(bestSellers, 4);
 		model.addAttribute("bestSellersPartitions", bestSellersPartitions);
 
 		return "index";
