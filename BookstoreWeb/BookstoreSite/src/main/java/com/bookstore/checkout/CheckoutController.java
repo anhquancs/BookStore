@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.bookstore.Utility;
 import com.bookstore.address.AddressService;
+import com.bookstore.checkout.usecase.PaymentGateway;
 import com.bookstore.customer.CustomerService;
 import com.bookstore.entity.Address;
 import com.bookstore.entity.CartItem;
@@ -36,6 +37,9 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class CheckoutController {
+
+	@Autowired
+	private PaymentGateway paymentGateway;
 
 	@Autowired
 	private CheckoutService checkoutService;
@@ -76,7 +80,7 @@ public class CheckoutController {
 
 		model.addAttribute("checkoutInfo", checkoutInfo);
 		model.addAttribute("cartItems", cartItems);
-		
+
 		System.out.print("paymentTotal debug" + checkoutInfo.getPaymentTotal());
 
 		return "checkout/checkout";
@@ -106,11 +110,27 @@ public class CheckoutController {
 		List<CartItem> cartItems = cartService.listByCartItems(customer);
 		CheckoutInfo checkoutInfo = checkoutService.prepareCheckout(cartItems, shippingRate);
 
-		Order createdOrder = orderService.createOrder(customer, defaultAddress, cartItems, paymentMethod, checkoutInfo);
-		cartService.deleteByCustomer(customer);
-		sendOrderConfirmationEmail(request, createdOrder);
+		Order createdOrder = null;
+		String paymentUrl = null;
 
-		return "checkout/order_completed";
+		if (paymentMethod == PaymentMethod.VNPAY) {
+			// Tạo đơn hàng trước khi chuyển hướng đến VNPay
+			createdOrder = orderService.createOrder(customer, defaultAddress, cartItems, paymentMethod, checkoutInfo);
+			paymentUrl = paymentGateway
+					.initateTransaction(Math.round(checkoutInfo.getPaymentTotal()), createdOrder.getId().toString())
+					.getPaymentUrl();
+
+			cartService.deleteByCustomer(customer);
+			sendOrderConfirmationEmail(request, createdOrder);
+			// Chuyển hướng đến VNPay để thanh toán
+			return "redirect:" + paymentUrl;
+		} else {
+			// Xử lý thanh toán bằng phương thức khác
+			createdOrder = orderService.createOrder(customer, defaultAddress, cartItems, paymentMethod, checkoutInfo);
+			cartService.deleteByCustomer(customer);
+			sendOrderConfirmationEmail(request, createdOrder);
+			return "checkout/order_completed";
+		}
 	}
 
 	private void sendOrderConfirmationEmail(HttpServletRequest request, Order order)
