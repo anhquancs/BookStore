@@ -76,6 +76,8 @@ public class CheckoutController {
 
 		model.addAttribute("checkoutInfo", checkoutInfo);
 		model.addAttribute("cartItems", cartItems);
+		
+		System.out.print("paymentTotal debug" + checkoutInfo.getPaymentTotal());
 
 		return "checkout/checkout";
 	}
