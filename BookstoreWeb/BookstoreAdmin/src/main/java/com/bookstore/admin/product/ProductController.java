@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -144,24 +145,51 @@ public class ProductController {
         return "redirect:/products";
     }
 
+	/*
+	 * @GetMapping("/products/delete/{id}") public String
+	 * deleteProduct(@PathVariable(name = "id") Integer id, Model model,
+	 * RedirectAttributes redirectAttributes) { try { productService.delete(id);
+	 * String productExtraImagesDir = "../product-images/" + id + "/extras"; String
+	 * productImagesDir = "../product-images/" + id;
+	 * 
+	 * FileUploadUtil.removeDir(productExtraImagesDir);
+	 * FileUploadUtil.removeDir(productImagesDir);
+	 * 
+	 * redirectAttributes.addFlashAttribute("message", "ID Sản Phẩm " + id +
+	 * " đã được xóa thành công!"); } catch (ProductNotFoundException ex) {
+	 * redirectAttributes.addFlashAttribute("message", ex.getMessage()); } return
+	 * "redirect:/products"; }
+	 */
+    
     @GetMapping("/products/delete/{id}")
-	public String deleteProduct(@PathVariable(name = "id") Integer id, Model model,
-			RedirectAttributes redirectAttributes) {
-		try {
-			productService.delete(id);
-            String productExtraImagesDir = "../product-images/" + id + "/extras";
-            String productImagesDir = "../product-images/" + id;
+    public String deleteProduct(@PathVariable(name = "id") Integer id, Model model, RedirectAttributes redirectAttributes) {
+        try {
+            // Thực hiện xóa sản phẩm bằng ID
+            productService.delete(id);
 
-            FileUploadUtil.removeDir(productExtraImagesDir);
-            FileUploadUtil.removeDir(productImagesDir);
+            // Xóa thư mục chứa hình ảnh của sản phẩm nếu cần
+            String productDir = "../product-images/" + id;
+            FileUploadUtil.removeDir(productDir);
 
-			redirectAttributes.addFlashAttribute("message", 
-				"ID Sản Phẩm " + id + " đã được xóa thành công!");
-		} catch (ProductNotFoundException ex) { 
-			redirectAttributes.addFlashAttribute("message", ex.getMessage());
-		}
-		return "redirect:/products";
-	}
+            // Thêm thông báo thành công vào thuộc tính flash
+            redirectAttributes.addFlashAttribute("message", 
+                "ID: " + id + " của sản phẩm đã được xóa thành công!");
+
+        } catch (DataIntegrityViolationException ex) {
+            // Xử lý lỗi khi không thể xóa do dữ liệu liên quan
+            redirectAttributes.addFlashAttribute("message", 
+                "ID: " + id + " không thể xóa do liên quan đến dữ liệu khác!");
+
+        } catch (ProductNotFoundException ex) {
+            // Xử lý lỗi khi sản phẩm không tồn tại
+            redirectAttributes.addFlashAttribute("message", 
+                "ID: " + id + " không tồn tại hoặc đã bị xóa!");
+        }
+
+        // Chuyển hướng về danh sách sản phẩm
+        return "redirect:/products";
+    }
+
 
     @GetMapping("/products/edit/{id}")
     public String editProduct(@PathVariable("id") Integer id, Model model, RedirectAttributes ra) {
