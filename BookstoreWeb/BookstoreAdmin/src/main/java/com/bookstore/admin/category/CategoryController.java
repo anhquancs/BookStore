@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -126,23 +127,37 @@ public class CategoryController {
 
 		return "redirect:/categories";
 	}
-	
-	@GetMapping("/categories/delete/{id}")
-	public String deleteCategory(@PathVariable(name = "id") Integer id, Model model,
-			RedirectAttributes redirectAttributes) {
-		try {
-			service.delete(id);
-			String categoryDir = "../category-images/" + id; 
-			FileUploadUtil.removeDir(categoryDir);
 
-			redirectAttributes.addFlashAttribute("message", 
-				"ID: " + id + " của thể loại đã được xóa thành công!");
-			} catch (CategoryNotFoundException ex) { 
-				redirectAttributes.addFlashAttribute("message", ex.getMessage());
-		}
-		return "redirect:/categories";
+	@GetMapping("/categories/delete/{id}")
+	public String deleteCategory(@PathVariable(name = "id") Integer id, Model model, RedirectAttributes redirectAttributes) {
+	    try {
+	        // Thực hiện xóa thể loại bằng ID
+	        service.delete(id);
+
+	        // Xóa thư mục chứa hình ảnh của thể loại nếu cần
+	        String categoryDir = "../category-images/" + id; 
+	        FileUploadUtil.removeDir(categoryDir);
+
+	        // Thêm thông báo thành công vào thuộc tính flash
+	        redirectAttributes.addFlashAttribute("message", 
+	            "ID: " + id + " của thể loại đã được xóa thành công!");
+
+	    } catch (DataIntegrityViolationException ex) {
+	        // Xử lý lỗi khi không thể xóa do dữ liệu liên quan
+	        redirectAttributes.addFlashAttribute("message", 
+	            "ID: " + id + " không thể xóa do liên quan đến dữ liệu khác!");
+
+	    } catch (CategoryNotFoundException ex) {
+	        // Xử lý lỗi khi thể loại không tồn tại
+	        redirectAttributes.addFlashAttribute("message", 
+	            "ID: " + id + " không tồn tại hoặc đã bị xóa!");
+	    }
+
+	    // Chuyển hướng về danh sách thể loại
+	    return "redirect:/categories";
 	}
 
+	
 	@GetMapping("/categories/export/csv")
 	public void exportToCSV(HttpServletResponse response) throws IOException {
 		List<Category> listCategories = service.listCategoriesUsedInForm(); 

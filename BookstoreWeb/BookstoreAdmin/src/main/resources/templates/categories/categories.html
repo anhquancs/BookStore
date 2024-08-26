@@ -46,6 +46,14 @@
 										</div>
 									</div>
 								</div>
+								<!-- Error message -->
+								<div class="row">
+									<div class="col-5 ml-auto">
+										<div th:if="${errorMessage}" class="alert alert-danger">
+											<span th:text="${errorMessage}"></span>
+										</div>
+									</div>
+								</div>
 
 								<!-- Core table -->
 								<div class="card-body px-0 pb-2">

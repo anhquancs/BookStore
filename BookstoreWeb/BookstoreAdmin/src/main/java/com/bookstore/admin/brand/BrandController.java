@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -125,14 +126,22 @@ public class BrandController {
             redirectAttributes.addFlashAttribute("message",
                     "NXB ID " + id + " đã được xóa thành công!");
         } catch (BrandNotFoundException ex) {
-            redirectAttributes.addFlashAttribute("message", ex.getMessage());
+            redirectAttributes.addFlashAttribute("errorMessage",
+                    "NXB ID " + id + " không tồn tại!");
+        } catch (DataIntegrityViolationException ex) {
+            redirectAttributes.addFlashAttribute("errorMessage",
+                    "ID " + id + " không thể xóa do liên quan đến dữ liệu khác!");
+        } catch (Exception ex) {
+            redirectAttributes.addFlashAttribute("errorMessage",
+                    "Đã xảy ra lỗi trong quá trình xóa NXB ID " + id + "!");
         }
         return "redirect:/brands";
     }
+
     @GetMapping("brands/export/csv")
     public void exportToCSV(HttpServletResponse response) throws IOException {
-        // Assuming you have a service or repository to fetch brands
-        List<Brand> listBrands = brandService.listAll(); // Replace with your actual logic
+       
+        List<Brand> listBrands = brandService.listAll();
 
         BrandCSVExporter csvExporter = new BrandCSVExporter();
         csvExporter.export(listBrands, response);
