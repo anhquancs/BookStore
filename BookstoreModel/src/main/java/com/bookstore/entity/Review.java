@@ -18,7 +18,7 @@ public class Review extends IdBasedEntity {
 	@Column(length = 128, nullable = false)
 	private String headline;
 	
-	@Column(length = 300, nullable = false)
+	@Column(length = 500, nullable = false)
 	private String comment;
 	
 	private int rating;	
