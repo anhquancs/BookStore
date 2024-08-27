@@ -41,7 +41,7 @@ function addNewTrackRecord() {
 const statusDescriptions = {
     "NEW": "Khách hàng đã đặt hàng",
     "CANCELLED": "Đơn hàng đã bị từ chối",
-    "PROCESSING": "Order is being processed",
+    "PROCESSING": "Đơn hàng đang được xử lý",
     "PACKAGED": "Đơn hàng đang được xử lý",
     "PICKED": "Shiper đã nhận được đơn hàng",
     "SHIPPING": "Shiper đang giao đơn hàng",

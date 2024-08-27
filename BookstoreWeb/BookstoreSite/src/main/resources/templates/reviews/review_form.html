@@ -39,20 +39,21 @@
 			style="max-width: 600px; margin: 0 auto">
 			<input type="hidden" name="productId" th:value="${product.id}" />
 			<div class="border border-secondary rounded p-3">
+			<div id="voteError" class="text-danger" style="display: none;">Đánh giá sao trước khi hoàn thành nhé</div>
 				<p>
 					<input type="text" th:field="*{rating}" class="product-rating-star" dir="ltr" data-size="md"
 						data-step="1" />
 				</p>
 				<p>
 					<input type="text" th:field="*{headline}" class="form-control" required minlength="10"
-						maxlength="128" placeholder="Headline or Summary" />
+						maxlength="128" placeholder="Tiêu đề" />
 				</p>
 				<p>
 					<textarea th:field="*{comment}" rows="3" cols="10" class="form-control" required
-						placeholder="Comment Details"></textarea>
+						placeholder="Chi tiết bình luận"></textarea>
 				</p>
 				<p>
-					<input type="submit" value="Post this Review" class="btn btn-primary" />
+					<input type="submit" value="Đánh Giá" class="btn btn-primary" />
 				</p>
 			</div>
 
@@ -63,12 +64,32 @@
 	</div>
 	<div th:replace="navigation :: footer_menu"></div>
 
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		$(".product-rating-star").rating({
 			hoverOnClear: false,
 			theme: 'krajee-svg'
 		});	
-	</script>
+	</script> -->
+	<script type="text/javascript">
+    $(document).ready(function() {
+        $(".product-rating-star").rating({
+            hoverOnClear: false,
+            theme: 'krajee-svg'
+        });
+
+        // Bắt sự kiện submit form
+        $("form").submit(function(event) {
+            var ratingValue = $(".product-rating-star").val();
+
+            if (!ratingValue) {
+                event.preventDefault(); // Ngăn việc gửi form
+                $("#voteError").show();  // Hiển thị thông báo lỗi
+            } else {
+                $("#voteError").hide();  // Ẩn thông báo lỗi nếu người dùng đã vote
+            }
+        });
+    });
+</script>
 </body>
 
 </html>
