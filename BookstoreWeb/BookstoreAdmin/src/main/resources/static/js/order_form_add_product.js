@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$("#products").on("click", "#linkAddProduct", function(e) {
+	$("#product").on("click", "#linkAddProduct", function(e) {
 		e.preventDefault();
 		link = $(this);
 		url = link.attr("href");

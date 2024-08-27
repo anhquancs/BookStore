@@ -6,9 +6,10 @@
 <body>
 	<div class="container-fluid">
 		<div>
-			<form th:action="@{/orders/search_product}" method="post" class="form-inline my-2">
-				<input type="search" required class="form-control mr-sm-2" name="keyword" th:value="${keyword}"
-					placeholder="tên sản phẩm" />
+			<form th:action="@{/orders/search_product}" method="post" class="form-inline my-2"
+				onsubmit="encodeKeyword()">
+				<input type="search" required class="form-control mr-sm-2" name="keyword" id="keyword"
+					th:value="${keyword}" placeholder="tên sản phẩm" />
 				<input type="submit" class="btn btn-outline-success" value="Tìm" />
 			</form>
 		</div>
@@ -47,6 +48,11 @@
 				}
 
 			});
+		}
+
+		function encodeKeyword() {
+			var input = document.getElementById("keyword");
+			input.value = encodeURIComponent(input.value);
 		}
 	</script>
 </body>

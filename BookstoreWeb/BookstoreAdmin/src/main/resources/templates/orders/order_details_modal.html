@@ -9,7 +9,7 @@
 			<a class="nav-link active" id="overview-tab" data-toggle="tab" href="#overview" role="tab">Chung</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" id="products-tab" data-toggle="tab" href="#products" role="tab">Sản phẩm</a>
+			<a class="nav-link" id="products-tab" data-toggle="tab" href="#product" role="tab">Sản phẩm</a>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link" id="shipping-tab" data-toggle="tab" href="#shipping" role="tab">Giao hàng</a>
@@ -90,7 +90,7 @@
 				</div>
 			</form>
 		</div>
-		<div class="tab-pane fade p-3" id="products" role="tabpanel" aria-labelledby="products-tab">
+		<div class="tab-pane fade p-3" id="product" role="tabpanel" aria-labelledby="products-tab">
 			<th:block th:each="detail, status : ${order.orderDetails}">
 				<div class="row border rounded p-1" th:with="product = ${detail.product}">
 					<div class="col-sm-1">
